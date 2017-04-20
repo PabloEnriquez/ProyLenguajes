@@ -1,0 +1,18 @@
+//Created by Anoop Kumar
+import com.droolsRestful.droolsUtilities.ArithmeticOperations;
+
+dialect  "mvel"
+
+rule "add"
+    when
+          object: ArithmeticOperations(operationType == "add")
+    then
+         object.setResult(object.getNum1() + object.getNum2());
+end
+
+rule "multiply"
+    when
+          object: ArithmeticOperations(operationType == "multiply")
+    then
+         object.setResult(object.getNum1() * object.getNum2());
+end
