@@ -55,7 +55,7 @@ por ejemplo si meten:
 		"nivelCurso": "2"
 	}
 }
-se les dispara la regla de "Inscripcion futura nivel bajo", q les pone en consola: rafael del piero, la materia: LP, es muy baja para tu nivel.
+se les dispara la regla de "Inscripcion futura nivel bajo", q les pone en consola: rafael del piero, la materia: LP, es muy baja para tu nivel. este caso lo hice pensando en un estudiante q se quisiera inscribir en el futuro a una materia y asi, por le dice q es muy difícil para el o q no lo va a retar.
 
 el archivo drl esta en src/main/resources/droolsrules. chequen ahi para algunas recomendaciones q hice
 
