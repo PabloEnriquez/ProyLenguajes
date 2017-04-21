@@ -2,7 +2,7 @@
 para correrlo en eclipse, deben tener un servidor, yo tengo wildfly pero segun yo sirve con el q sea.
 entonces importan el proyecto drools a eclipse y le ponen run on server
 usando postman o algo similar si tienen otro, pueden hacer get y post.
-ahorita tengo otras clases/objetos q usaba de ejemplo, eso de padre y hermano es de la tarea tons no lo tomen en cuenta; ahorita solo estudiante importa.
+ahorita tengo otras clases/objetos q usaba de ejemplo, eso de padre y hermano es de la tarea tons no lo tomen en cuenta; ahorita solo estudiante importa (y materia y tema, tal vez maestro lo podamos incluir). (src/main/java/com.trucutru.model)
 ya en postman pueden ingresar estos json en este path(http://localhost:8080/restdrools/estudiantes/inserta), esto es POST:
 {
 	"nombre": "rafael del piero",
