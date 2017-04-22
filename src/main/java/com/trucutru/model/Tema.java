@@ -14,7 +14,7 @@ public class Tema {
 	
 	//double promedio;
 	
-	private Double getPromedioTareas(List<Tarea> ejercicios){
+	public Double getPromedioTareas(List<Tarea> ejercicios){
 		for(int i = 0; i < ejercicios.size(); i++){
 			Tarea t = ejercicios.get(i);
 			promedioEjer += t.getCalif();
@@ -24,7 +24,7 @@ public class Tema {
 	}
 
 	public Double getPromedioEjer() {
-		return getPromedioTareas(ejercicios);
+		return promedioEjer;
 	}
 
 	public void setPromedioEjer(Double promedioEjer) {
