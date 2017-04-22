@@ -7,8 +7,10 @@ rule "Your Second Rule"
     when
         $e : Estudiante();
     then
-    	$e.getMateriaCursando().getTema().setPromedioEjer(0.0);
-    	$e.getMateriaCursando().getTema().setPromedioEjer($e.getMateriaCursando().getTema().getPromedioTareas($e.getMateriaCursando().getTema().getEjercicios()));
+    	//$e.getMateriaCursando().getTema().setPromedioEjer(0.0);
+    	//$e.getMateriaCursando().getTema().setPromedioEjer($e.getMateriaCursando().getTema().getPromedioTareas($e.getMateriaCursando().getTema().getEjercicios()));
+    	$e.getMateriaCursando().setPromedioAlumno(0.0);
+    	$e.getMateriaCursando().setPromedioAlumno($e.getMateriaCursando().getPromedioMateria($e.getMateriaCursando().getTemas()));
         System.out.println("Estudiante encontrado!!!!: " + $e.toString());
 end
 

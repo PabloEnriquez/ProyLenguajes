@@ -16,13 +16,31 @@ public class Materia {
 	private Double promedioAlumno;
 	private Double porcentajeCompl;
 	private int nivelCurso;
-	private Tema tema;
+	private List<Tema> temas;
 	
 //	public Materia(String nombre, int nivelCurso) {
 //		super();
 //		this.nombre = nombre;
 //		this.nivelCurso = nivelCurso;
 //	}
+	
+	public Double getPromedioMateria(List<Tema> temas){
+		for(int i = 0; i < temas.size(); i++){
+			Tema t = temas.get(i);
+			t.setPromedioEjer(0.0);
+			List<Tarea> tareas = t.getEjercicios();
+//			for(int j = 0; j < tareas.size(); j++){
+//				Tarea t2 = tareas.get(j);
+//				aux += t2.getCalif();
+//			}
+//			aux = (aux / tareas.size());
+			double aux = t.getPromedioTareas(tareas);
+			t.setPromedioEjer(aux);
+			promedioAlumno += aux;
+		}
+		promedioAlumno = (promedioAlumno / temas.size());
+		return promedioAlumno;
+	}
 
 	public String getNombre() {
 		return nombre;
@@ -47,13 +65,13 @@ public class Materia {
 	public void setPorcentajeCompl(Double porcentajeCompl) {
 		this.porcentajeCompl = porcentajeCompl;
 	}
-
-	public Tema getTema() {
-		return tema;
+	
+	public List<Tema> getTemas() {
+		return temas;
 	}
 
-	public void setTema(Tema tema) {
-		this.tema = tema;
+	public void setTemas(List<Tema> temas) {
+		this.temas = temas;
 	}
 
 	//	public Nivel getNivelCurso() {
@@ -82,6 +100,6 @@ public class Materia {
 	@Override
 	public String toString() {
 		return "Materia [nombre=" + nombre + ", maestro=" + maestro + ", promedioAlumno=" + promedioAlumno
-				+ ", porcentajeCompl=" + porcentajeCompl + ", nivelCurso=" + nivelCurso + ", tema=" + tema + "]";
+				+ ", porcentajeCompl=" + porcentajeCompl + ", nivelCurso=" + nivelCurso + ", temas=" + temas + "]";
 	}
 }
