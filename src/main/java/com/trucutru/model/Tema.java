@@ -1,13 +1,36 @@
 package com.trucutru.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.ArrayList;
+import java.util.List;
 
 @XmlRootElement
 public class Tema {
 	
 	private String nombre;
 	private int nivel;
+	private List<Tarea> ejercicios;
+	private Double promedioEjer;
 	
+	//double promedio;
+	
+	private Double getPromedioTareas(List<Tarea> ejercicios){
+		for(int i = 0; i < ejercicios.size(); i++){
+			Tarea t = ejercicios.get(i);
+			promedioEjer += t.getCalif();
+		}
+		promedioEjer = (promedioEjer / ejercicios.size());
+		return promedioEjer;	
+	}
+
+	public Double getPromedioEjer() {
+		return getPromedioTareas(ejercicios);
+	}
+
+	public void setPromedioEjer(Double promedioEjer) {
+		this.promedioEjer = promedioEjer;
+	}
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -24,9 +47,18 @@ public class Tema {
 		this.nivel = nivel;
 	}
 
+	public List<Tarea> getEjercicios() {
+		return ejercicios;
+	}
+
+	public void setEjercicios(List<Tarea> ejercicios) {
+		this.ejercicios = ejercicios;
+	}
+
 	@Override
 	public String toString() {
-		return "Tema [nombre=" + nombre + ", nivel=" + nivel + "]";
+		return "Tema [nombre=" + nombre + ", nivel=" + nivel + ", ejercicios=" + ejercicios + ", promedioEjer="
+				+ promedioEjer + "]";
 	}
 	
 }
