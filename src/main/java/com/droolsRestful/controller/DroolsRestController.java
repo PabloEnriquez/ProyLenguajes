@@ -17,9 +17,6 @@ import java.util.Map;
 import com.trucutru.model.*;
 import com.trucutru.endpoint.impl.*;
 
-/**
- * Created by Anoop on 07-03-2017.
- */
 @RestController
 public class DroolsRestController {
 

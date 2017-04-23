@@ -1,21 +1,34 @@
 //created on: Apr 16, 2017
 package com.trucutru
+ import java.util.ArrayList;  
+ import java.util.List;
 import com.trucutru.model.*;
 
 rule "Your Second Rule"
     //include attributes such as "salience" here...
     when
-        $e : Estudiante();
+        $e : Estudiante($materias : materiasCursando);
     then
     	//$e.getMateriaCursando().getTema().setPromedioEjer(0.0);
     	//$e.getMateriaCursando().getTema().setPromedioEjer($e.getMateriaCursando().getTema().getPromedioTareas($e.getMateriaCursando().getTema().getEjercicios()));
-    	$e.getMateriaCursando().setPromedioAlumno(0.0);
-    	$e.getMateriaCursando().setPromedioAlumno($e.getMateriaCursando().getPromedioMateria($e.getMateriaCursando().getTemas()));
-    	$e.setPromedioGlobal($e.getMateriaCursando().getPromedioAlumno());
+    	//$e.getMateriaCursando().setPromedioAlumno(0.0);
+    	//$e.getMateriaCursando().setPromedioAlumno($e.getMateriaCursando().getPromedioMateria($e.getMateriaCursando().getTemas()));
+    	$e.setPromedioGlobal($e.getPromedioTotal($materias));
     	//$e.getMateriaCursando().setPromedioAlumno(50.0);
         System.out.println("Estudiante encontrado!!!!: " + $e.toString());
 end
 
+rule "Encontrar temas"
+	when
+		//$e : Estudiante( $temas : materiaCursando.getTemas() );
+		$e : Estudiante( $materias : materiasCursando );
+		$mat : Materia() from $materias;
+		$temas : Tema() from $mat.getTemas();
+		$t : Tema(nombre == "MRUA") from $temas;
+	then
+		System.out.println("Se encontro: " + $t.getNombre());
+end
+/*
 rule "Mal historial, reprobando materia media-alta, pero con tiempo"
 	when
 		$e : Estudiante( materiaCursando.getPromedioAlumno() < 60 
@@ -51,6 +64,7 @@ rule "Inscripcion futura nivel bajo"
 	then
 		System.out.println($e.getNombre() + ", la materia: " + $e.getMateriaCursando().getNombre() + ", es muy baja para tu nivel");
 end
+*/
 
 /*rule "promedio global"
     //include attributes such as "salience" here...

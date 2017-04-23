@@ -10,7 +10,20 @@ public class Estudiante {
 	
 	private String nombre;
 	private Double promedioGlobal;
-	private Materia materiaCursando;
+	private List<Materia> materiasCursando;
+	
+	public Double getPromedioTotal(List<Materia> materias){
+		for(int i = 0; i < materias.size(); i++){
+			Materia m = materias.get(i);
+			m.setPromedioAlumno(0.0);
+			List<Tema> temas = m.getTemas();
+			double aux = m.getPromedioMateria(temas);
+			m.setPromedioAlumno(aux);
+			promedioGlobal += aux;
+		}
+		promedioGlobal = (promedioGlobal / materias.size());
+		return promedioGlobal;
+	}
 	
 	public String getNombre() {
 		return nombre;
@@ -28,17 +41,17 @@ public class Estudiante {
 		this.promedioGlobal = promedioGlobal;
 	}
 
-	public Materia getMateriaCursando() {
-		return materiaCursando;
+	public List<Materia> getMateriasCursando() {
+		return materiasCursando;
 	}
 
-	public void setMateriaCursando(Materia materiaCursando) {
-		this.materiaCursando = materiaCursando;
+	public void setMateriasCursando(List<Materia> materiasCursando) {
+		this.materiasCursando = materiasCursando;
 	}
 
 	@Override
 	public String toString() {
-		return "Estudiante [nombre=" + nombre + ", promedioGlobal=" + promedioGlobal + ", materiaCursando="
-				+ materiaCursando + "]";
+		return "Estudiante [nombre=" + nombre + ", promedioGlobal=" + promedioGlobal + ", materiasCursando="
+				+ materiasCursando + "]";
 	}
 }

@@ -23,7 +23,7 @@ public class StudentService {
 		Estudiante estudiante = new Estudiante();
 		estudiante.setNombre(estud.getNombre());
 		estudiante.setPromedioGlobal(estud.getPromedioGlobal());
-		estudiante.setMateriaCursando(estud.getMateriaCursando());
+		estudiante.setMateriasCursando(estud.getMateriasCursando());
 		//estudiante.setMaestro(estud.getMaestro());
 		
 		try{
