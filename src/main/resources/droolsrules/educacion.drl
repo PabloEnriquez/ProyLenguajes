@@ -11,6 +11,8 @@ rule "Your Second Rule"
     	//$e.getMateriaCursando().getTema().setPromedioEjer($e.getMateriaCursando().getTema().getPromedioTareas($e.getMateriaCursando().getTema().getEjercicios()));
     	$e.getMateriaCursando().setPromedioAlumno(0.0);
     	$e.getMateriaCursando().setPromedioAlumno($e.getMateriaCursando().getPromedioMateria($e.getMateriaCursando().getTemas()));
+    	$e.setPromedioGlobal($e.getMateriaCursando().getPromedioAlumno());
+    	//$e.getMateriaCursando().setPromedioAlumno(50.0);
         System.out.println("Estudiante encontrado!!!!: " + $e.toString());
 end
 

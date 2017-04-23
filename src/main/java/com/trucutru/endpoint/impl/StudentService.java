@@ -49,6 +49,7 @@ public class StudentService {
 
 	public List<Estudiante> getEstudiantes() {
 		KieSession kSession = droolsInitializer.getKsession();
+		kSession.fireAllRules();
         List<Estudiante> estudiantes = new ArrayList<Estudiante>();
         for (Object o : kSession.getObjects()) {
             if (o instanceof Estudiante) {

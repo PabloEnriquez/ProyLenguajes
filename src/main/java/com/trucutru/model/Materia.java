@@ -29,11 +29,6 @@ public class Materia {
 			Tema t = temas.get(i);
 			t.setPromedioEjer(0.0);
 			List<Tarea> tareas = t.getEjercicios();
-//			for(int j = 0; j < tareas.size(); j++){
-//				Tarea t2 = tareas.get(j);
-//				aux += t2.getCalif();
-//			}
-//			aux = (aux / tareas.size());
 			double aux = t.getPromedioTareas(tareas);
 			t.setPromedioEjer(aux);
 			promedioAlumno += aux;
