@@ -28,17 +28,23 @@ rule "Encontrar temas"
 	then
 		System.out.println("Se encontro: " + $t.getNombre());
 end
-/*
+
 rule "Mal historial, reprobando materia media-alta, pero con tiempo"
 	when
-		$e : Estudiante( materiaCursando.getPromedioAlumno() < 60 
-		&& (materiaCursando.getNivelCurso() > 5 && materiaCursando.getNivelCurso() < 8)
-		&& materiaCursando.getPorcentajeCompl() < 50
-		&& promedioGlobal < 65 );
+		$e : Estudiante( $materias : materiasCursando );
+		$mat : Materia() from $materias;
+		eval($mat.getPromedioAlumno() < 60 
+		&& ($mat.getNivelCurso() > 5 && $mat.getNivelCurso() < 8) 
+		&& $mat.getPorcentajeCompl() < 50 
+		&& $e.getPromedioGlobal() < 65 );
+		//$e : Estudiante( materiaCursando.getPromedioAlumno() < 60 
+		//&& (materiaCursando.getNivelCurso() > 5 && materiaCursando.getNivelCurso() < 8)
+		//&& materiaCursando.getPorcentajeCompl() < 50
+		//&& promedioGlobal < 65 );
 	then
 		System.out.println($e.getNombre() + ", tu historial es malo, tu promedio en la materia es reprobatorio y el nivel de la clase es medio-alto; pero todavía tienes tiempo, busca asesoria");
 end
-
+/*
 rule "Buen historial, reprobando materia media-alta, pero con tiempo"
 	when
 		$e : Estudiante( materiaCursando.getPromedioAlumno() < 60 
