@@ -4,23 +4,24 @@ package com.trucutru
  import java.util.List;
 import com.trucutru.model.*;
 
-rule "Your Second Rule"
+rule "Insertar datos"
+	when
+	then
+		insert(new Materia("Mates",7));
+end
+
+rule "Calcular promedio global -> en cadena se obtiene el promedio de tareas por tema por materia por cada una en la lista de materias"
     //include attributes such as "salience" here...
+    salience 100
     when
         $e : Estudiante($materias : materiasCursando);
     then
-    	//$e.getMateriaCursando().getTema().setPromedioEjer(0.0);
-    	//$e.getMateriaCursando().getTema().setPromedioEjer($e.getMateriaCursando().getTema().getPromedioTareas($e.getMateriaCursando().getTema().getEjercicios()));
-    	//$e.getMateriaCursando().setPromedioAlumno(0.0);
-    	//$e.getMateriaCursando().setPromedioAlumno($e.getMateriaCursando().getPromedioMateria($e.getMateriaCursando().getTemas()));
     	$e.setPromedioGlobal($e.getPromedioTotal($materias));
-    	//$e.getMateriaCursando().setPromedioAlumno(50.0);
-        System.out.println("Estudiante encontrado!!!!: " + $e.toString());
+        System.out.println("Estudiante encontrado!!: " + $e.toString());
 end
 
 rule "Encontrar temas"
 	when
-		//$e : Estudiante( $temas : materiaCursando.getTemas() );
 		$e : Estudiante( $materias : materiasCursando );
 		$mat : Materia() from $materias;
 		$temas : Tema() from $mat.getTemas();
@@ -37,24 +38,22 @@ rule "Mal historial, reprobando materia media-alta, pero con tiempo"
 		&& ($mat.getNivelCurso() > 5 && $mat.getNivelCurso() < 8) 
 		&& $mat.getPorcentajeCompl() < 50 
 		&& $e.getPromedioGlobal() < 65 );
-		//$e : Estudiante( materiaCursando.getPromedioAlumno() < 60 
-		//&& (materiaCursando.getNivelCurso() > 5 && materiaCursando.getNivelCurso() < 8)
-		//&& materiaCursando.getPorcentajeCompl() < 50
-		//&& promedioGlobal < 65 );
 	then
-		System.out.println($e.getNombre() + ", tu historial es malo, tu promedio en la materia es reprobatorio y el nivel de la clase es medio-alto; pero todavía tienes tiempo, busca asesoria");
-end
-/*
-rule "Buen historial, reprobando materia media-alta, pero con tiempo"
-	when
-		$e : Estudiante( materiaCursando.getPromedioAlumno() < 60 
-		&& (materiaCursando.getNivelCurso() > 5 && materiaCursando.getNivelCurso() < 8)
-		&& materiaCursando.getPorcentajeCompl() < 50
-		&& promedioGlobal > 80 );
-	then
-		System.out.println($e.getNombre() + ", tu historial es bueno, tu promedio en la materia es reprobatorio y el nivel de la clase es medio-alto; pero todavía tienes tiempo, practica y ponte al corriente");
+		System.out.println($e.getNombre() + ", tu historial es malo, tu promedio en la materia: " + $mat.getNombre() + " es reprobatorio y el nivel de la clase es medio-alto; pero todavía tienes tiempo, busca asesoria");
 end
 
+rule "Buen historial, reprobando materia media-alta, pero con tiempo"
+	when
+		$e : Estudiante( $materias : materiasCursando );
+		$mat : Materia() from $materias;
+		eval($mat.getPromedioAlumno() < 60 
+		&& ($mat.getNivelCurso() > 5 && $mat.getNivelCurso() < 8) 
+		&& $mat.getPorcentajeCompl() < 50 
+		&& $e.getPromedioGlobal() > 75 );
+	then
+		System.out.println($e.getNombre() + ", tu historial es bueno, tu promedio en la materia: " + $mat.getNombre() + " es reprobatorio y el nivel de la clase es medio-alto; pero todavía tienes tiempo, practica y ponte al corriente");
+end
+/*
 rule "Inscripcion futura nivel correcto"
 	when
 		$e : Estudiante( promedioGlobal > 85
@@ -71,20 +70,3 @@ rule "Inscripcion futura nivel bajo"
 		System.out.println($e.getNombre() + ", la materia: " + $e.getMateriaCursando().getNombre() + ", es muy baja para tu nivel");
 end
 */
-
-/*rule "promedio global"
-    //include attributes such as "salience" here...
-    when
-        $e : Estudiante();
-        $e2 : Estudiante($e.nombre == nombre && $e.getMateriaCursando().getNombre() != $e2.getMateriaCursando().getNombre() && $e.getPromedioGlobal() != $e2.getPromedioGlobal());
-        //eval($e.getMateriaCursando().getNombre() != $e2.getMateriaCursando().getNombre());
-    then
-    	$e.setPromedioGlobal($e.getMateriaCursando().getPromedioAlumno());
-    	$e2.setPromedioGlobal($e2.getMateriaCursando().getPromedioAlumno());
-    	double aux = $e.getPromedioGlobal() + $e2.getPromedioGlobal();
-    	aux = aux/2;
-    	$e.setPromedioGlobal(aux);
-    	$e2.setPromedioGlobal(aux);
-        System.out.println("Nuevo promedio global: " + $e.getPromedioGlobal());
-        System.out.println("Estudiante actualizado!!!!: " + $e.toString());
-end*/

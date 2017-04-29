@@ -18,11 +18,14 @@ public class Materia {
 	private int nivelCurso;
 	private List<Tema> temas;
 	
-//	public Materia(String nombre, int nivelCurso) {
-//		super();
-//		this.nombre = nombre;
-//		this.nivelCurso = nivelCurso;
-//	}
+	public Materia(){
+	}
+	
+	public Materia(String nombre, int nivelCurso) {
+		super();
+		this.nombre = nombre;
+		this.nivelCurso = nivelCurso;
+	}
 	
 	public Double getPromedioMateria(List<Tema> temas){
 		for(int i = 0; i < temas.size(); i++){
@@ -69,13 +72,6 @@ public class Materia {
 		this.temas = temas;
 	}
 
-	//	public Nivel getNivelCurso() {
-//		return nivelCurso;
-//	}
-//
-//	public void setNivelCurso(Nivel nivelCurso) {
-//		this.nivelCurso = nivelCurso;
-//	}
 	public int getNivelCurso() {
 		return nivelCurso;
 	}

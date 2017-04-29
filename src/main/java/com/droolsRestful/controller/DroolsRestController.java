@@ -49,26 +49,16 @@ public class DroolsRestController {
     @RequestMapping(value="users/categorize/{name}/{age}", method = RequestMethod.POST, /*consumes = "application/json",*/
             produces = "application/json")
     public User categorizeUser(@PathVariable("name") String name, @PathVariable("age") String age) {
-    	
     	 Map<String, String> input  = new HashMap<String, String>();
     	 input.put("name", name);
     	 input.put("age", age);
     	 User result = userService.categorizeUser(input);
-    	 
-//    	 Map<String, String> resultMap = new HashMap<String, String>();
-//    	 resultMap.put("New user", result.toString());
-//    	 return resultMap;
     	 return result;
     }
     
-    @RequestMapping(value="users", method = RequestMethod.GET,
-            produces = "application/json")
+    @RequestMapping(value="users", method = RequestMethod.GET, produces = "application/json")
     public List<User> getUsers() {
-//    	Map<String, String> input  = new HashMap<String, String>();
-//    	input.put("list", list);
-//    	Map<String, String> resultMap = new HashMap<String, String>();
     	List<User> users = userService.getUsers();
-//    	resultMap.put("Users", users.toString());
     	return users;
     }
     
