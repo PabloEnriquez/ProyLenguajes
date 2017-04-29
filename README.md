@@ -60,3 +60,92 @@ se les dispara la regla de "Inscripcion futura nivel bajo", q les pone en consol
 el archivo drl esta en src/main/resources/droolsrules. chequen ahi para algunas recomendaciones q hice
 
 http://localhost:8080/restdrools/estudiantes con GET les da una lista de estudiantes
+
+
+**********************************************
+nuevo objeto json de prueba:
+{
+	"nombre": "pedro paramo",
+	"promedioGlobal": "0.0",
+	"materiasCursando": [{
+		"nombre": "Fisica",
+		"maestro": "Juan marcos castenad",
+		"promedioAlumno": "0.0",
+		"porcentajeCompl": "25",
+		"nivelCurso": "7",
+		"temas": [
+			{
+				"nombre": "MRUA",
+				"nivel": "7",
+				"ejercicios": [{
+					"nombre": "tarea 1",
+					"calif": "55",
+					"dificultad": "8"
+				}, {
+					"nombre": "tarea 2",
+					"calif": "45",
+					"dificultad": "9"
+				}, {
+					"nombre": "tarea 3",
+					"calif": "50",
+					"dificultad": "6"
+				}]
+			}, {
+				"nombre": "Caida Libre",
+				"nivel": "5",
+				"ejercicios": [{
+					"nombre": "ejercicio 1",
+					"calif": "66",
+					"dificultad": "9"
+				}, {
+					"nombre": "tarea 1",
+					"calif": "54",
+					"dificultad": "7"
+				}, {
+					"nombre": "ejericio 2",
+					"calif": "58",
+					"dificultad": "6"
+				}]
+		}] 
+	}, {
+		"nombre": "Matematicas",
+		"maestro": "Pedro lopez de silao",
+		"promedioAlumno": "0.0",
+		"porcentajeCompl": "35",
+		"nivelCurso": "7",
+		"temas": [
+			{
+				"nombre": "Divisiones",
+				"nivel": "7",
+				"ejercicios": [{
+					"nombre": "tarea 1",
+					"calif": "45",
+					"dificultad": "8"
+				}, {
+					"nombre": "tarea 2",
+					"calif": "55",
+					"dificultad": "9"
+				}, {
+					"nombre": "tarea 3",
+					"calif": "50",
+					"dificultad": "6"
+				}]
+			}, {
+				"nombre": "Limites",
+				"nivel": "5",
+				"ejercicios": [{
+					"nombre": "ejercicio 1",
+					"calif": "56",
+					"dificultad": "9"
+				}, {
+					"nombre": "tarea 1",
+					"calif": "34",
+					"dificultad": "7"
+				}, {
+					"nombre": "ejericio 2",
+					"calif": "38",
+					"dificultad": "6"
+				}]
+		}]
+	}]
+}
