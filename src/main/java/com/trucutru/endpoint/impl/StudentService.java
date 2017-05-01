@@ -24,6 +24,7 @@ public class StudentService {
 		estudiante.setNombre(estud.getNombre());
 		estudiante.setPromedioGlobal(estud.getPromedioGlobal());
 		estudiante.setMateriasCursando(estud.getMateriasCursando());
+		estudiante.setMateriaAInscribir(estud.getMateriaAInscribir());
 		//estudiante.setMaestro(estud.getMaestro());
 		
 		try{

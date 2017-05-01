@@ -11,6 +11,7 @@ public class Estudiante {
 	private String nombre;
 	private Double promedioGlobal;
 	private List<Materia> materiasCursando;
+	private Materia materiaAInscribir;
 	
 	public Double getPromedioTotal(List<Materia> materias){
 		for(int i = 0; i < materias.size(); i++){
@@ -54,4 +55,13 @@ public class Estudiante {
 		return "Estudiante [nombre=" + nombre + ", promedioGlobal=" + promedioGlobal + ", materiasCursando="
 				+ materiasCursando + "]";
 	}
+
+	public Materia getMateriaAInscribir() {
+		return materiaAInscribir;
+	}
+
+	public void setMateriaAInscribir(Materia materiaAInscribir) {
+		this.materiaAInscribir = materiaAInscribir;
+	}
+
 }
