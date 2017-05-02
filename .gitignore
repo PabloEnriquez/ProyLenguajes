@@ -1,0 +1,6 @@
+#this is list of file and folder not to be added to source control
+*.log
+.idea/
+lib/
+.iml
+target/
