@@ -2,16 +2,39 @@ package com.trucutru.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import com.trucutru.model.*;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Estudiante {
 	
+	private static final AtomicInteger count = new AtomicInteger(0); 
+	public final int id;
 	private String nombre;
 	private Double promedioGlobal;
 	private List<Materia> materiasCursando;
-	private Materia materiaAInscribir;
+	public List<String> recomendaciones;
+	
+	public Estudiante(){
+		id = count.incrementAndGet();
+	}
+	
+//	public Estudiante(String nombre){
+//		id = count.incrementAndGet();
+//		this.nombre = nombre;
+//	}
+	
+//	public Estudiante(String nombre, Double promedioGlobal, List<Materia> materiasCursando,
+//			List<String> recomendaciones) {
+//		this.nombre = nombre;
+//		this.promedioGlobal = promedioGlobal;
+//		this.materiasCursando = materiasCursando;
+//		this.recomendaciones = recomendaciones;
+//		id = count.incrementAndGet();
+//	}
 	
 	public Double getPromedioTotal(List<Materia> materias){
 		for(int i = 0; i < materias.size(); i++){
@@ -56,12 +79,11 @@ public class Estudiante {
 				+ materiasCursando + "]";
 	}
 
-	public Materia getMateriaAInscribir() {
-		return materiaAInscribir;
+	public List<String> getRecomendaciones() {
+		return recomendaciones;
 	}
 
-	public void setMateriaAInscribir(Materia materiaAInscribir) {
-		this.materiaAInscribir = materiaAInscribir;
+	public void setRecomendaciones(List<String> recomendaciones) {
+		this.recomendaciones = recomendaciones;
 	}
-
 }

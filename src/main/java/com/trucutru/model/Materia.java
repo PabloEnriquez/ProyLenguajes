@@ -2,7 +2,10 @@ package com.trucutru.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+
 import javax.xml.bind.annotation.XmlRootElement;
+import com.trucutru.model.*;
 
 @XmlRootElement
 public class Materia {
@@ -11,6 +14,8 @@ public class Materia {
 //		ALTO, MEDIO, BAJO
 //	};
 	
+	private static final AtomicInteger count = new AtomicInteger(0); 
+	public final int id;
 	private String nombre;
 	private String maestro;
 	private Double promedioAlumno;
@@ -19,10 +24,12 @@ public class Materia {
 	private List<Tema> temas;
 	
 	public Materia(){
+		id = count.incrementAndGet();
 	}
 	
 	public Materia(String nombre, int nivelCurso) {
 		super();
+		id = count.incrementAndGet();
 		this.nombre = nombre;
 		this.nivelCurso = nivelCurso;
 	}

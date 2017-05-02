@@ -2,13 +2,22 @@ package com.trucutru.model;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import com.trucutru.model.*;
 
 @XmlRootElement
 public class Tarea {
 	
+	private static final AtomicInteger count = new AtomicInteger(0); 
+	public final int id;
 	private String nombre;
 	private Double calif;
 	private int dificultad;
+	
+	public Tarea(){
+		id = count.incrementAndGet();
+	}
 	
 	public String getNombre() {
 		return nombre;

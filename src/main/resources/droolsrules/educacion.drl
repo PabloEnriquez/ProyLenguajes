@@ -10,11 +10,11 @@ rule "Insertar datos"
 		insert(new Materia("Mates",7));
 end
 
-rule "Calcular promedio global -> en cadena se obtiene el promedio de tareas por tema por materia por cada una en la lista de materias"
+rule "Calcular promedio gplobal -> en cadena se obtiene el promedio de tareas por tema por materia por cada una en la lista de materias"
     //include attributes such as "salience" here...
     salience 100
     when
-        $e : Estudiante($materias : materiasCursando && materiaAInscribir == null);
+        $e : Estudiante($materias : materiasCursando );
         eval($materias != null);
     then
     	$e.setPromedioGlobal($e.getPromedioTotal($materias));
@@ -40,39 +40,46 @@ rule "Mal historial, reprobando materia media-alta, pero con tiempo"
 		&& $mat.getPorcentajeCompl() < 50 
 		&& $e.getPromedioGlobal() < 65 );
 	then
-		System.out.println($e.getNombre() + ", tu historial es malo, tu promedio en la materia: "
-		 + $mat.getNombre() + " es reprobatorio y el nivel de la clase es medio-alto; pero todavía tienes tiempo, busca asesoria");
+		//System.out.println($e.getNombre() + ", tu historial es malo, tu promedio en la materia: "
+		//+ $mat.getNombre() + " es reprobatorio y el nivel de la clase es medio-alto; pero todavía tienes tiempo, busca asesoria");
+		//System.out.println($r.getRecomendacion());
+		$e.getRecomendaciones().add($e.getNombre() + ", tu historial es bueno, tu promedio en la materia: " 
+		+ $mat.getNombre() + " es reprobatorio y el nivel de la clase es medio-alto; pero todavía tienes tiempo, practica y ponte al corriente");
 end
 
 rule "Buen historial, reprobando materia media-alta, pero con tiempo"
+
 	when
-		$e : Estudiante( $materias : materiasCursando );
+		$e : Estudiante( $materias : materiasCursando, $recomendaciones : recomendaciones );
 		$mat : Materia() from $materias;
 		eval($mat.getPromedioAlumno() < 60 
 		&& ($mat.getNivelCurso() > 5 && $mat.getNivelCurso() < 8) 
 		&& $mat.getPorcentajeCompl() < 50 
 		&& $e.getPromedioGlobal() > 75 );
 	then
-		System.out.println($e.getNombre() + ", tu historial es bueno, tu promedio en la materia: " 
+		//System.out.println($e.getNombre() + ", tu historial es bueno, tu promedio en la materia: " 
+		//+ $mat.getNombre() + " es reprobatorio y el nivel de la clase es medio-alto; pero todavía tienes tiempo, practica y ponte al corriente");
+		//System.out.println($r.getRecomendacion());
+		$e.getRecomendaciones().add($e.getNombre() + ", tu historial es bueno, tu promedio en la materia: " 
 		+ $mat.getNombre() + " es reprobatorio y el nivel de la clase es medio-alto; pero todavía tienes tiempo, practica y ponte al corriente");
+		//System.out.println("hola" + $e.getRecomendaciones());
 end
 
 rule "Inscripcion futura nivel correcto"
+
 	when
-		$e1 : Estudiante( materiaAInscribir != null );
-		$e : Estudiante($e1.getNombre() == nombre && promedioGlobal > 70 );
-		eval( $e1.getMateriaAInscribir().getNivelCurso() > 7 );
+		$e1 : EstudInscripcion( $e1.getMateriaAInscribir().getNivelCurso() > 7 
+		&& promedioGlobal > 75 );
 	then
-		System.out.println($e.getNombre() + ", la materia: " + $e1.getMateriaAInscribir().getNombre() + ", es perfecta para tu nivel");
-		//System.out.println("son iguales");
+		//System.out.println($e1.getNombre() + ", la materia: " + $e1.getMateriaAInscribir().getNombre() + ", es perfecta para tu nivel");
+		$e1.getRecomendaciones().add($e1.getNombre() + ", la materia: " + $e1.getMateriaAInscribir().getNombre() + ", es perfecta para tu nivel");
 end
 
 rule "Inscripcion futura nivel bajo"
 	when
-		$e1 : Estudiante( materiaAInscribir != null );
-		$e : Estudiante($e1.getNombre() == nombre && promedioGlobal > 75 );
-		eval( $e1.getMateriaAInscribir().getNivelCurso() < 3 );
+		$e1 : EstudInscripcion( materiaAInscribir.getNivelCurso() < 3
+		&& promedioGlobal > 75 );
 	then
-		System.out.println($e.getNombre() + ", la materia: " + $e1.getMateriaAInscribir().getNombre() + ", es muy baja para tu nivel");
+		//System.out.println($e1.getNombre() + ", la materia: " + $e1.getMateriaAInscribir().getNombre() + ", es muy baja para tu nivel");
+		$e1.getRecomendaciones().add($e1.getNombre() + ", la materia: " + $e1.getMateriaAInscribir().getNombre() + ", es muy baja para tu nivel");
 end
-

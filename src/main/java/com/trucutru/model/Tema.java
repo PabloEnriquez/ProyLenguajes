@@ -3,16 +3,25 @@ package com.trucutru.model;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import com.trucutru.model.*;
 
 @XmlRootElement
 public class Tema {
 	
+	private static final AtomicInteger count = new AtomicInteger(0); 
+	public final int id;
 	private String nombre;
 	private int nivel;
 	private List<Tarea> ejercicios;
 	private Double promedioEjer;
 	
 	//double promedio;
+	
+	public Tema(){
+		id = count.incrementAndGet();
+	}
 	
 	public Double getPromedioTareas(List<Tarea> ejercicios){
 		for(int i = 0; i < ejercicios.size(); i++){

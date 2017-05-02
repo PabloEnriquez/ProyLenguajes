@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -114,9 +115,20 @@ public class DroolsRestController {
     @RequestMapping(value="estudiantes/inserta", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
     public Estudiante insertaEstudiante(@RequestBody Estudiante estud) {
-    	 Estudiante result = estudService.insertaEstud(estud);
-    	 return result;
-    }  
+    	Estudiante result = estudService.insertaEstud(estud);
+//    	List<Recomendacion> lista = new ArrayList<Recomendacion>();
+//     	lista.add(result);
+    	return result;
+    } 
+    
+    @RequestMapping(value="estudiantes/prediccion", method = RequestMethod.POST, produces = "application/json")
+    @ResponseBody
+    public EstudInscripcion verInscripEstudiante(@RequestBody EstudInscripcion estud){
+    	EstudInscripcion result = estudService.inscribirEstud(estud);
+//    	List<RecomendacionFuturo> lista = new ArrayList<RecomendacionFuturo>();
+//    	lista.add(result);
+    	return result;
+    }
     
     @RequestMapping(value="estudiantes", method = RequestMethod.GET/*, produces = "application/json"*/)
     @ResponseBody

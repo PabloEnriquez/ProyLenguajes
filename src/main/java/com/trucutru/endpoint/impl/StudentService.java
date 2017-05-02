@@ -8,7 +8,6 @@ import com.droolsRestful.droolsUtilities.DroolsInitializer;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import com.trucutru.model.*;
 
@@ -20,12 +19,19 @@ public class StudentService {
 	
 	public Estudiante insertaEstud(Estudiante estud){
 		
-		Estudiante estudiante = new Estudiante();
-		estudiante.setNombre(estud.getNombre());
-		estudiante.setPromedioGlobal(estud.getPromedioGlobal());
-		estudiante.setMateriasCursando(estud.getMateriasCursando());
-		estudiante.setMateriaAInscribir(estud.getMateriaAInscribir());
+//		Estudiante estudiante = new Estudiante();
+//		estudiante.setNombre(estud.getNombre());
+//		estudiante.setPromedioGlobal(estud.getPromedioGlobal());
+//		estudiante.setMateriasCursando(estud.getMateriasCursando());
+//		estudiante.setMateriaAInscribir(estud.getMateriaAInscribir());
 		//estudiante.setMaestro(estud.getMaestro());
+		
+//		List<Recomendacion> recoms = new ArrayList<Recomendacion>();
+//		estud.setRecomendaciones(recoms);
+		
+//		Recomendacion recomendacion = new Recomendacion();
+//   	 	recomendacion.setEstudiante(estud);
+//   	 	recoms.add(recomendacion);
 		
 		try{
             //get session from context
@@ -34,18 +40,44 @@ public class StudentService {
 //          printKieSessionAllFacts(kSession);
 //            System.out.println(">> Estudiante: " + estudiante);
             //Insert rule parameters.
-            kSession.insert(estudiante);
+            kSession.insert(estud);
+//            kSession.insert(recomendacion);
             //fire rules
 //            kSession.fireAllRules();
             int fired = kSession.fireAllRules();
             System.out.println(">> Fired: " + fired);
             //Close session. Don't close session as this is a service.
             //kSession.dispose();
-            return estudiante;
+            return estud;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
+	}
+	
+	public EstudInscripcion inscribirEstud(EstudInscripcion estud){
+//		RecomendacionFuturo recomendacion = new RecomendacionFuturo();
+//   	 	recomendacion.setEstudiante(estud);
+   	 	try{
+         //get session from context
+   	 		KieSession kSession = droolsInitializer.getKsession();
+//         System.out.println(">> kSession: " + kSession);
+//       printKieSessionAllFacts(kSession);
+//         System.out.println(">> Estudiante: " + estudiante);
+         //Insert rule parameters.
+   	 		kSession.insert(estud);
+//   	 		kSession.insert(recomendacion);
+         //fire rules
+//         kSession.fireAllRules();
+   	 		int fired = kSession.fireAllRules();
+   	 		System.out.println(">> Fired: " + fired);
+         //Close session. Don't close session as this is a service.
+         //kSession.dispose();
+   	 		return estud;
+   	 	} catch (Exception e) {
+   	 		e.printStackTrace();
+   	 		return null;
+   	 	}
 	}
 
 	public List<Estudiante> getEstudiantes() {
