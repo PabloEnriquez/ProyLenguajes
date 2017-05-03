@@ -7,6 +7,54 @@ import com.trucutru.model.*;
 rule "Insertar datos"
 	when
 	then
+		Tarea t1 = new Tarea("ejercicio 1", 55.0, 9);
+		Tarea t2 = new Tarea("ejercicio 2", 65.0, 8);
+		Tarea t3 = new Tarea("ejercicio 3", 50.0, 6);
+		Tarea t11 = new Tarea("tarea 1", 66.0, 9);
+		Tarea t22 = new Tarea("tarea 2", 54.0, 7);
+		Tarea t33 = new Tarea("tarea 3", 58.0, 6);
+		List<Tarea> ejercicios = new ArrayList<Tarea>();
+		ejercicios.add(t1);
+		ejercicios.add(t2);
+		ejercicios.add(t3);
+		List<Tarea> ejercicios2 = new ArrayList<Tarea>();
+		ejercicios2.add(t11);
+		ejercicios2.add(t22);
+		ejercicios2.add(t33);
+		Tema te1 = new Tema("MRUA", 7, ejercicios, 0.0);
+		Tema te2 = new Tema("Caida Libre", 5, ejercicios2, 0.0);
+		List<Tema> temas1 = new ArrayList<Tema>();
+		temas1.add(te1);
+		temas1.add(te2);
+		Materia m1 = new Materia("Fisica", "Juan marcos castenad", 0.0, 25.0, 7, temas1);
+		
+		Tarea ta1 = new Tarea("ejercicio 1", 100.0, 9);
+		Tarea ta2 = new Tarea("ejercicio 2", 100.0, 8);
+		Tarea ta3 = new Tarea("ejercicio 3", 100.0, 6);
+		Tarea ta11 = new Tarea("tarea 1", 100.0, 9);
+		Tarea ta22 = new Tarea("tarea 2", 100.0, 7);
+		Tarea ta33 = new Tarea("tarea 3", 100.0, 6);
+		List<Tarea> ejercicios3 = new ArrayList<Tarea>();
+		ejercicios3.add(ta1);
+		ejercicios3.add(ta2);
+		ejercicios3.add(ta3);
+		List<Tarea> ejercicios4 = new ArrayList<Tarea>();
+		ejercicios4.add(ta11);
+		ejercicios4.add(ta22);
+		ejercicios4.add(ta33);
+		Tema te11 = new Tema("Divisiones", 7, ejercicios3, 0.0);
+		Tema te22 = new Tema("Limites", 5, ejercicios4, 0.0);
+		List<Tema> temas2 = new ArrayList<Tema>();
+		temas2.add(te11);
+		temas2.add(te22);
+		Materia m2 = new Materia("Matematicas", "Pedro lopez de silao", 0.0, 35.0, 7, temas2);
+		
+		List<Materia> materias = new ArrayList<Materia>();
+		materias.add(m1);
+		materias.add(m2);
+		List<String> recoms = new ArrayList<String>();
+		insert( new Estudiante("San Luis Potosi", 0.0, materias, recoms) );
+		
 		insert(new Materia("Mates",7));
 end
 

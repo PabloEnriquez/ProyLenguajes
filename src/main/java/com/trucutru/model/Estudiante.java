@@ -27,14 +27,14 @@ public class Estudiante {
 //		this.nombre = nombre;
 //	}
 	
-//	public Estudiante(String nombre, Double promedioGlobal, List<Materia> materiasCursando,
-//			List<String> recomendaciones) {
-//		this.nombre = nombre;
-//		this.promedioGlobal = promedioGlobal;
-//		this.materiasCursando = materiasCursando;
-//		this.recomendaciones = recomendaciones;
-//		id = count.incrementAndGet();
-//	}
+	public Estudiante(String nombre, Double promedioGlobal, List<Materia> materiasCursando,
+			List<String> recomendaciones) {
+		this.nombre = nombre;
+		this.promedioGlobal = promedioGlobal;
+		this.materiasCursando = materiasCursando;
+		this.recomendaciones = recomendaciones;
+		id = count.incrementAndGet();
+	}
 	
 	public int getId() {
 		return id;

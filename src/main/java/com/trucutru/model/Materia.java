@@ -27,6 +27,17 @@ public class Materia {
 		id = count.incrementAndGet();
 	}
 	
+	public Materia(String nombre, String maestro, Double promedioAlumno, Double porcentajeCompl, int nivelCurso,
+			List<Tema> temas) {
+		id = count.incrementAndGet();
+		this.nombre = nombre;
+		this.maestro = maestro;
+		this.promedioAlumno = promedioAlumno;
+		this.porcentajeCompl = porcentajeCompl;
+		this.nivelCurso = nivelCurso;
+		this.temas = temas;
+	}
+
 	public Materia(String nombre, int nivelCurso) {
 		super();
 		id = count.incrementAndGet();

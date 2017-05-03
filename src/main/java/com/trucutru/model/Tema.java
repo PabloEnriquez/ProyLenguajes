@@ -23,6 +23,14 @@ public class Tema {
 		id = count.incrementAndGet();
 	}
 	
+	public Tema(String nombre, int nivel, List<Tarea> ejercicios, Double promedioEjer) {
+		id = count.incrementAndGet();
+		this.nombre = nombre;
+		this.nivel = nivel;
+		this.ejercicios = ejercicios;
+		this.promedioEjer = promedioEjer;
+	}
+
 	public Double getPromedioTareas(List<Tarea> ejercicios){
 		for(int i = 0; i < ejercicios.size(); i++){
 			Tarea t = ejercicios.get(i);

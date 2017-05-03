@@ -19,6 +19,13 @@ public class Tarea {
 		id = count.incrementAndGet();
 	}
 	
+	public Tarea(String nombre, Double calif, int dificultad) {
+		id = count.incrementAndGet();
+		this.nombre = nombre;
+		this.calif = calif;
+		this.dificultad = dificultad;
+	}
+
 	public String getNombre() {
 		return nombre;
 	}
