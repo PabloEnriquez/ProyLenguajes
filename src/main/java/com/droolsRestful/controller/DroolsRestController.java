@@ -140,7 +140,7 @@ public class DroolsRestController {
     	return result;
     }
     
-    @RequestMapping(value="estudiantes", method = RequestMethod.GET/*, produces = "application/json"*/)
+    @RequestMapping(value="estudiantes", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
     public List<Estudiante> getEstudiantes() {
     	List<Estudiante> estudiantes = estudService.getEstudiantes();
