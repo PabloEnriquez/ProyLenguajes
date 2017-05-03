@@ -10,7 +10,7 @@ rule "Insertar datos"
 		insert(new Materia("Mates",7));
 end
 
-rule "Calcular promedio gplobal -> en cadena se obtiene el promedio de tareas por tema por materia por cada una en la lista de materias"
+rule "Calcular promedio global -> en cadena se obtiene el promedio de tareas por tema por materia por cada una en la lista de materias"
     //include attributes such as "salience" here...
     salience 100
     when
@@ -42,9 +42,48 @@ rule "Mal historial, reprobando materia media-alta, pero con tiempo"
 	then
 		//System.out.println($e.getNombre() + ", tu historial es malo, tu promedio en la materia: "
 		//+ $mat.getNombre() + " es reprobatorio y el nivel de la clase es medio-alto; pero todavía tienes tiempo, busca asesoria");
-		//System.out.println($r.getRecomendacion());
 		$e.getRecomendaciones().add($e.getNombre() + ", tu promedio global es bueno, tu promedio en la materia: " 
 		+ $mat.getNombre() + " es reprobatorio y el nivel de la clase es medio-alto; pero todavía tienes tiempo, practica y ponte al corriente");
+end
+
+rule "Mal historial, reprobando materia media-alta, pero sin tiempo"
+	when
+		$e : Estudiante( $materias : materiasCursando );
+		$mat : Materia() from $materias;
+		eval($mat.getPromedioAlumno() < 60 
+		&& ($mat.getNivelCurso() > 5 && $mat.getNivelCurso() < 8) 
+		&& $mat.getPorcentajeCompl() > 75 
+		&& $e.getPromedioGlobal() < 65 );
+	then
+		$e.getRecomendaciones().add($e.getNombre() + ", tu promedio global es malo, tu promedio en la materia: " 
+		+ $mat.getNombre() + " es reprobatorio y el nivel de la clase es medio-alto y ya está por concluir el curso. "
+		+ "Te recomendamos tomar asesorías con el profesor " + $mat.getMaestro() + "lo más pronto posible");
+end
+
+rule "Mal historial, aprobando materia media-alta, con tiempo"
+	when
+		$e : Estudiante( $materias : materiasCursando );
+		$mat : Materia() from $materias;
+		eval($mat.getPromedioAlumno() >= 70 
+		&& ($mat.getNivelCurso() > 5 && $mat.getNivelCurso() < 8) 
+		&& $mat.getPorcentajeCompl() < 50 
+		&& $e.getPromedioGlobal() < 65 );
+	then
+		$e.getRecomendaciones().add($e.getNombre() + ", tu promedio global ha sido malo, pero tu promedio en la materia: " 
+		+ $mat.getNombre() + " va mejorando. ¡Felicidades! Sigue así lo que resta del curso.");
+end
+
+rule "Mal historial, aprobando materia media-alta, sin tiempo"
+	when
+		$e : Estudiante( $materias : materiasCursando );
+		$mat : Materia() from $materias;
+		eval($mat.getPromedioAlumno() >= 70 
+		&& ($mat.getNivelCurso() > 5 && $mat.getNivelCurso() < 8) 
+		&& $mat.getPorcentajeCompl() > 75 
+		&& $e.getPromedioGlobal() < 65 );
+	then
+		$e.getRecomendaciones().add($e.getNombre() + ", tu promedio global ha sido malo, pero tu promedio en la materia: " 
+		+ $mat.getNombre() + " va mejorando. ¡Felicidades! Sigue así y tu promedio global subirá, ya casi acabas.");
 end
 
 rule "Buen historial, reprobando materia media-alta, pero con tiempo"
@@ -59,10 +98,56 @@ rule "Buen historial, reprobando materia media-alta, pero con tiempo"
 	then
 		//System.out.println($e.getNombre() + ", tu historial es bueno, tu promedio en la materia: " 
 		//+ $mat.getNombre() + " es reprobatorio y el nivel de la clase es medio-alto; pero todavía tienes tiempo, practica y ponte al corriente");
-		//System.out.println($r.getRecomendacion());
 		$e.getRecomendaciones().add($e.getNombre() + ", tu promedio global es bueno, tu promedio en la materia: " 
 		+ $mat.getNombre() + " es reprobatorio y el nivel de la clase es medio-alto; pero todavía tienes tiempo, practica y ponte al corriente");
-		//System.out.println("hola" + $e.getRecomendaciones());
+end
+
+rule "Buen historial, reprobando materia media-alta, pero sin tiempo"
+	when
+		$e : Estudiante( $materias : materiasCursando );
+		$mat : Materia() from $materias;
+		eval($mat.getPromedioAlumno() < 60 
+		&& ($mat.getNivelCurso() > 5 && $mat.getNivelCurso() < 8) 
+		&& $mat.getPorcentajeCompl() > 75 
+		&& $e.getPromedioGlobal() > 75 );
+	then
+		$e.getRecomendaciones().add($e.getNombre() + ", tu promedio global es malo, tu promedio en la materia: " 
+		+ $mat.getNombre() + " es reprobatorio y el nivel de la clase es medio-alto y ya está por concluir el curso. "
+		+ "Te recomendamos tomar asesorías con el profesor " + $mat.getMaestro() + "para mejorar tus resultados");
+end
+
+rule "Buen historial, aprobando materia media-alta"
+	when
+		$e : Estudiante( $materias : materiasCursando );
+		$mat : Materia() from $materias;
+		eval($mat.getPromedioAlumno() >= 70 
+		&& ($mat.getNivelCurso() > 5 && $mat.getNivelCurso() < 8)  
+		&& $e.getPromedioGlobal() > 75 );
+	then
+		$e.getRecomendaciones().add($e.getNombre() + ", tu promedio global y tu promedio en la materia: " 
+		+ $mat.getNombre() + " son muy buenos. Sigue así para mantener un excelente promedio");
+end
+
+rule "Inscripcion futura nivel alto"
+
+	when
+		$e1 : EstudInscripcion( $e1.getMateriaAInscribir().getNivelCurso() > 7 
+		&& promedioGlobal > 75 );
+	then
+		//System.out.println($e1.getNombre() + ", la materia: " + $e1.getMateriaAInscribir().getNombre() + ", es muy alta para tu nivel");
+		$e1.getRecomendaciones().add($e1.getNombre() + ", la materia: " + $e1.getMateriaAInscribir().getNombre() + ", es muy alta para tu nivel");
+end
+
+
+rule "Inscripcion futura nivel correcto(medio)"
+
+	when
+		$e1 : EstudInscripcion( ($e1.getMateriaAInscribir().getNivelCurso() >= 3
+		&& $e1.getMateriaAInscribir().getNivelCurso() <= 7)
+		&& promedioGlobal > 75 );
+	then
+		//System.out.println($e1.getNombre() + ", la materia: " + $e1.getMateriaAInscribir().getNombre() + ", es perfecta para tu nivel");
+		$e1.getRecomendaciones().add($e1.getNombre() + ", la materia: " + $e1.getMateriaAInscribir().getNombre() + ", es perfecta para tu nivel");
 end
 
 rule "Inscripcion futura nivel correcto"
