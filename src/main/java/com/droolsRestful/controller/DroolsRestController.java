@@ -130,6 +130,16 @@ public class DroolsRestController {
     	return result;
     }
     
+    @RequestMapping(value="estudiantes/{id}", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    public Estudiante getEstudiante(@PathVariable("id") String idEstudiante){
+    	Map<String, String> input  = new HashMap<String, String>();
+    	input.put("id", idEstudiante);
+    	List<Estudiante> estudiantes = estudService.getEstudiantes();
+    	Estudiante result = estudService.getEstudId(input, estudiantes);
+    	return result;
+    }
+    
     @RequestMapping(value="estudiantes", method = RequestMethod.GET/*, produces = "application/json"*/)
     @ResponseBody
     public List<Estudiante> getEstudiantes() {

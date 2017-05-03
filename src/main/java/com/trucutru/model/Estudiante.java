@@ -36,6 +36,10 @@ public class Estudiante {
 //		id = count.incrementAndGet();
 //	}
 	
+	public int getId() {
+		return id;
+	}
+
 	public Double getPromedioTotal(List<Materia> materias){
 		for(int i = 0; i < materias.size(); i++){
 			Materia m = materias.get(i);

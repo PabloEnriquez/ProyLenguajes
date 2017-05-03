@@ -43,7 +43,7 @@ rule "Mal historial, reprobando materia media-alta, pero con tiempo"
 		//System.out.println($e.getNombre() + ", tu historial es malo, tu promedio en la materia: "
 		//+ $mat.getNombre() + " es reprobatorio y el nivel de la clase es medio-alto; pero todavía tienes tiempo, busca asesoria");
 		//System.out.println($r.getRecomendacion());
-		$e.getRecomendaciones().add($e.getNombre() + ", tu historial es bueno, tu promedio en la materia: " 
+		$e.getRecomendaciones().add($e.getNombre() + ", tu promedio global es bueno, tu promedio en la materia: " 
 		+ $mat.getNombre() + " es reprobatorio y el nivel de la clase es medio-alto; pero todavía tienes tiempo, practica y ponte al corriente");
 end
 
@@ -60,7 +60,7 @@ rule "Buen historial, reprobando materia media-alta, pero con tiempo"
 		//System.out.println($e.getNombre() + ", tu historial es bueno, tu promedio en la materia: " 
 		//+ $mat.getNombre() + " es reprobatorio y el nivel de la clase es medio-alto; pero todavía tienes tiempo, practica y ponte al corriente");
 		//System.out.println($r.getRecomendacion());
-		$e.getRecomendaciones().add($e.getNombre() + ", tu historial es bueno, tu promedio en la materia: " 
+		$e.getRecomendaciones().add($e.getNombre() + ", tu promedio global es bueno, tu promedio en la materia: " 
 		+ $mat.getNombre() + " es reprobatorio y el nivel de la clase es medio-alto; pero todavía tienes tiempo, practica y ponte al corriente");
 		//System.out.println("hola" + $e.getRecomendaciones());
 end

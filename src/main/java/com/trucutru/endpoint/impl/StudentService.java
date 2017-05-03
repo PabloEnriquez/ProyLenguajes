@@ -8,6 +8,7 @@ import com.droolsRestful.droolsUtilities.DroolsInitializer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.trucutru.model.*;
 
@@ -90,6 +91,23 @@ public class StudentService {
             }
         }
         return estudiantes;
+	}
+	
+	public Estudiante getEstudId(Map<String, String> inputMap, List<Estudiante> estudiantes){
+		KieSession kSession = droolsInitializer.getKsession();
+		kSession.fireAllRules();
+		int idEstud = Integer.parseInt(inputMap.get("id"));
+//		List<Estudiante> estudiantes = getEstudiantes();
+		for (Object o : kSession.getObjects()) {
+            if (o instanceof Estudiante) {
+//            	estudiantes.add((Estudiante) o);
+            	Estudiante estudiante = (Estudiante) o;
+            	if(estudiante.getId() == idEstud){
+            		return estudiante;
+            	}
+            }
+        }
+		return null;
 	}
 
 }
