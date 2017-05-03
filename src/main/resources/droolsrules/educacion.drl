@@ -57,6 +57,60 @@ rule "Insertar datos"
 		List<String> recoms = new ArrayList<String>();
 		insert( new Estudiante("San Luis Potosi", 0.0, materias, recoms) );
 		
+		//------------------------------------------------
+		
+		Tarea tar1 = new Tarea("ejercicio 1", 55.0, 8);
+		Tarea tar2 = new Tarea("ejercicio 2", 45.0, 9);
+		Tarea tar3 = new Tarea("ejercicio 3", 50.0, 6);
+		Tarea tar11 = new Tarea("tarea 1", 66.0, 9);
+		Tarea tar22 = new Tarea("tarea 2", 54.0, 7);
+		Tarea tar33 = new Tarea("tarea 3", 58.0, 6);
+		List<Tarea> ejerciciosA = new ArrayList<Tarea>();
+		ejerciciosA.add(tar1);
+		ejerciciosA.add(tar2);
+		ejerciciosA.add(tar3);
+		List<Tarea> ejercicios2A = new ArrayList<Tarea>();
+		ejercicios2A.add(tar11);
+		ejercicios2A.add(tar22);
+		ejercicios2A.add(tar33);
+		Tema tem1 = new Tema("MRUA", 7, ejerciciosA, 0.0);
+		Tema tem2 = new Tema("Caida Libre", 5, ejercicios2A, 0.0);
+		List<Tema> temas1A = new ArrayList<Tema>();
+		temas1A.add(tem1);
+		temas1A.add(tem2);
+		Materia m1B = new Materia("Fisica", "Juan marcos castenad", 0.0, 25.0, 7, temas1A);
+		insert(m1B);
+		
+		Tarea tare1 = new Tarea("ejercicio 1", 45.0, 9);
+		Tarea tare2 = new Tarea("ejercicio 2", 55.0, 8);
+		Tarea tare3 = new Tarea("ejercicio 3", 50.0, 6);
+		Tarea tare11 = new Tarea("tarea 1", 56.0, 9);
+		Tarea tare22 = new Tarea("tarea 2", 34.0, 7);
+		Tarea tare33 = new Tarea("tarea 3", 38.0, 6);
+		List<Tarea> ejercicios3A = new ArrayList<Tarea>();
+		ejercicios3A.add(tare1);
+		ejercicios3A.add(tare2);
+		ejercicios3A.add(tare3);
+		List<Tarea> ejercicios4A = new ArrayList<Tarea>();
+		ejercicios4A.add(tare11);
+		ejercicios4A.add(tare22);
+		ejercicios4A.add(tare33);
+		Tema te11A = new Tema("Divisiones", 7, ejercicios3A, 0.0);
+		Tema te22A = new Tema("Limites", 5, ejercicios4A, 0.0);
+		List<Tema> temas2A = new ArrayList<Tema>();
+		temas2A.add(te11A);
+		temas2A.add(te22A);
+		Materia m2B = new Materia("Matematicas", "Pedro lopez de silao", 0.0, 35.0, 7, temas2A);
+		insert(m2B);
+		
+		List<Materia> materias2 = new ArrayList<Materia>();
+		materias2.add(m1B);
+		materias2.add(m2B);
+		List<String> recoms2 = new ArrayList<String>();
+		insert( new Estudiante("Gabriel Garcia Marquez", 0.0, materias2, recoms2) );
+		
+		//-----------------------------------------------
+		
 		insert(new Materia("Mates",7));
 end
 
