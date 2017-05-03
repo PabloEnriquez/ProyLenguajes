@@ -20,6 +20,10 @@ public class EstudInscripcion {
 		id = count.incrementAndGet();
 	}
 	
+	public int getId() {
+		return id;
+	}
+
 	public String getNombre() {
 		return nombre;
 	}

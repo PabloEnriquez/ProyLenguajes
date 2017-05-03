@@ -135,8 +135,25 @@ public class DroolsRestController {
     public Estudiante getEstudiante(@PathVariable("id") String idEstudiante){
     	Map<String, String> input  = new HashMap<String, String>();
     	input.put("id", idEstudiante);
-    	List<Estudiante> estudiantes = estudService.getEstudiantes();
-    	Estudiante result = estudService.getEstudId(input, estudiantes);
+    	Estudiante result = estudService.getEstudId(input);
+    	return result;
+    }
+    
+    @RequestMapping(value="estudiantes/inscripciones/{id}", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    public EstudInscripcion getEstudianteInscripcion(@PathVariable("id") String idEstudiante){
+    	Map<String, String> input  = new HashMap<String, String>();
+    	input.put("id", idEstudiante);
+    	EstudInscripcion result = estudService.getEstudInscripcionId(input);
+    	return result;
+    }
+    
+    @RequestMapping(value="estudiantes/materias/{id}", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    public Materia getMateria(@PathVariable("id") String idEstudiante){
+    	Map<String, String> input  = new HashMap<String, String>();
+    	input.put("id", idEstudiante);
+    	Materia result = estudService.getMateriaId(input);
     	return result;
     }
     
@@ -145,5 +162,19 @@ public class DroolsRestController {
     public List<Estudiante> getEstudiantes() {
     	List<Estudiante> estudiantes = estudService.getEstudiantes();
     	return estudiantes;
+    }
+    
+    @RequestMapping(value="estudiantes/inscripciones", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    public List<EstudInscripcion> getEstudiantesInscripciones() {
+    	List<EstudInscripcion> estudiantes = estudService.getEstudiantesInscripcion();
+    	return estudiantes;
+    }
+    
+    @RequestMapping(value="estudiantes/materias", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    public List<Materia> getMaterias() {
+    	List<Materia> materias = estudService.getMaterias();
+    	return materias;
     }
 }

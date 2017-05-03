@@ -27,6 +27,7 @@ rule "Insertar datos"
 		temas1.add(te1);
 		temas1.add(te2);
 		Materia m1 = new Materia("Fisica", "Juan marcos castenad", 0.0, 25.0, 7, temas1);
+		insert(m1);
 		
 		Tarea ta1 = new Tarea("ejercicio 1", 100.0, 9);
 		Tarea ta2 = new Tarea("ejercicio 2", 100.0, 8);
@@ -48,6 +49,7 @@ rule "Insertar datos"
 		temas2.add(te11);
 		temas2.add(te22);
 		Materia m2 = new Materia("Matematicas", "Pedro lopez de silao", 0.0, 35.0, 7, temas2);
+		insert(m2);
 		
 		List<Materia> materias = new ArrayList<Materia>();
 		materias.add(m1);

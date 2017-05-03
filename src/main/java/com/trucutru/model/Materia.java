@@ -45,6 +45,10 @@ public class Materia {
 		this.nivelCurso = nivelCurso;
 	}
 	
+	public int getId() {
+		return id;
+	}
+
 	public Double getPromedioMateria(List<Tema> temas){
 		for(int i = 0; i < temas.size(); i++){
 			Tema t = temas.get(i);

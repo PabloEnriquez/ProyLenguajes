@@ -93,17 +93,69 @@ public class StudentService {
         return estudiantes;
 	}
 	
-	public Estudiante getEstudId(Map<String, String> inputMap, List<Estudiante> estudiantes){
+	public List<EstudInscripcion> getEstudiantesInscripcion(){
+		KieSession kSession = droolsInitializer.getKsession();
+		kSession.fireAllRules();
+		List<EstudInscripcion> estudiantes = new ArrayList<EstudInscripcion>();
+		for (Object o : kSession.getObjects()) {
+            if (o instanceof EstudInscripcion) {
+            	estudiantes.add((EstudInscripcion) o);
+            }
+        }
+        return estudiantes;
+	}
+	
+	public List<Materia> getMaterias() {
+		KieSession kSession = droolsInitializer.getKsession();
+		kSession.fireAllRules();
+        List<Materia> materias = new ArrayList<Materia>();
+        for (Object o : kSession.getObjects()) {
+            if (o instanceof Materia) {
+            	materias.add((Materia) o);
+            }
+        }
+        return materias;
+	}
+	
+	public Estudiante getEstudId(Map<String, String> inputMap){
 		KieSession kSession = droolsInitializer.getKsession();
 		kSession.fireAllRules();
 		int idEstud = Integer.parseInt(inputMap.get("id"));
-//		List<Estudiante> estudiantes = getEstudiantes();
 		for (Object o : kSession.getObjects()) {
             if (o instanceof Estudiante) {
-//            	estudiantes.add((Estudiante) o);
             	Estudiante estudiante = (Estudiante) o;
             	if(estudiante.getId() == idEstud){
             		return estudiante;
+            	}
+            }
+        }
+		return null;
+	}
+	
+	public EstudInscripcion getEstudInscripcionId(Map<String, String> inputMap){
+		KieSession kSession = droolsInitializer.getKsession();
+		kSession.fireAllRules();
+		int idEstud = Integer.parseInt(inputMap.get("id"));
+		for (Object o : kSession.getObjects()) {
+            if (o instanceof EstudInscripcion) {
+            	EstudInscripcion estudiante = (EstudInscripcion) o;
+            	if(estudiante.getId() == idEstud){
+            		return estudiante;
+            	}
+            }
+        }
+		return null;
+	}
+	
+	public Materia getMateriaId(Map<String, String> inputMap){
+		KieSession kSession = droolsInitializer.getKsession();
+		kSession.fireAllRules();
+		int idMateria = Integer.parseInt(inputMap.get("id"));
+		for (Object o : kSession.getObjects()) {
+            if (o instanceof Materia) {
+            	Materia materia = (Materia) o;
+            	if(materia.getId() == idMateria){
+            		return materia;
             	}
             }
         }
