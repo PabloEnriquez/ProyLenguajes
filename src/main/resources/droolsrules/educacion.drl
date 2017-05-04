@@ -4,7 +4,7 @@ package com.trucutru
  import java.util.List;
 import com.trucutru.model.*;
 
-rule "Insertar datos"
+/*rule "Insertar datos"
 	when
 	then
 		Tarea t1 = new Tarea("ejercicio 1", 55.0, 9);
@@ -272,3 +272,4 @@ rule "Inscripcion futura nivel bajo"
 		//System.out.println($e1.getNombre() + ", la materia: " + $e1.getMateriaAInscribir().getNombre() + ", es muy baja para tu nivel");
 		$e1.getRecomendaciones().add($e1.getNombre() + ", la materia: " + $e1.getMateriaAInscribir().getNombre() + ", es muy baja para tu nivel");
 end
+*/

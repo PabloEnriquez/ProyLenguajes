@@ -1,6 +1,5 @@
 package com.droolsRestful.controller;
 
-import com.droolsRestful.droolsUtilities.DroolsRules;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,140 +21,130 @@ import com.trucutru.endpoint.impl.*;
 public class DroolsRestController {
 
     @Autowired
-    DroolsRules droolsRules;
-    @Autowired
-    UserService userService;
-    @Autowired
-    PadreService padreService;
-    @Autowired
     StudentService estudService;
 
-    DecimalFormat format = new DecimalFormat("0.#");
-
-    @RequestMapping(value="doMaths/{operation}/{num1:.+}/{num2:.+}", method = RequestMethod.GET,
-        produces = "application/json")
-    public Map basicOperation(@PathVariable("operation") String operation, @PathVariable("num1") String num1, @PathVariable("num2") String num2) {
-
-        Map<String, String> input  = new HashMap<String, String>();
-        input.put("operator",  operation);
-        input.put("num1", num1);
-        input.put("num2", num2);
-        Double result  = droolsRules.executeOperation(input);
-
-        Map<String, String> resultMap = new HashMap<String, String>();
-        resultMap.put("result", format.format(result));
-        return resultMap;
-    }
-
-    @RequestMapping(value="users/categorize/{name}/{age}", method = RequestMethod.POST, /*consumes = "application/json",*/
-            produces = "application/json")
-    public User categorizeUser(@PathVariable("name") String name, @PathVariable("age") String age) {
-    	 Map<String, String> input  = new HashMap<String, String>();
-    	 input.put("name", name);
-    	 input.put("age", age);
-    	 User result = userService.categorizeUser(input);
-    	 return result;
-    }
-    
-    @RequestMapping(value="users", method = RequestMethod.GET, produces = "application/json")
-    public List<User> getUsers() {
-    	List<User> users = userService.getUsers();
-    	return users;
-    }
-    
-//    @RequestMapping(value="padres/inserta/{padre}/{hijo}", method = RequestMethod.POST, /*consumes = "application/json",*/
-//            produces = "application/json")
-//    public Padre insertaPadre(@PathVariable("padre") String padre, @PathVariable("hijo") String hijo) {
-//    	
-//    	 Map<String, String> input  = new HashMap<String, String>();
-//    	 input.put("padre", padre);
-//    	 input.put("hijo", hijo);
-//    	 Padre result = padreService.insertaPadre(input);
-//
-//    	 return result;
-//    }
-    
-    @RequestMapping(value="padres/inserta", method = RequestMethod.POST, produces = "application/json")
-    @ResponseBody
-    public Padre insertaPadre(@RequestBody Padre padre) {
-    	 Padre result = padreService.insertaPadre2(padre);
-    	 return result;
-    }
-    
-    @RequestMapping(value="padres", method = RequestMethod.GET/*, produces = "application/json"*/)
-    @ResponseBody
-    public List<Padre> getPadres() {
-    	List<Padre> padres = padreService.getPadres();
-    	return padres;
-    }
-    
-    @RequestMapping(value="padres/hermanos", method = RequestMethod.GET/*, produces = "application/json"*/)
-    @ResponseBody
-    public List<Hermano> getHermanos() {
-    	List<Hermano> hermanos = padreService.getHermanos();
-    	return hermanos;
-    }
-    
-    @RequestMapping(value="padres/abuelos", method = RequestMethod.GET/*, produces = "application/json"*/)
-    @ResponseBody
-    public List<Abuelo> getAbuelos() {
-    	List<Abuelo> abuelos = padreService.getAbuelos();
-    	return abuelos;
-    }
-
-    @RequestMapping(value="padres/ancestros", method = RequestMethod.GET/*, produces = "application/json"*/)
-    @ResponseBody
-    public List<Ancestro> getAncestros() {
-    	List<Ancestro> ancestros = padreService.getAncestros();
-    	return ancestros;
-    }
-    
-//    ---------------------------------------------------------------------------------------------------------
+    //------------------------------POST------------------------------
     
     @RequestMapping(value="estudiantes/inserta", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
     public Estudiante insertaEstudiante(@RequestBody Estudiante estud) {
     	Estudiante result = estudService.insertaEstud(estud);
-//    	List<Recomendacion> lista = new ArrayList<Recomendacion>();
-//     	lista.add(result);
     	return result;
     } 
     
-    @RequestMapping(value="estudiantes/prediccion", method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(value="materias/inserta", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
-    public EstudInscripcion verInscripEstudiante(@RequestBody EstudInscripcion estud){
-    	EstudInscripcion result = estudService.inscribirEstud(estud);
-//    	List<RecomendacionFuturo> lista = new ArrayList<RecomendacionFuturo>();
-//    	lista.add(result);
+    public Materia insertaMateria(@RequestBody Materia materia) {
+    	Materia result = estudService.insertaMateria(materia);
     	return result;
     }
     
-    @RequestMapping(value="estudiantes/{id}", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value="tareas/inserta", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
-    public Estudiante getEstudiante(@PathVariable("id") String idEstudiante){
+    public Tarea insertaTarea(@RequestBody Tarea tarea) {
+    	Tarea result = estudService.insertaTarea(tarea);
+    	return result;
+    }
+    
+    @RequestMapping(value="temas/inserta", method = RequestMethod.POST, produces = "application/json")
+    @ResponseBody
+    public Tema insertaTema(@RequestBody Tema tema) {
+    	Tema result = estudService.insertaTema(tema);
+    	return result;
+    }
+    
+    @RequestMapping(value="estud_mat/inserta", method = RequestMethod.POST, produces = "application/json")
+    @ResponseBody
+    public Estudiante_materia insertaEstud_Mat(@RequestBody Estudiante_materia est_mat) {
+    	Estudiante_materia result = estudService.insertaEstudMateria(est_mat);
+    	return result;
+    }
+    
+    @RequestMapping(value="tarea_estud/inserta", method = RequestMethod.POST, produces = "application/json")
+    @ResponseBody
+    public Tarea_estudiante insertaTarea_Estud(@RequestBody Tarea_estudiante tar_est) {
+    	Tarea_estudiante result = estudService.insertaTareaEstud(tar_est);
+    	return result;
+    }
+    
+    @RequestMapping(value="tema_estud/inserta", method = RequestMethod.POST, produces = "application/json")
+    @ResponseBody
+    public Tema_estudiante insertaTema_Estud(@RequestBody Tema_estudiante tema_est) {
+    	Tema_estudiante result = estudService.insertaTemaEstud(tema_est);
+    	return result;
+    }
+    
+    //------------------------------GET id----------------------------
+    
+    @RequestMapping(value="estudiantes/{id_est}", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    public Estudiante getEstudiante(@PathVariable("id_est") String idEstudiante){
     	Map<String, String> input  = new HashMap<String, String>();
-    	input.put("id", idEstudiante);
+    	input.put("id_est", idEstudiante);
     	Estudiante result = estudService.getEstudId(input);
     	return result;
     }
     
-    @RequestMapping(value="estudiantes/inscripciones/{id}", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value="materias/{id_mat}", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-    public EstudInscripcion getEstudianteInscripcion(@PathVariable("id") String idEstudiante){
+    public Materia getMateria(@PathVariable("id_mat") String idMateria){
     	Map<String, String> input  = new HashMap<String, String>();
-    	input.put("id", idEstudiante);
-    	EstudInscripcion result = estudService.getEstudInscripcionId(input);
-    	return result;
-    }
-    
-    @RequestMapping(value="estudiantes/materias/{id}", method = RequestMethod.GET, produces = "application/json")
-    @ResponseBody
-    public Materia getMateria(@PathVariable("id") String idEstudiante){
-    	Map<String, String> input  = new HashMap<String, String>();
-    	input.put("id", idEstudiante);
+    	input.put("id_mat", idMateria);
     	Materia result = estudService.getMateriaId(input);
     	return result;
     }
+    
+    @RequestMapping(value="tareas/{id_tar}", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    public Tarea getTarea(@PathVariable("id_tar") String idTarea){
+    	Map<String, String> input  = new HashMap<String, String>();
+    	input.put("id_tar", idTarea);
+    	Tarea result = estudService.getTareaId(input);
+    	return result;
+    }
+    
+    @RequestMapping(value="temas/{id_tem}", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    public Tema getTema(@PathVariable("id_tem") String idTema){
+    	Map<String, String> input  = new HashMap<String, String>();
+    	input.put("id_tem", idTema);
+    	Tema result = estudService.getTemaId(input);
+    	return result;
+    }
+    
+    @RequestMapping(value="estud_mat/{id_est}/{id_mat}", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    public Estudiante_materia getEstudMat(@PathVariable("id_est") String idEstud, @PathVariable("id_mat") String idMat){
+    	Map<String, String> input  = new HashMap<String, String>();
+    	input.put("id_est", idEstud);
+    	input.put("id_mat", idMat);
+    	Estudiante_materia result = estudService.getEst_MatId(input);
+    	return result;
+    }
+    
+    @RequestMapping(value="tarea_estud/{id_est}/{id_tem}/{id_tar}", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    public Tarea_estudiante getTareaEstud(@PathVariable("id_est") String idEstud, @PathVariable("id_tar") String idTarea,
+    		@PathVariable("id_tem") String idTema){
+    	Map<String, String> input  = new HashMap<String, String>();
+    	input.put("id_est", idEstud);
+    	input.put("id_tar", idTarea);
+    	input.put("id_tem", idTema);
+    	Tarea_estudiante result = estudService.getTar_EstId(input);
+    	return result;
+    }
+    
+    @RequestMapping(value="tema_estud/{id_est}/{id_tem}", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    public Tema_estudiante getTemaEstud(@PathVariable("id_est") String idEstud, @PathVariable("id_tem") String idTema){
+    	Map<String, String> input  = new HashMap<String, String>();
+    	input.put("id_est", idEstud);
+    	input.put("id_tem", idTema);
+    	Tema_estudiante result = estudService.getTem_EstId(input);
+    	return result;
+    }
+    
+    //----------------------------GET listas-------------------------------------------------
     
     @RequestMapping(value="estudiantes", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
@@ -164,17 +153,45 @@ public class DroolsRestController {
     	return estudiantes;
     }
     
-    @RequestMapping(value="estudiantes/inscripciones", method = RequestMethod.GET, produces = "application/json")
-    @ResponseBody
-    public List<EstudInscripcion> getEstudiantesInscripciones() {
-    	List<EstudInscripcion> estudiantes = estudService.getEstudiantesInscripcion();
-    	return estudiantes;
-    }
-    
-    @RequestMapping(value="estudiantes/materias", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value="materias", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
     public List<Materia> getMaterias() {
     	List<Materia> materias = estudService.getMaterias();
     	return materias;
+    }
+    
+    @RequestMapping(value="tareas", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    public List<Tarea> getTareas() {
+    	List<Tarea> tareas = estudService.getTareas();
+    	return tareas;
+    }
+    
+    @RequestMapping(value="temas", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    public List<Tema> getTemas() {
+    	List<Tema> temas = estudService.getTemas();
+    	return temas;
+    }
+    
+    @RequestMapping(value="estud_mat", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    public List<Estudiante_materia> getEstudiantesMaterias() {
+    	List<Estudiante_materia> est_mats = estudService.getEstudiantesMaterias();
+    	return est_mats;
+    }
+    
+    @RequestMapping(value="tarea_estud", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    public List<Tarea_estudiante> getTareasEstudiantes() {
+    	List<Tarea_estudiante> tarea_estuds = estudService.getEstudiantesTareas();
+    	return tarea_estuds;
+    }
+    
+    @RequestMapping(value="tema_estud", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    public List<Tema_estudiante> getTemasEstudiantes() {
+    	List<Tema_estudiante> tema_estuds = estudService.getEstudiantesTemas();
+    	return tema_estuds;
     }
 }

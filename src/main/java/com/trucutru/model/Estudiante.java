@@ -15,7 +15,7 @@ public class Estudiante {
 	public final int id;
 	private String nombre;
 	private Double promedioGlobal;
-	private List<Materia> materiasCursando;
+//	private List<Materia> materiasCursando;
 	public List<String> recomendaciones;
 	
 	public Estudiante(){
@@ -27,31 +27,30 @@ public class Estudiante {
 //		this.nombre = nombre;
 //	}
 	
-	public Estudiante(String nombre, Double promedioGlobal, List<Materia> materiasCursando,
-			List<String> recomendaciones) {
+	public Estudiante(String nombre, Double promedioGlobal, List<String> recomendaciones) {
+		id = count.incrementAndGet();
 		this.nombre = nombre;
 		this.promedioGlobal = promedioGlobal;
-		this.materiasCursando = materiasCursando;
+//		this.materiasCursando = materiasCursando;
 		this.recomendaciones = recomendaciones;
-		id = count.incrementAndGet();
 	}
 	
 	public int getId() {
 		return id;
 	}
 
-	public Double getPromedioTotal(List<Materia> materias){
-		for(int i = 0; i < materias.size(); i++){
-			Materia m = materias.get(i);
-			m.setPromedioAlumno(0.0);
-			List<Tema> temas = m.getTemas();
-			double aux = m.getPromedioMateria(temas);
-			m.setPromedioAlumno(aux);
-			promedioGlobal += aux;
-		}
-		promedioGlobal = (promedioGlobal / materias.size());
-		return promedioGlobal;
-	}
+//	public Double getPromedioTotal(List<Materia> materias){
+//		for(int i = 0; i < materias.size(); i++){
+//			Materia m = materias.get(i);
+//			m.setPromedioAlumno(0.0);
+//			List<Tema> temas = m.getTemas();
+//			double aux = m.getPromedioMateria(temas);
+//			m.setPromedioAlumno(aux);
+//			promedioGlobal += aux;
+//		}
+//		promedioGlobal = (promedioGlobal / materias.size());
+//		return promedioGlobal;
+//	}
 	
 	public String getNombre() {
 		return nombre;
@@ -69,22 +68,22 @@ public class Estudiante {
 		this.promedioGlobal = promedioGlobal;
 	}
 
-	public List<Materia> getMateriasCursando() {
-		return materiasCursando;
-	}
-
-	public void setMateriasCursando(List<Materia> materiasCursando) {
-		this.materiasCursando = materiasCursando;
+//	public List<Materia> getMateriasCursando() {
+//		return materiasCursando;
+//	}
+//
+//	public void setMateriasCursando(List<Materia> materiasCursando) {
+//		this.materiasCursando = materiasCursando;
+//	}
+//
+	public List<String> getRecomendaciones() {
+		return recomendaciones;
 	}
 
 	@Override
 	public String toString() {
-		return "Estudiante [nombre=" + nombre + ", promedioGlobal=" + promedioGlobal + ", materiasCursando="
-				+ materiasCursando + "]";
-	}
-
-	public List<String> getRecomendaciones() {
-		return recomendaciones;
+		return "Estudiante [id=" + id + ", nombre=" + nombre + ", promedioGlobal=" + promedioGlobal
+				+ ", recomendaciones=" + recomendaciones + "]";
 	}
 
 	public void setRecomendaciones(List<String> recomendaciones) {
