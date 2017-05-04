@@ -104,7 +104,14 @@ rule "Insertar datos"
 		//insert(new Counter());
 end
 
-rule "Contador por materia"
+rule "Contador por cada estudiante"
+	when
+		$e : Estudiante();
+	then
+		insert( new Counter($e.getNombre(), 0) );
+end
+
+rule "Contador por cada materia"
 	when
 		$mat : Materia();
 		$estud : Estudiante();
@@ -134,7 +141,7 @@ rule "Calcular sumatoria de tareas por tema"
 		double aux = $tema_estud.getPromedio_ejercicios();
 		aux = aux + $tar_estud.getCalificacion();	
 		$tema_estud.setPromedio_ejercicios(aux);
-		System.out.println("Tema: "+ $tema.getNombre() + " suma: " + aux + " cont = " + $c.getValue());
+		System.out.println("Tema: "+ $tema.getNombre() + " suma: " + $tema_estud.getPromedio_ejercicios() + " cont = " + $c.getValue());
 end
 
 rule "Calcular promedio de temas a partir de sus tareas"
@@ -147,7 +154,7 @@ rule "Calcular promedio de temas a partir de sus tareas"
 		double aux = $tema_estud.getPromedio_ejercicios();
 		aux = ( aux / $c.getValue() );
 		$tema_estud.setPromedio_ejercicios(aux);
-		System.out.println("Tema: "+ $tema.getNombre() + " promedio: " + aux + " cont = " + $c.getValue());
+		System.out.println("Tema: "+ $tema.getNombre() + " promedio: " + $tema_estud.getPromedio_ejercicios() + " cont = " + $c.getValue());
 end
 
 rule "Calcular sumatoria de promedio de materias por tema"
@@ -164,7 +171,7 @@ rule "Calcular sumatoria de promedio de materias por tema"
 		double aux = $estud_mat.getPromedioAlumno();
 		aux = aux + $tema_estud.getPromedio_ejercicios();
 		$estud_mat.setPromedioAlumno(aux);
-		System.out.println("Materia: " + $mat.getNombre() + " suma: " + aux + " cont: " + $c.getValue());
+		System.out.println("Materia: " + $mat.getNombre() + " suma: " + $estud_mat.getPromedioAlumno() + " cont: " + $c.getValue());
 end
 
 rule "Calcular promedio de materias por tema"
@@ -177,7 +184,32 @@ rule "Calcular promedio de materias por tema"
 		double aux = $estud_mat.getPromedioAlumno();
 		aux = ( aux / $c.getValue() );
 		$estud_mat.setPromedioAlumno(aux);
-		System.out.println("Materia: " + $mat.getNombre() + " promedio: " + aux + " cont: " + $c.getValue());
+		System.out.println("Materia: " + $mat.getNombre() + " promedio: " + $estud_mat.getPromedioAlumno() + " cont: " + $c.getValue());
+end
+
+rule "Calcular sumatoria de materias para promedio global"
+	when
+		$estud : Estudiante();
+		$mat : Materia();
+		$estud_mat : Estudiante_materia($mat.getId() == id_materia, $estud.getId() == id_estudiante);
+		$c : Counter( name == $estud.getNombre() );
+	then
+		$c.setValue( $c.getValue() + 1 );
+		double aux = $estud.getPromedioGlobal();
+		aux = aux + $estud_mat.getPromedioAlumno();
+		$estud.setPromedioGlobal(aux);
+		System.out.println("Estudiante: " + $estud.getNombre() + " suma: " + $estud.getPromedioGlobal() + " cont: " + $c.getValue());
+end
+
+rule "Calcular promedio global del alumno"
+	when
+		$estud : Estudiante();
+		$c : Counter( name == $estud.getNombre() );
+	then
+		double aux = $estud.getPromedioGlobal();
+		aux = ( aux / $c.getValue() );
+		$estud.setPromedioGlobal(aux);
+		System.out.println("Estudiante: " + $estud.getNombre() + " promedio: " + $estud.getPromedioGlobal() + " cont: " + $c.getValue());
 end
 
 /*rule "Insertar datos"
