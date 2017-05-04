@@ -4,6 +4,11 @@ package com.trucutru
  import java.util.List;
 import com.trucutru.model.*;
 
+declare Counter
+	name : String @key
+	value : int @key
+end
+
 rule "Insertar datos"
 	when
 	then
@@ -17,8 +22,8 @@ rule "Insertar datos"
 		insert(m1);
 		insert(m2);
 		
-		Estudiante_materia estud_mat1 = new Estudiante_materia(m1.getId(), e1.getId(), 0.0, 0.0);
-		Estudiante_materia estud_mat2 = new Estudiante_materia(m2.getId(), e1.getId(), 0.0, 0.0);
+		Estudiante_materia estud_mat1 = new Estudiante_materia(m1.getId(), e1.getId(), 0.0, 35.0);
+		Estudiante_materia estud_mat2 = new Estudiante_materia(m2.getId(), e1.getId(), 0.0, 50.0);
 		insert(estud_mat1);
 		insert(estud_mat2);
 		//---
@@ -96,6 +101,83 @@ rule "Insertar datos"
 		insert(tar_estud11);
 		insert(tar_estud12);
 		//---
+		//insert(new Counter());
+end
+
+rule "Contador por materia"
+	when
+		$mat : Materia();
+		$estud : Estudiante();
+		$estud_mat : Estudiante_materia($mat.getId() == id_materia, $estud.getId() == id_estudiante);
+	then
+		insert( new Counter($mat.getNombre(), 0) );
+end
+
+rule "Contador por cada tema"
+	when
+		$tema : Tema();
+		$estud : Estudiante();
+		$tema_estud : Tema_estudiante($tema.getId_tema() == id_tema, $estud.getId() == id_estudiante);
+	then
+		insert( new Counter($tema.getNombre(), 0) );
+end
+
+rule "Calcular sumatoria de tareas por tema"
+	when
+		$tema : Tema();
+		$estud : Estudiante();
+		$tar_estud : Tarea_estudiante($tema.getId_tema() == id_tema, $estud.getId() == id_estudiante);
+		$tema_estud : Tema_estudiante($tema.getId_tema() == id_tema, $estud.getId() == id_estudiante);
+		$c : Counter( name == $tema.getNombre() );
+	then
+		$c.setValue( $c.getValue() + 1 );
+		double aux = $tema_estud.getPromedio_ejercicios();
+		aux = aux + $tar_estud.getCalificacion();	
+		$tema_estud.setPromedio_ejercicios(aux);
+		System.out.println("Tema: "+ $tema.getNombre() + " suma: " + aux + " cont = " + $c.getValue());
+end
+
+rule "Calcular promedio de temas a partir de sus tareas"
+	when
+		$tema : Tema();
+		$estud : Estudiante();
+		$tema_estud : Tema_estudiante($tema.getId_tema() == id_tema, $estud.getId() == id_estudiante);
+		$c : Counter( name == $tema.getNombre() );
+	then
+		double aux = $tema_estud.getPromedio_ejercicios();
+		aux = ( aux / $c.getValue() );
+		$tema_estud.setPromedio_ejercicios(aux);
+		System.out.println("Tema: "+ $tema.getNombre() + " promedio: " + aux + " cont = " + $c.getValue());
+end
+
+rule "Calcular sumatoria de promedio de materias por tema"
+	when
+		$tema : Tema();
+		$estud : Estudiante();
+		$mat : Materia();
+		$tema_estud : Tema_estudiante($tema.getId_tema() == id_tema, $estud.getId() == id_estudiante);
+		$estud_mat : Estudiante_materia($mat.getId() == id_materia, $estud.getId() == id_estudiante);
+		$c : Counter( name == $mat.getNombre() );
+		eval( $tema.getId_materia() == $mat.getId() );
+	then
+		$c.setValue( $c.getValue() + 1 );
+		double aux = $estud_mat.getPromedioAlumno();
+		aux = aux + $tema_estud.getPromedio_ejercicios();
+		$estud_mat.setPromedioAlumno(aux);
+		System.out.println("Materia: " + $mat.getNombre() + " suma: " + aux + " cont: " + $c.getValue());
+end
+
+rule "Calcular promedio de materias por tema"
+	when
+		$estud : Estudiante();
+		$mat : Materia();
+		$estud_mat : Estudiante_materia($mat.getId() == id_materia, $estud.getId() == id_estudiante);
+		$c : Counter( name == $mat.getNombre() );
+	then
+		double aux = $estud_mat.getPromedioAlumno();
+		aux = ( aux / $c.getValue() );
+		$estud_mat.setPromedioAlumno(aux);
+		System.out.println("Materia: " + $mat.getNombre() + " promedio: " + aux + " cont: " + $c.getValue());
 end
 
 /*rule "Insertar datos"

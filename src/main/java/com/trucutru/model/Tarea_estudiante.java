@@ -6,15 +6,15 @@ public class Tarea_estudiante {
 	private int id_tarea;
 	private int id_tema;
 	private int id_estudiante;
-	private double califiacion;
+	private double calificacion;
 	
 	public Tarea_estudiante() {
 	}
-	public Tarea_estudiante(int id_tarea, int id_tema, int id_estudiante, double califiacion) {
+	public Tarea_estudiante(int id_tarea, int id_tema, int id_estudiante, double calificacion) {
 		this.id_tarea = id_tarea;
 		this.id_tema = id_tema;
 		this.id_estudiante = id_estudiante;
-		this.califiacion = califiacion;
+		this.calificacion = calificacion;
 	}
 	public int getId_tarea() {
 		return id_tarea;
@@ -37,13 +37,13 @@ public class Tarea_estudiante {
 	@Override
 	public String toString() {
 		return "Tarea_estudiante [id_tarea=" + id_tarea + ", id_tema=" + id_tema + ", id_estudiante=" + id_estudiante
-				+ ", califiacion=" + califiacion + "]";
+				+ ", calificacion=" + calificacion + "]";
 	}
-	public double getCalifiacion() {
-		return califiacion;
+	public double getCalificacion() {
+		return calificacion;
 	}
-	public void setCalifiacion(double califiacion) {
-		this.califiacion = califiacion;
+	public void setCalificacion(double calificacion) {
+		this.calificacion = calificacion;
 	}
 	
 }
