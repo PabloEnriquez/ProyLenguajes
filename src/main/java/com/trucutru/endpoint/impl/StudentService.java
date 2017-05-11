@@ -33,6 +33,10 @@ public class StudentService {
 	            		estudiante.setPromedioGlobal(estud.getPromedioGlobal());
 	            		estudiante.setRecomendaciones(estud.getRecomendaciones());
 	            		estudPasado = estudiante;
+	            		kSession.insert(estudPasado);
+	                    //fire rules
+	                    int fired = kSession.fireAllRules();
+	                    System.out.println(">> Fired: " + fired);
 	            	}
 	            }
 	        }
@@ -319,54 +323,52 @@ public class StudentService {
 		return null;
 	}
 	
-	public Estudiante_materia getEst_MatId(Map<String, String> inputMap){
+	public List<Estudiante_materia> getEst_MatId(Map<String, String> inputMap){
+		List<Estudiante_materia> lista_estud_mat = new ArrayList<Estudiante_materia>();
 		KieSession kSession = droolsInitializer.getKsession();
 		kSession.fireAllRules();
 		int idEst = Integer.parseInt(inputMap.get("id_est"));
-		int idMat = Integer.parseInt(inputMap.get("id_mat"));
 		for (Object o : kSession.getObjects()) {
             if (o instanceof Estudiante_materia) {
             	Estudiante_materia est_mat = (Estudiante_materia) o;
-            	if(est_mat.getId_estudiante() == idEst && est_mat.getId_materia() == idMat){
-            		return est_mat;
+            	if(est_mat.getId_estudiante() == idEst){
+            		lista_estud_mat.add(est_mat);
             	}
             }
         }
-		return null;
+		return lista_estud_mat;
 	}
 	
-	public Tarea_estudiante getTar_EstId(Map<String, String> inputMap){
+	public List<Tarea_estudiante> getTar_EstId(Map<String, String> inputMap){
+		List<Tarea_estudiante> list_tar_est = new ArrayList<Tarea_estudiante>();
 		KieSession kSession = droolsInitializer.getKsession();
 		kSession.fireAllRules();
 		int idEst = Integer.parseInt(inputMap.get("id_est"));
-		int idTar = Integer.parseInt(inputMap.get("id_tar"));
-		int idTem = Integer.parseInt(inputMap.get("id_tem"));
 		for (Object o : kSession.getObjects()) {
             if (o instanceof Tarea_estudiante) {
             	Tarea_estudiante tar_est = (Tarea_estudiante) o;
-            	if(tar_est.getId_estudiante() == idEst && tar_est.getId_tarea() == idTar
-            			&& tar_est.getId_tema() == idTem){
-            		return tar_est;
+            	if(tar_est.getId_estudiante() == idEst){
+            		list_tar_est.add(tar_est);
             	}
             }
         }
-		return null;
+		return list_tar_est;
 	}
 	
-	public Tema_estudiante getTem_EstId(Map<String, String> inputMap){
+	public List<Tema_estudiante> getTem_EstId(Map<String, String> inputMap){
+		List<Tema_estudiante> list_tem_est = new ArrayList<Tema_estudiante>();
 		KieSession kSession = droolsInitializer.getKsession();
 		kSession.fireAllRules();
 		int idEst = Integer.parseInt(inputMap.get("id_est"));
-		int idTem = Integer.parseInt(inputMap.get("id_tem"));
 		for (Object o : kSession.getObjects()) {
             if (o instanceof Tema_estudiante) {
             	Tema_estudiante tem_est = (Tema_estudiante) o;
-            	if(tem_est.getId_estudiante() == idEst && tem_est.getId_tema() == idTem){
-            		return tem_est;
+            	if(tem_est.getId_estudiante() == idEst){
+            		list_tem_est.add(tem_est);
             	}
             }
         }
-		return null;
+		return list_tem_est;
 	}
 
 }

@@ -198,35 +198,30 @@ public class DroolsRestController {
     	return result;
     }
     
-    @RequestMapping(value="estud_mat/{id_est}/{id_mat}", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value="estud_mat/{id_est}", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-    public Estudiante_materia getEstudMat(@PathVariable("id_est") String idEstud, @PathVariable("id_mat") String idMat){
+    public List<Estudiante_materia> getEstudMat(@PathVariable("id_est") String idEstud){
     	Map<String, String> input  = new HashMap<String, String>();
     	input.put("id_est", idEstud);
-    	input.put("id_mat", idMat);
-    	Estudiante_materia result = estudService.getEst_MatId(input);
+    	List<Estudiante_materia> result = estudService.getEst_MatId(input);
     	return result;
     }
     
-    @RequestMapping(value="tarea_estud/{id_est}/{id_tem}/{id_tar}", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value="tarea_estud/{id_est}", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-    public Tarea_estudiante getTareaEstud(@PathVariable("id_est") String idEstud, @PathVariable("id_tar") String idTarea,
-    		@PathVariable("id_tem") String idTema){
+    public List<Tarea_estudiante> getTareaEstud(@PathVariable("id_est") String idEstud){
     	Map<String, String> input  = new HashMap<String, String>();
     	input.put("id_est", idEstud);
-    	input.put("id_tar", idTarea);
-    	input.put("id_tem", idTema);
-    	Tarea_estudiante result = estudService.getTar_EstId(input);
+    	List<Tarea_estudiante> result = estudService.getTar_EstId(input);
     	return result;
     }
     
-    @RequestMapping(value="tema_estud/{id_est}/{id_tem}", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value="tema_estud/{id_est}", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-    public Tema_estudiante getTemaEstud(@PathVariable("id_est") String idEstud, @PathVariable("id_tem") String idTema){
+    public List<Tema_estudiante> getTemaEstud(@PathVariable("id_est") String idEstud){
     	Map<String, String> input  = new HashMap<String, String>();
     	input.put("id_est", idEstud);
-    	input.put("id_tem", idTema);
-    	Tema_estudiante result = estudService.getTem_EstId(input);
+    	List<Tema_estudiante> result = estudService.getTem_EstId(input);
     	return result;
     }
     
