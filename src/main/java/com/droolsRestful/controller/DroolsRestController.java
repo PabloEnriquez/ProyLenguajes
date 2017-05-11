@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,50 +31,122 @@ public class DroolsRestController {
     @RequestMapping(value="estudiantes/inserta", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
     public Estudiante insertaEstudiante(@RequestBody Estudiante estud) {
-    	Estudiante result = estudService.insertaEstud(estud);
-    	return result;
+    	try{
+    		Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
+    		Matcher m = p.matcher(estud.getNombre());
+    		boolean b = m.find();
+    		if(!b){
+    			Estudiante result = estudService.insertaEstud(estud);
+               	return result;
+    		}else{
+    			estud.setNombre("El nombre contiene caracteres especiales inaceptables. Favor de cambiar");
+    			return estud;
+    		}
+    	}catch (Exception e) {
+            e.printStackTrace();
+            estud.setNombre(e.toString());
+            return estud;
+        }
     } 
     
     @RequestMapping(value="materias/inserta", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
     public Materia insertaMateria(@RequestBody Materia materia) {
-    	Materia result = estudService.insertaMateria(materia);
-    	return result;
+    	try{
+    		Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
+    		Matcher m = p.matcher(materia.getNombre());
+    		boolean b = m.find();
+    		if (!b){
+    			Materia result = estudService.insertaMateria(materia);
+            	return result;
+    		}else{
+    			materia.setNombre("El nombre contiene caracteres especiales inaceptables. Favor de cambiar");
+    			return materia;
+    		}
+    	}catch (Exception e) {
+    		e.printStackTrace();
+    		materia.setNombre(e.toString());
+    		return materia;
+    	}
+    	
     }
     
     @RequestMapping(value="tareas/inserta", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
     public Tarea insertaTarea(@RequestBody Tarea tarea) {
-    	Tarea result = estudService.insertaTarea(tarea);
-    	return result;
+    	try{
+    		Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
+    		Matcher m = p.matcher(tarea.getNombre());
+    		boolean b = m.find();
+    		if(!b){
+            	Tarea result = estudService.insertaTarea(tarea);
+            	return result;	
+    		}else{
+    			tarea.setNombre("El nombre contiene caracteres especiales inaceptables. Favor de cambiar");
+    			return tarea;
+    		}
+    	}catch (Exception e) {
+    		e.printStackTrace();
+    		tarea.setNombre(e.toString());
+    		return tarea;
+    	}
     }
     
     @RequestMapping(value="temas/inserta", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
     public Tema insertaTema(@RequestBody Tema tema) {
-    	Tema result = estudService.insertaTema(tema);
-    	return result;
+    	try{
+    		Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
+    		Matcher m = p.matcher(tema.getNombre());
+    		boolean b = m.find();
+    		if(!b){
+            	Tema result = estudService.insertaTema(tema);
+            	return result;	
+    		}else{
+    			tema.setNombre("El nombre contiene caracteres especiales inaceptables. Favor de cambiar");
+    			return tema;
+    		}
+    	}catch (Exception e) {
+    		e.printStackTrace();
+    		tema.setNombre(e.toString());
+    		return tema;
+    	}
     }
     
     @RequestMapping(value="estud_mat/inserta", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
     public Estudiante_materia insertaEstud_Mat(@RequestBody Estudiante_materia est_mat) {
-    	Estudiante_materia result = estudService.insertaEstudMateria(est_mat);
-    	return result;
+    	try{
+        	Estudiante_materia result = estudService.insertaEstudMateria(est_mat);
+        	return result;
+    	}catch (Exception e){
+    		e.printStackTrace();
+    		return est_mat;
+    	}
     }
     
     @RequestMapping(value="tarea_estud/inserta", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
     public Tarea_estudiante insertaTarea_Estud(@RequestBody Tarea_estudiante tar_est) {
-    	Tarea_estudiante result = estudService.insertaTareaEstud(tar_est);
-    	return result;
+    	try{
+        	Tarea_estudiante result = estudService.insertaTareaEstud(tar_est);
+        	return result;
+    	}catch (Exception e){
+    		e.printStackTrace();
+    		return tar_est;
+    	}
     }
     
     @RequestMapping(value="tema_estud/inserta", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
     public Tema_estudiante insertaTema_Estud(@RequestBody Tema_estudiante tema_est) {
-    	Tema_estudiante result = estudService.insertaTemaEstud(tema_est);
-    	return result;
+    	try{
+        	Tema_estudiante result = estudService.insertaTemaEstud(tema_est);
+        	return result;
+    	}catch (Exception e){
+    		e.printStackTrace();
+    		return tema_est;
+    	}
     }
     
     //------------------------------GET id----------------------------

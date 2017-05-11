@@ -10,6 +10,7 @@ declare Counter
 end
 
 rule "Insertar datos"
+	salience 100
 	when
 	then
 		//---
@@ -105,6 +106,7 @@ rule "Insertar datos"
 end
 
 rule "Contador por cada estudiante"
+	salience 99
 	when
 		$e : Estudiante();
 	then
@@ -112,6 +114,7 @@ rule "Contador por cada estudiante"
 end
 
 rule "Contador por cada materia"
+	salience 99
 	when
 		$mat : Materia();
 		$estud : Estudiante();
@@ -121,6 +124,7 @@ rule "Contador por cada materia"
 end
 
 rule "Contador por cada tema"
+	salience 99
 	when
 		$tema : Tema();
 		$estud : Estudiante();
@@ -130,6 +134,7 @@ rule "Contador por cada tema"
 end
 
 rule "Calcular sumatoria de tareas por tema"
+	salience 98
 	when
 		$tema : Tema();
 		$estud : Estudiante();
@@ -145,6 +150,7 @@ rule "Calcular sumatoria de tareas por tema"
 end
 
 rule "Calcular promedio de temas a partir de sus tareas"
+	salience 97
 	when
 		$tema : Tema();
 		$estud : Estudiante();
@@ -158,6 +164,7 @@ rule "Calcular promedio de temas a partir de sus tareas"
 end
 
 rule "Calcular sumatoria de promedio de materias por tema"
+	salience 96
 	when
 		$tema : Tema();
 		$estud : Estudiante();
@@ -175,6 +182,7 @@ rule "Calcular sumatoria de promedio de materias por tema"
 end
 
 rule "Calcular promedio de materias por tema"
+	salience 95
 	when
 		$estud : Estudiante();
 		$mat : Materia();
@@ -188,6 +196,7 @@ rule "Calcular promedio de materias por tema"
 end
 
 rule "Calcular sumatoria de materias para promedio global"
+	salience 94
 	when
 		$estud : Estudiante();
 		$mat : Materia();
@@ -202,6 +211,7 @@ rule "Calcular sumatoria de materias para promedio global"
 end
 
 rule "Calcular promedio global del alumno"
+	salience 93
 	when
 		$estud : Estudiante();
 		$c : Counter( name == $estud.getNombre() );
