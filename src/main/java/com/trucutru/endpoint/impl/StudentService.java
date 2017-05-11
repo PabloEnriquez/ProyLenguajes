@@ -18,6 +18,31 @@ public class StudentService {
 	@Autowired
     private DroolsInitializer droolsInitializer;
 	
+	//--------------------PUT de objetos -------------------------------
+	
+	public Estudiante editarEstudiante(Estudiante estud, Map<String, String> inputMap){
+		try{
+			KieSession kSession = droolsInitializer.getKsession();
+			int idEstud = Integer.parseInt(inputMap.get("id_est"));
+			Estudiante estudPasado = null;
+			for (Object o : kSession.getObjects()) {
+	            if (o instanceof Estudiante) {
+	            	Estudiante estudiante = (Estudiante) o;
+	            	if(estudiante.getId() == idEstud){
+	            		estudiante.setNombre(estud.getNombre());
+	            		estudiante.setPromedioGlobal(estud.getPromedioGlobal());
+	            		estudiante.setRecomendaciones(estud.getRecomendaciones());
+	            		estudPasado = estudiante;
+	            	}
+	            }
+	        }
+			return estudPasado;
+		}catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+	}
+	
 	//--------------------POST de objetos--------------------------------
 	
 	public Estudiante insertaEstud(Estudiante estud){

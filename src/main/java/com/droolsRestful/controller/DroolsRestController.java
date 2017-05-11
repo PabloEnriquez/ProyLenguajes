@@ -25,6 +25,17 @@ public class DroolsRestController {
 
     @Autowired
     StudentService estudService;
+    
+    //-----------------------------PUT-----------------------------
+    
+    @RequestMapping(value="estudiantes/editar/{id_est}", method = RequestMethod.PUT, produces = "application/json")
+    @ResponseBody
+    public Estudiante editarEstudiante(@RequestBody Estudiante estud, @PathVariable("id_est") String idEstudiante){
+    	Map<String, String> input  = new HashMap<String, String>();
+    	input.put("id_est", idEstudiante);
+    	Estudiante result = estudService.editarEstudiante(estud, input);
+    	return result;
+    }
 
     //------------------------------POST------------------------------
     
