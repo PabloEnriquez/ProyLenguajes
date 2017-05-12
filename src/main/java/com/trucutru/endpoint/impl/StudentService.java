@@ -24,7 +24,7 @@ public class StudentService {
 		try{
 			KieSession kSession = droolsInitializer.getKsession();
 			int idEstud = Integer.parseInt(inputMap.get("id_est"));
-			Estudiante estudPasado = null;
+			Estudiante estudModif = null;
 			for (Object o : kSession.getObjects()) {
 	            if (o instanceof Estudiante) {
 	            	Estudiante estudiante = (Estudiante) o;
@@ -32,15 +32,13 @@ public class StudentService {
 	            		estudiante.setNombre(estud.getNombre());
 	            		//estudiante.setPromedioGlobal(estud.getPromedioGlobal());
 	            		estudiante.setRecomendaciones(estud.getRecomendaciones());
-	            		estudPasado = estudiante;
-	            		kSession.insert(estudPasado);
-	                    //fire rules
-	                    int fired = kSession.fireAllRules();
-	                    System.out.println(">> Fired: " + fired);
+	            		estudModif = estudiante;
+	            		kSession.insert(estudModif);
+	                    kSession.fireAllRules();
 	            	}
 	            }
 	        }
-			return estudPasado;
+			return estudModif;
 		}catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -51,7 +49,7 @@ public class StudentService {
 		try{
 			KieSession kSession = droolsInitializer.getKsession();
 			int idMateria = Integer.parseInt(inputMap.get("id_mat"));
-			Materia materiaPasada = null;
+			Materia materiaModif = null;
 			for (Object o : kSession.getObjects()) {
 	            if (o instanceof Materia) {
 	            	Materia materiaEncontrada = (Materia) o;
@@ -59,12 +57,13 @@ public class StudentService {
 	            		materiaEncontrada.setMaestro(materia.getMaestro());
 	            		materiaEncontrada.setNivelCurso(materia.getNivelCurso());
 	            		materiaEncontrada.setNombre(materia.getNombre());
-	            		materiaPasada = materiaEncontrada;
-	            		kSession.insert(materiaPasada);
+	            		materiaModif = materiaEncontrada;
+	            		kSession.insert(materiaModif);
+	            		kSession.fireAllRules();
 	            	}
 	            }
 	        }
-			return materiaPasada;
+			return materiaModif;
 		}catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -75,18 +74,72 @@ public class StudentService {
 		try{
 			KieSession kSession = droolsInitializer.getKsession();
 			int idTarea = Integer.parseInt(inputMap.get("id_tar"));
-			Tarea tareaPasada = null;
+			Tarea tareaModif = null;
 			for (Object o : kSession.getObjects()) {
 	            if (o instanceof Tarea) {
 	            	Tarea tareaEncontrada = (Tarea) o;
-	            	if(tarea.getId_tarea() == idTarea){
+	            	if(tareaEncontrada.getId_tarea() == idTarea){
 	            		tareaEncontrada.setDificultad(tarea.getDificultad());
-	            		tareaEncontrada.setId_tema(tarea.getId_tema());
+	            		//tareaEncontrada.setId_tema(tarea.getId_tema());
 	            		tareaEncontrada.setNombre(tarea.getNombre());
+	            		tareaModif = tareaEncontrada;
+	            		kSession.insert(tareaModif);
+	            		kSession.fireAllRules();
 	            	}
 	            }
 	        }
-			return tareaPasada;
+			return tareaModif;
+		}catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+	}
+	
+	public Tema editarTema(Tema tema, Map<String, String> inputMap){
+		try{
+			KieSession kSession = droolsInitializer.getKsession();
+			int idTema = Integer.parseInt(inputMap.get("id_tem"));
+			Tema temaModif = null;
+			for (Object o : kSession.getObjects()) {
+	            if (o instanceof Tema) {
+	            	Tema temaEncontrado = (Tema) o;
+	            	if(temaEncontrado.getId_tema() == idTema){
+	            		//temaEncontrado.setId_materia(tema.getId_materia());
+	            		temaEncontrado.setNivel(tema.getNivel());
+	            		temaEncontrado.setNombre(tema.getNombre());
+	            		temaModif = temaEncontrado;
+	            		kSession.insert(temaModif);
+	            		kSession.fireAllRules();
+	            	}
+	            }
+	        }
+			return temaModif;
+		}catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+	}
+	
+	public Tarea_estudiante editarTareaEstudiante(Tarea_estudiante tar_estud, Map<String, String> inputMap){
+		try{
+			KieSession kSession = droolsInitializer.getKsession();
+			kSession.fireAllRules();
+			int idEst = Integer.parseInt(inputMap.get("id_est"));
+			int idTarea = Integer.parseInt(inputMap.get("id_tar"));
+			Tarea_estudiante tar_estModif = null;
+			for (Object o : kSession.getObjects()) {
+	            if (o instanceof Tarea_estudiante) {
+	            	Tarea_estudiante tar_estEncontrada = (Tarea_estudiante) o;
+	            	if(tar_estEncontrada.getId_estudiante() == idEst && tar_estEncontrada.getId_tarea() == idTarea){
+	            		tar_estEncontrada.setCalificacion(tar_estud.getCalificacion());
+	            		tar_estEncontrada.setCompleted(tar_estud.isCompleted());
+	            		tar_estModif = tar_estEncontrada;
+	            		kSession.insert(tar_estModif);
+	            		kSession.fireAllRules();
+	            	}
+	            }
+	        }
+			return tar_estModif;
 		}catch (Exception e) {
             e.printStackTrace();
             return null;

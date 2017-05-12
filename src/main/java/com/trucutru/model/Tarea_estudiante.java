@@ -11,11 +11,13 @@ public class Tarea_estudiante {
 	
 	public Tarea_estudiante() {
 	}
-	public Tarea_estudiante(int id_tarea, int id_tema, int id_estudiante, double calificacion) {
+	public Tarea_estudiante(int id_tarea, int id_tema, int id_estudiante, double calificacion, boolean completed) {
+		super();
 		this.id_tarea = id_tarea;
 		this.id_tema = id_tema;
 		this.id_estudiante = id_estudiante;
 		this.calificacion = calificacion;
+		this.completed = completed;
 	}
 	public int getId_tarea() {
 		return id_tarea;

@@ -31,10 +31,77 @@ public class DroolsRestController {
     @RequestMapping(value="estudiantes/editar/{id_est}", method = RequestMethod.PUT, produces = "application/json")
     @ResponseBody
     public Estudiante editarEstudiante(@RequestBody Estudiante estud, @PathVariable("id_est") String idEstudiante){
-    	Map<String, String> input  = new HashMap<String, String>();
-    	input.put("id_est", idEstudiante);
-    	Estudiante result = estudService.editarEstudiante(estud, input);
-    	return result;
+    	try{
+    		Map<String, String> input  = new HashMap<String, String>();
+        	input.put("id_est", idEstudiante);
+        	Estudiante result = estudService.editarEstudiante(estud, input);
+        	return result;
+    	}catch (Exception e) {
+            e.printStackTrace();
+            estud.setNombre(e.toString());
+            return estud;
+        }	
+    }
+    
+    @RequestMapping(value="materias/editar/{id_mat}", method = RequestMethod.PUT, produces = "application/json")
+    @ResponseBody
+    public Materia editarMateria(@RequestBody Materia materia, @PathVariable("id_mat") String idMateria){
+    	try{
+    		Map<String, String> input  = new HashMap<String, String>();
+        	input.put("id_mat", idMateria);
+        	Materia result = estudService.editarMateria(materia, input);
+        	return result;
+    	}catch (Exception e) {
+    		e.printStackTrace();
+    		materia.setNombre(e.toString());
+    		return materia;
+    	}
+    }
+    
+    @RequestMapping(value="tareas/editar/{id_tar}", method = RequestMethod.PUT, produces = "application/json")
+    @ResponseBody
+    public Tarea editarTarea(@RequestBody Tarea tarea, @PathVariable("id_tar") String idTarea){
+    	try{
+        	Map<String, String> input  = new HashMap<String, String>();
+        	input.put("id_tar", idTarea);
+        	Tarea result = estudService.editarTarea(tarea, input);
+        	return result;
+    	}catch (Exception e) {
+    		e.printStackTrace();
+    		tarea.setNombre(e.toString());
+    		return tarea;
+    	}
+    }
+    
+    @RequestMapping(value="temas/editar/{id_tem}", method = RequestMethod.PUT, produces = "application/json")
+    @ResponseBody
+    public Tema editarTema(@RequestBody Tema tema, @PathVariable("id_tem") String idTema){
+    	try{
+    		Map<String, String> input  = new HashMap<String, String>();
+        	input.put("id_tem", idTema);
+        	Tema result = estudService.editarTema(tema, input);
+        	return result;
+    	}catch (Exception e) {
+    		e.printStackTrace();
+    		tema.setNombre(e.toString());
+    		return tema;
+    	}
+    }
+    
+    @RequestMapping(value="tarea_estud/editar/{id_est}/{id_tar}", method = RequestMethod.PUT, produces = "application/json")
+    @ResponseBody
+    public Tarea_estudiante editarTareaEstudiante(@RequestBody Tarea_estudiante tar_est, @PathVariable("id_est") String idEstud,
+    		@PathVariable("id_tar") String idTarea){
+    	try{
+    		Map<String, String> input  = new HashMap<String, String>();
+        	input.put("id_est", idEstud);
+        	input.put("id_tar", idTarea);
+        	Tarea_estudiante result = estudService.editarTareaEstudiante(tar_est, input);
+        	return result;
+    	}catch (Exception e){
+    		e.printStackTrace();
+    		return tar_est;
+    	}
     }
 
     //------------------------------POST------------------------------
