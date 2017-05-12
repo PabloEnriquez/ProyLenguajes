@@ -30,7 +30,7 @@ public class StudentService {
 	            	Estudiante estudiante = (Estudiante) o;
 	            	if(estudiante.getId() == idEstud){
 	            		estudiante.setNombre(estud.getNombre());
-	            		estudiante.setPromedioGlobal(estud.getPromedioGlobal());
+	            		//estudiante.setPromedioGlobal(estud.getPromedioGlobal());
 	            		estudiante.setRecomendaciones(estud.getRecomendaciones());
 	            		estudPasado = estudiante;
 	            		kSession.insert(estudPasado);
@@ -41,6 +41,52 @@ public class StudentService {
 	            }
 	        }
 			return estudPasado;
+		}catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+	}
+	
+	public Materia editarMateria(Materia materia, Map<String, String> inputMap){
+		try{
+			KieSession kSession = droolsInitializer.getKsession();
+			int idMateria = Integer.parseInt(inputMap.get("id_mat"));
+			Materia materiaPasada = null;
+			for (Object o : kSession.getObjects()) {
+	            if (o instanceof Materia) {
+	            	Materia materiaEncontrada = (Materia) o;
+	            	if(materiaEncontrada.getId() == idMateria){
+	            		materiaEncontrada.setMaestro(materia.getMaestro());
+	            		materiaEncontrada.setNivelCurso(materia.getNivelCurso());
+	            		materiaEncontrada.setNombre(materia.getNombre());
+	            		materiaPasada = materiaEncontrada;
+	            		kSession.insert(materiaPasada);
+	            	}
+	            }
+	        }
+			return materiaPasada;
+		}catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+	}
+	
+	public Tarea editarTarea(Tarea tarea, Map<String, String> inputMap){
+		try{
+			KieSession kSession = droolsInitializer.getKsession();
+			int idTarea = Integer.parseInt(inputMap.get("id_tar"));
+			Tarea tareaPasada = null;
+			for (Object o : kSession.getObjects()) {
+	            if (o instanceof Tarea) {
+	            	Tarea tareaEncontrada = (Tarea) o;
+	            	if(tarea.getId_tarea() == idTarea){
+	            		tareaEncontrada.setDificultad(tarea.getDificultad());
+	            		tareaEncontrada.setId_tema(tarea.getId_tema());
+	            		tareaEncontrada.setNombre(tarea.getNombre());
+	            	}
+	            }
+	        }
+			return tareaPasada;
 		}catch (Exception e) {
             e.printStackTrace();
             return null;

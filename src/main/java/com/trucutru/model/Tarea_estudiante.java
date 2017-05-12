@@ -7,6 +7,7 @@ public class Tarea_estudiante {
 	private int id_tema;
 	private int id_estudiante;
 	private double calificacion;
+	private boolean completed;
 	
 	public Tarea_estudiante() {
 	}
@@ -37,13 +38,19 @@ public class Tarea_estudiante {
 	@Override
 	public String toString() {
 		return "Tarea_estudiante [id_tarea=" + id_tarea + ", id_tema=" + id_tema + ", id_estudiante=" + id_estudiante
-				+ ", calificacion=" + calificacion + "]";
+				+ ", calificacion=" + calificacion + ", completed=" + completed + "]";
 	}
 	public double getCalificacion() {
 		return calificacion;
 	}
 	public void setCalificacion(double calificacion) {
 		this.calificacion = calificacion;
+	}
+	public boolean isCompleted() {
+		return completed;
+	}
+	public void setCompleted(boolean completed) {
+		this.completed = completed;
 	}
 	
 }
