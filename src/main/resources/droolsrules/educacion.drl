@@ -170,6 +170,7 @@ rule "Calcular sumatoria de tareas por tema"
 end
 
 rule "Contar numero de tareas TOTAL"
+	salience 98
 	when
 		$estud : Estudiante();
 		$mat : Materia();
@@ -183,6 +184,7 @@ rule "Contar numero de tareas TOTAL"
 end
 
 rule "Contar tareas NO hechas"
+	salience 98
 	when
 		$estud : Estudiante();
 		$mat : Materia();
