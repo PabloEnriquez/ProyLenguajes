@@ -10,33 +10,32 @@ import com.trucutru.model.*;
 public class Tarea {
 	
 	private static final AtomicInteger count = new AtomicInteger(0); 
-	private final int id_tarea;
-	private int id_tema;
+	private final int id;
+	private int idTema;
 	private String nombre;
-//	private Double calif;
 	private int dificultad;
 	
 	public Tarea(){
-		id_tarea = count.incrementAndGet();
-		id_tema = 0;
+		id = count.incrementAndGet();
 	}
 	
-	public Tarea(int id_tema, String nombre, int dificultad) {
-		id_tarea = count.incrementAndGet();
-		this.id_tema = id_tema;
+	public Tarea(int idTema, String nombre, int dificultad) {
+		id = count.incrementAndGet();
+		this.idTema = idTema;
 		this.nombre = nombre;
 		this.dificultad = dificultad;
 	}
-
-	public int getId_tarea() {
-		return id_tarea;
+	
+	public int getIdTema() {
+		return idTema;
 	}
 
-	public int getId_tema() {
-		return id_tema;
+	public void setIdTema(int idTema) {
+		this.idTema = idTema;
 	}
-	public void setId_tema(int id_tema) {
-		this.id_tema = id_tema;
+
+	public int getId() {
+		return id;
 	}
 
 	public String getNombre() {
@@ -45,12 +44,6 @@ public class Tarea {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-//	public Double getCalif() {
-//		return calif;
-//	}
-//	public void setCalif(Double calif) {
-//		this.calif = calif;
-//	}
 	public int getDificultad() {
 		return dificultad;
 	}
@@ -60,7 +53,7 @@ public class Tarea {
 
 	@Override
 	public String toString() {
-		return "Tarea [id_Tarea=" + id_tarea + ", id_Tema=" + id_tema + ", nombre=" + nombre + ", dificultad="
+		return "Tarea [id=" + id + ", idTema=" + idTema + ", nombre=" + nombre + ", dificultad="
 				+ dificultad + "]";
 	}
 	

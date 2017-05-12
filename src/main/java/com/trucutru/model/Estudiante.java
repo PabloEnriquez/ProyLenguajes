@@ -15,42 +15,22 @@ public class Estudiante {
 	public final int id;
 	private String nombre;
 	private Double promedioGlobal;
-//	private List<Materia> materiasCursando;
 	public List<String> recomendaciones;
 	
 	public Estudiante(){
 		id = count.incrementAndGet();
 	}
 	
-//	public Estudiante(String nombre){
-//		id = count.incrementAndGet();
-//		this.nombre = nombre;
-//	}
-	
 	public Estudiante(String nombre, Double promedioGlobal, List<String> recomendaciones) {
 		id = count.incrementAndGet();
 		this.nombre = nombre;
 		this.promedioGlobal = promedioGlobal;
-//		this.materiasCursando = materiasCursando;
 		this.recomendaciones = recomendaciones;
 	}
 	
 	public int getId() {
 		return id;
 	}
-
-//	public Double getPromedioTotal(List<Materia> materias){
-//		for(int i = 0; i < materias.size(); i++){
-//			Materia m = materias.get(i);
-//			m.setPromedioAlumno(0.0);
-//			List<Tema> temas = m.getTemas();
-//			double aux = m.getPromedioMateria(temas);
-//			m.setPromedioAlumno(aux);
-//			promedioGlobal += aux;
-//		}
-//		promedioGlobal = (promedioGlobal / materias.size());
-//		return promedioGlobal;
-//	}
 	
 	public String getNombre() {
 		return nombre;
@@ -68,14 +48,6 @@ public class Estudiante {
 		this.promedioGlobal = promedioGlobal;
 	}
 
-//	public List<Materia> getMateriasCursando() {
-//		return materiasCursando;
-//	}
-//
-//	public void setMateriasCursando(List<Materia> materiasCursando) {
-//		this.materiasCursando = materiasCursando;
-//	}
-//
 	public List<String> getRecomendaciones() {
 		return recomendaciones;
 	}

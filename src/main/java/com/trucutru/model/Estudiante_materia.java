@@ -3,31 +3,38 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Estudiante_materia {
-	private int id_materia;
-	private int id_estudiante;
+	private int idMateria;
+	private int idEstudiante;
 	private double promedioAlumno;
 	private double porcentajeCompletado;
 	
 	public Estudiante_materia() {
 	}
-	public Estudiante_materia(int id_materia, int id_estudiante, double promedioAlumno, double porcentajeCompletado) {
-		this.id_materia = id_materia;
-		this.id_estudiante = id_estudiante;
+	
+	public Estudiante_materia(int idMateria, int idEstudiante, double promedioAlumno, double porcentajeCompletado) {
+		super();
+		this.idMateria = idMateria;
+		this.idEstudiante = idEstudiante;
 		this.promedioAlumno = promedioAlumno;
 		this.porcentajeCompletado = porcentajeCompletado;
 	}
-	public int getId_materia() {
-		return id_materia;
+
+	public int getIdMateria() {
+		return idMateria;
 	}
-	public void setId_materia(int id_materia) {
-		this.id_materia = id_materia;
+
+	public void setIdMateria(int idMateria) {
+		this.idMateria = idMateria;
 	}
-	public int getId_estudiante() {
-		return id_estudiante;
+
+	public int getIdEstudiante() {
+		return idEstudiante;
 	}
-	public void setId_estudiante(int id_estudiante) {
-		this.id_estudiante = id_estudiante;
+
+	public void setIdEstudiante(int idEstudiante) {
+		this.idEstudiante = idEstudiante;
 	}
+
 	public double getPromedioAlumno() {
 		return promedioAlumno;
 	}
@@ -40,10 +47,10 @@ public class Estudiante_materia {
 	public void setPorcentajeCompletado(double porcentajeCompletado) {
 		this.porcentajeCompletado = porcentajeCompletado;
 	}
+
 	@Override
 	public String toString() {
-		return "Estudiante_materia [id_materia=" + id_materia + ", id_estudiante=" + id_estudiante + ", promedioAlumno="
+		return "Estudiante_materia [idMateria=" + idMateria + ", idEstudiante=" + idEstudiante + ", promedioAlumno="
 				+ promedioAlumno + ", porcentajeCompletado=" + porcentajeCompletado + "]";
 	}
-	
 }

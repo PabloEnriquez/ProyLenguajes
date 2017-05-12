@@ -37,67 +37,67 @@ rule "Insertar datos"
 		insert(t3);
 		insert(t4);
 		
-		Tema_estudiante tema_estud1 = new Tema_estudiante(t1.getId_tema(), e1.getId(), 0.0);
-		Tema_estudiante tema_estud2 = new Tema_estudiante(t2.getId_tema(), e1.getId(), 0.0);
-		Tema_estudiante tema_estud3 = new Tema_estudiante(t3.getId_tema(), e1.getId(), 0.0);
-		Tema_estudiante tema_estud4 = new Tema_estudiante(t4.getId_tema(), e1.getId(), 0.0);
+		Tema_estudiante tema_estud1 = new Tema_estudiante(t1.getId(), e1.getId(), 0.0);
+		Tema_estudiante tema_estud2 = new Tema_estudiante(t2.getId(), e1.getId(), 0.0);
+		Tema_estudiante tema_estud3 = new Tema_estudiante(t3.getId(), e1.getId(), 0.0);
+		Tema_estudiante tema_estud4 = new Tema_estudiante(t4.getId(), e1.getId(), 0.0);
 		insert(tema_estud1);
 		insert(tema_estud2);
 		insert(tema_estud3);
 		insert(tema_estud4);
 		//---
-		Tarea tar1 = new Tarea(t1.getId_tema(), "Ejercicio 1", 8);
-		Tarea tar2 = new Tarea(t1.getId_tema(), "Tarea 1", 7);
-		Tarea tar3 = new Tarea(t1.getId_tema(), "Assignment 2", 6);
+		Tarea tar1 = new Tarea(t1.getId(), "Ejercicio 1", 8);
+		Tarea tar2 = new Tarea(t1.getId(), "Tarea 1", 7);
+		Tarea tar3 = new Tarea(t1.getId(), "Assignment 2", 6);
 		insert(tar1);
 		insert(tar2);
 		insert(tar3);
 		
-		Tarea_estudiante tar_estud1 = new Tarea_estudiante(tar1.getId_tarea(), t1.getId_tema(), e1.getId(), 26.0, true);
-		Tarea_estudiante tar_estud2 = new Tarea_estudiante(tar2.getId_tarea(), t1.getId_tema(), e1.getId(), 76.0, true);
-		Tarea_estudiante tar_estud3 = new Tarea_estudiante(tar3.getId_tarea(), t1.getId_tema(), e1.getId(), 0.0, false);
+		Tarea_estudiante tar_estud1 = new Tarea_estudiante(tar1.getId(), t1.getId(), e1.getId(), 26.0, true);
+		Tarea_estudiante tar_estud2 = new Tarea_estudiante(tar2.getId(), t1.getId(), e1.getId(), 76.0, true);
+		Tarea_estudiante tar_estud3 = new Tarea_estudiante(tar3.getId(), t1.getId(), e1.getId(), 0.0, false);
 		insert(tar_estud1);
 		insert(tar_estud2);
 		insert(tar_estud3);
 		//---
-		Tarea tar4 = new Tarea(t2.getId_tema(), "Proyecto 1", 8);
-		Tarea tar5 = new Tarea(t2.getId_tema(), "Ejercicio 5", 8);
-		Tarea tar6 = new Tarea(t2.getId_tema(), "Tarea 3", 8);
+		Tarea tar4 = new Tarea(t2.getId(), "Proyecto 1", 8);
+		Tarea tar5 = new Tarea(t2.getId(), "Ejercicio 5", 8);
+		Tarea tar6 = new Tarea(t2.getId(), "Tarea 3", 8);
 		insert(tar4);
 		insert(tar5);
 		insert(tar6);
 		
-		Tarea_estudiante tar_estud4 = new Tarea_estudiante(tar4.getId_tarea(), t2.getId_tema(), e1.getId(), 76.0, true);
-		Tarea_estudiante tar_estud5 = new Tarea_estudiante(tar5.getId_tarea(), t2.getId_tema(), e1.getId(), 56.0, true);
-		Tarea_estudiante tar_estud6 = new Tarea_estudiante(tar6.getId_tarea(), t2.getId_tema(), e1.getId(), 0.0, false);
+		Tarea_estudiante tar_estud4 = new Tarea_estudiante(tar4.getId(), t2.getId(), e1.getId(), 76.0, true);
+		Tarea_estudiante tar_estud5 = new Tarea_estudiante(tar5.getId(), t2.getId(), e1.getId(), 56.0, true);
+		Tarea_estudiante tar_estud6 = new Tarea_estudiante(tar6.getId(), t2.getId(), e1.getId(), 0.0, false);
 		insert(tar_estud4);
 		insert(tar_estud5);
 		insert(tar_estud6);
 		//---
-		Tarea tar7 = new Tarea(t3.getId_tema(), "Ejercicio 5", 8);
-		Tarea tar8 = new Tarea(t3.getId_tema(), "Tarea 9", 7);
-		Tarea tar9 = new Tarea(t3.getId_tema(), "Examen 2", 6);
+		Tarea tar7 = new Tarea(t3.getId(), "Ejercicio 5", 8);
+		Tarea tar8 = new Tarea(t3.getId(), "Tarea 9", 7);
+		Tarea tar9 = new Tarea(t3.getId(), "Examen 2", 6);
 		insert(tar7);
 		insert(tar8);
 		insert(tar9);
 		
-		Tarea_estudiante tar_estud7 = new Tarea_estudiante(tar7.getId_tarea(), t3.getId_tema(), e1.getId(), 0.0, false);
-		Tarea_estudiante tar_estud8 = new Tarea_estudiante(tar8.getId_tarea(), t3.getId_tema(), e1.getId(), 46.0, true);
-		Tarea_estudiante tar_estud9 = new Tarea_estudiante(tar9.getId_tarea(), t3.getId_tema(), e1.getId(), 56.0, true);
+		Tarea_estudiante tar_estud7 = new Tarea_estudiante(tar7.getId(), t3.getId(), e1.getId(), 0.0, false);
+		Tarea_estudiante tar_estud8 = new Tarea_estudiante(tar8.getId(), t3.getId(), e1.getId(), 46.0, true);
+		Tarea_estudiante tar_estud9 = new Tarea_estudiante(tar9.getId(), t3.getId(), e1.getId(), 56.0, true);
 		insert(tar_estud7);
 		insert(tar_estud8);
 		insert(tar_estud9);
 		//---
-		Tarea tar10 = new Tarea(t4.getId_tema(), "Prueba 1", 8);
-		Tarea tar11 = new Tarea(t4.getId_tema(), "Examen 3", 7);
-		Tarea tar12 = new Tarea(t4.getId_tema(), "Ejercicios 2", 6);
+		Tarea tar10 = new Tarea(t4.getId(), "Prueba 1", 8);
+		Tarea tar11 = new Tarea(t4.getId(), "Examen 3", 7);
+		Tarea tar12 = new Tarea(t4.getId(), "Ejercicios 2", 6);
 		insert(tar10);
 		insert(tar11);
 		insert(tar12);
 		
-		Tarea_estudiante tar_estud10 = new Tarea_estudiante(tar10.getId_tarea(), t4.getId_tema(), e1.getId(), 36.0, true);
-		Tarea_estudiante tar_estud11 = new Tarea_estudiante(tar11.getId_tarea(), t4.getId_tema(), e1.getId(), 0.0, false);
-		Tarea_estudiante tar_estud12 = new Tarea_estudiante(tar12.getId_tarea(), t4.getId_tema(), e1.getId(), 46.0, true);
+		Tarea_estudiante tar_estud10 = new Tarea_estudiante(tar10.getId(), t4.getId(), e1.getId(), 36.0, true);
+		Tarea_estudiante tar_estud11 = new Tarea_estudiante(tar11.getId(), t4.getId(), e1.getId(), 0.0, false);
+		Tarea_estudiante tar_estud12 = new Tarea_estudiante(tar12.getId(), t4.getId(), e1.getId(), 46.0, true);
 		insert(tar_estud10);
 		insert(tar_estud11);
 		insert(tar_estud12);
@@ -118,7 +118,7 @@ rule "Contador por cada estudiante para tareas NO hechas por materia"
 	when
 		$mat : Materia();
 		$estud : Estudiante();
-		$estud_mat : Estudiante_materia($mat.getId() == id_materia, $estud.getId() == id_estudiante);
+		$estud_mat : Estudiante_materia($mat.getId() == idMateria, $estud.getId() == idEstudiante);
 	then
 		insert( new Counter($mat.getNombre().concat("TareasNoHechas"), 0) );
 end
@@ -128,7 +128,7 @@ rule "Contador por cada estudiante para TOTAL de tareas hechas por materias"
 	when
 		$mat : Materia();
 		$estud : Estudiante();
-		$estud_mat : Estudiante_materia($mat.getId() == id_materia, $estud.getId() == id_estudiante);
+		$estud_mat : Estudiante_materia($mat.getId() == idMateria, $estud.getId() == idEstudiante);
 	then
 		insert( new Counter($mat.getNombre().concat("TareasTotal"), 0) );
 end
@@ -138,7 +138,7 @@ rule "Contador por cada materia"
 	when
 		$mat : Materia();
 		$estud : Estudiante();
-		$estud_mat : Estudiante_materia($mat.getId() == id_materia, $estud.getId() == id_estudiante);
+		$estud_mat : Estudiante_materia($mat.getId() == idMateria, $estud.getId() == idEstudiante);
 	then
 		insert( new Counter($mat.getNombre(), 0) );
 end
@@ -148,7 +148,7 @@ rule "Contador por cada tema"
 	when
 		$tema : Tema();
 		$estud : Estudiante();
-		$tema_estud : Tema_estudiante($tema.getId_tema() == id_tema, $estud.getId() == id_estudiante);
+		$tema_estud : Tema_estudiante($tema.getId() == idTema, $estud.getId() == idEstudiante);
 	then
 		insert( new Counter($tema.getNombre(), 0) );
 end
@@ -158,24 +158,24 @@ rule "Calcular sumatoria de tareas por tema"
 	when
 		$tema : Tema();
 		$estud : Estudiante();
-		$tar_estud : Tarea_estudiante($tema.getId_tema() == id_tema, $estud.getId() == id_estudiante);
-		$tema_estud : Tema_estudiante($tema.getId_tema() == id_tema, $estud.getId() == id_estudiante);
+		$tar_estud : Tarea_estudiante($tema.getId() == idTema, $estud.getId() == idEstudiante);
+		$tema_estud : Tema_estudiante($tema.getId() == idTema, $estud.getId() == idEstudiante);
 		$c : Counter( name == $tema.getNombre() );
 	then
 		$c.setValue( $c.getValue() + 1 );
-		double aux = $tema_estud.getPromedio_ejercicios();
+		double aux = $tema_estud.getPromedioEjercicios();
 		aux = aux + $tar_estud.getCalificacion();	
-		$tema_estud.setPromedio_ejercicios(aux);
-		System.out.println("Tema: "+ $tema.getNombre() + " suma: " + $tema_estud.getPromedio_ejercicios() + " cont = " + $c.getValue());
+		$tema_estud.setPromedioEjercicios(aux);
+		System.out.println("Tema: "+ $tema.getNombre() + " suma: " + $tema_estud.getPromedioEjercicios() + " cont = " + $c.getValue());
 end
 
 rule "Contar numero de tareas TOTAL"
 	when
 		$estud : Estudiante();
 		$mat : Materia();
-		$tema : Tema( id_materia == $mat.getId() );
+		$tema : Tema( idMateria == $mat.getId() );
 		$tarea : Tarea();
-		$tar_estud : Tarea_estudiante($tarea.getId_tarea() == id_tarea, $tema.getId_tema() == id_tema, $estud.getId() == id_estudiante);
+		$tar_estud : Tarea_estudiante($tarea.getId() == idTarea, $tema.getId() == idTema, $estud.getId() == idEstudiante);
 		$c : Counter( name == $mat.getNombre().concat("TareasTotal") );
 	then
 		$c.setValue( $c.getValue() + 1 );
@@ -186,9 +186,9 @@ rule "Contar tareas NO hechas"
 	when
 		$estud : Estudiante();
 		$mat : Materia();
-		$tema : Tema( id_materia == $mat.getId() );
+		$tema : Tema( idMateria == $mat.getId() );
 		$tarea : Tarea();
-		$tar_estud : Tarea_estudiante($tarea.getId_tarea() == id_tarea, $tema.getId_tema() == id_tema, $estud.getId() == id_estudiante);
+		$tar_estud : Tarea_estudiante($tarea.getId() == idTarea, $tema.getId() == idTema, $estud.getId() == idEstudiante);
 		$c : Counter( name == $mat.getNombre().concat("TareasNoHechas") );
 		eval( $tar_estud.getCalificacion() == 0.0 && $tar_estud.isCompleted() == false );
 	then
@@ -201,13 +201,14 @@ rule "Calcular promedio de temas a partir de sus tareas"
 	when
 		$tema : Tema();
 		$estud : Estudiante();
-		$tema_estud : Tema_estudiante($tema.getId_tema() == id_tema, $estud.getId() == id_estudiante);
+		$tema_estud : Tema_estudiante($tema.getId() == idTema, $estud.getId() == idEstudiante);
 		$c : Counter( name == $tema.getNombre() );
 	then
-		double aux = $tema_estud.getPromedio_ejercicios();
+		double aux = $tema_estud.getPromedioEjercicios();
 		aux = ( aux / $c.getValue() );
-		$tema_estud.setPromedio_ejercicios(aux);
-		System.out.println("Tema: "+ $tema.getNombre() + " promedio: " + $tema_estud.getPromedio_ejercicios() + " cont = " + $c.getValue());
+		$tema_estud.setPromedioEjercicios(aux);
+		System.out.println("Tema: "+ $tema.getNombre() + " promedio: " + $tema_estud.getPromedioEjercicios() + " cont = " + $c.getValue());
+		$c.setValue(0);
 end
 
 rule "Calcular sumatoria de promedio de materias por tema"
@@ -216,14 +217,14 @@ rule "Calcular sumatoria de promedio de materias por tema"
 		$tema : Tema();
 		$estud : Estudiante();
 		$mat : Materia();
-		$tema_estud : Tema_estudiante($tema.getId_tema() == id_tema, $estud.getId() == id_estudiante);
-		$estud_mat : Estudiante_materia($mat.getId() == id_materia, $estud.getId() == id_estudiante);
+		$tema_estud : Tema_estudiante($tema.getId() == idTema, $estud.getId() == idEstudiante);
+		$estud_mat : Estudiante_materia($mat.getId() == idMateria, $estud.getId() == idEstudiante);
 		$c : Counter( name == $mat.getNombre() );
-		eval( $tema.getId_materia() == $mat.getId() );
+		eval( $tema.getIdMateria() == $mat.getId() );
 	then
 		$c.setValue( $c.getValue() + 1 );
 		double aux = $estud_mat.getPromedioAlumno();
-		aux = aux + $tema_estud.getPromedio_ejercicios();
+		aux = aux + $tema_estud.getPromedioEjercicios();
 		$estud_mat.setPromedioAlumno(aux);
 		System.out.println("Materia: " + $mat.getNombre() + " suma: " + $estud_mat.getPromedioAlumno() + " cont: " + $c.getValue());
 end
@@ -233,13 +234,14 @@ rule "Calcular promedio de materias por tema"
 	when
 		$estud : Estudiante();
 		$mat : Materia();
-		$estud_mat : Estudiante_materia($mat.getId() == id_materia, $estud.getId() == id_estudiante);
+		$estud_mat : Estudiante_materia($mat.getId() == idMateria, $estud.getId() == idEstudiante);
 		$c : Counter( name == $mat.getNombre() );
 	then
 		double aux = $estud_mat.getPromedioAlumno();
 		aux = ( aux / $c.getValue() );
 		$estud_mat.setPromedioAlumno(aux);
 		System.out.println("Materia: " + $mat.getNombre() + " promedio: " + $estud_mat.getPromedioAlumno() + " cont: " + $c.getValue());
+		$c.setValue(0);
 end
 
 rule "Calcular sumatoria de materias para promedio global"
@@ -247,7 +249,7 @@ rule "Calcular sumatoria de materias para promedio global"
 	when
 		$estud : Estudiante();
 		$mat : Materia();
-		$estud_mat : Estudiante_materia($mat.getId() == id_materia, $estud.getId() == id_estudiante);
+		$estud_mat : Estudiante_materia($mat.getId() == idMateria, $estud.getId() == idEstudiante);
 		$c : Counter( name == $estud.getNombre() );
 	then
 		$c.setValue( $c.getValue() + 1 );
@@ -267,13 +269,15 @@ rule "Calcular promedio global del alumno"
 		aux = ( aux / $c.getValue() );
 		$estud.setPromedioGlobal(aux);
 		System.out.println("Estudiante: " + $estud.getNombre() + " promedio: " + $estud.getPromedioGlobal() + " cont: " + $c.getValue());
+		$c.setValue(0);
 end
 
 rule "Determinar porcentaje completado de materia CON tareas SIN hacer"
+	salience 91
 	when
 		$estud : Estudiante();
 		$mat : Materia();
-		$estud_mat : Estudiante_materia($mat.getId() == id_materia, $estud.getId() == id_estudiante);
+		$estud_mat : Estudiante_materia($mat.getId() == idMateria, $estud.getId() == idEstudiante);
 		$cNoH : Counter( name == $mat.getNombre().concat("TareasNoHechas") );
 		$cH : Counter( name == $mat.getNombre().concat("TareasTotal") );
 		eval( $cNoH.getValue() != 0 );
@@ -282,19 +286,24 @@ rule "Determinar porcentaje completado de materia CON tareas SIN hacer"
 		aux = ( aux * 100 );
 		$estud_mat.setPorcentajeCompletado(aux);
 		System.out.println("Porcentaje completado: " + aux + " de: " + $mat.getNombre() + " por: " + $estud.getNombre());
+		$cH.setValue(0);
+		$cNoH.setValue(0);
 end
 
 rule "Determinar porcentaje completado de materia con tareas COMPLETAS"
+	salience 92
 	when
 		$estud : Estudiante();
 		$mat : Materia();
-		$estud_mat : Estudiante_materia($mat.getId() == id_materia, $estud.getId() == id_estudiante);
+		$estud_mat : Estudiante_materia($mat.getId() == idMateria, $estud.getId() == idEstudiante);
 		$cNoH : Counter( name == $mat.getNombre().concat("TareasNoHechas") );
 		$cH : Counter( name == $mat.getNombre().concat("TareasTotal") );
 		eval( $cNoH.getValue() == 0 );
 	then
 		$estud_mat.setPorcentajeCompletado(100.0);
 		System.out.println("Porcentaje completado: 100.0 de: " + $mat.getNombre() + " por: " + $estud.getNombre());
+		$cH.setValue(0);
+		$cNoH.setValue(0);
 end
 
 /*

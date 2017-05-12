@@ -3,38 +3,47 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Tema_estudiante {
-	private int id_tema;
-	private int id_estudiante;
-	private double promedio_ejercicios;
+	private int idTema;
+	private int idEstudiante;
+	private double promedioEjercicios;
 	
 	public Tema_estudiante() {
 	}
-	public Tema_estudiante(int id_tema, int id_estudiante, double promedio_ejercicios) {
-		this.id_tema = id_tema;
-		this.id_estudiante = id_estudiante;
-		this.promedio_ejercicios = promedio_ejercicios;
+	
+	public Tema_estudiante(int idTema, int idEstudiante, double promedioEjercicios) {
+		super();
+		this.idTema = idTema;
+		this.idEstudiante = idEstudiante;
+		this.promedioEjercicios = promedioEjercicios;
 	}
-	public int getId_tema() {
-		return id_tema;
+
+	public int getIdTema() {
+		return idTema;
 	}
-	public void setId_tema(int id_tema) {
-		this.id_tema = id_tema;
+
+	public void setIdTema(int idTema) {
+		this.idTema = idTema;
 	}
-	public int getId_estudiante() {
-		return id_estudiante;
+
+	public int getIdEstudiante() {
+		return idEstudiante;
 	}
-	public void setId_estudiante(int id_estudiante) {
-		this.id_estudiante = id_estudiante;
+
+	public void setIdEstudiante(int idEstudiante) {
+		this.idEstudiante = idEstudiante;
 	}
-	public double getPromedio_ejercicios() {
-		return promedio_ejercicios;
+
+	public double getPromedioEjercicios() {
+		return promedioEjercicios;
 	}
-	public void setPromedio_ejercicios(double promedio_ejercicios) {
-		this.promedio_ejercicios = promedio_ejercicios;
+	public void setPromedioEjercicios(double promedioEjercicios) {
+		this.promedioEjercicios = promedioEjercicios;
 	}
+
 	@Override
 	public String toString() {
-		return "Tema_estudiante [id_tema=" + id_tema + ", id_estudiante=" + id_estudiante + ", promedio_ejercicios="
-				+ promedio_ejercicios + "]";
+		return "Tema_estudiante [idTema=" + idTema + ", idEstudiante=" + idEstudiante + ", promedioEjercicios="
+				+ promedioEjercicios + "]";
 	}
+	
 }

@@ -18,6 +18,8 @@ public class StudentService {
 	@Autowired
     private DroolsInitializer droolsInitializer;
 	
+	//org.kie.api.runtime.rule.FactHandle estudianteHandle = null;
+	
 	//--------------------PUT de objetos -------------------------------
 	
 	public Estudiante editarEstudiante(Estudiante estud, Map<String, String> inputMap){
@@ -33,12 +35,13 @@ public class StudentService {
 	            		//estudiante.setPromedioGlobal(estud.getPromedioGlobal());
 	            		estudiante.setRecomendaciones(estud.getRecomendaciones());
 	            		estudModif = estudiante;
-	            		kSession.insert(estudModif);
+	            		//kSession.insert(estudModif);
+//	            		org.kie.api.runtime.rule.FactHandle estudianteHandle = kSession.insert(estudModif);
+//	            		kSession.update(estudianteHandle, estudiante);
 	                    kSession.fireAllRules();
 	            	}
 	            }
 	        }
-			kSession.fireAllRules();
 			return estudModif;
 		}catch (Exception e) {
             e.printStackTrace();
@@ -64,7 +67,6 @@ public class StudentService {
 	            	}
 	            }
 	        }
-			kSession.fireAllRules();
 			return materiaModif;
 		}catch (Exception e) {
             e.printStackTrace();
@@ -80,7 +82,7 @@ public class StudentService {
 			for (Object o : kSession.getObjects()) {
 	            if (o instanceof Tarea) {
 	            	Tarea tareaEncontrada = (Tarea) o;
-	            	if(tareaEncontrada.getId_tarea() == idTarea){
+	            	if(tareaEncontrada.getId() == idTarea){
 	            		tareaEncontrada.setDificultad(tarea.getDificultad());
 	            		//tareaEncontrada.setId_tema(tarea.getId_tema());
 	            		tareaEncontrada.setNombre(tarea.getNombre());
@@ -90,7 +92,6 @@ public class StudentService {
 	            	}
 	            }
 	        }
-			kSession.fireAllRules();
 			return tareaModif;
 		}catch (Exception e) {
             e.printStackTrace();
@@ -106,7 +107,7 @@ public class StudentService {
 			for (Object o : kSession.getObjects()) {
 	            if (o instanceof Tema) {
 	            	Tema temaEncontrado = (Tema) o;
-	            	if(temaEncontrado.getId_tema() == idTema){
+	            	if(temaEncontrado.getId() == idTema){
 	            		//temaEncontrado.setId_materia(tema.getId_materia());
 	            		temaEncontrado.setNivel(tema.getNivel());
 	            		temaEncontrado.setNombre(tema.getNombre());
@@ -116,7 +117,6 @@ public class StudentService {
 	            	}
 	            }
 	        }
-			kSession.fireAllRules();
 			return temaModif;
 		}catch (Exception e) {
             e.printStackTrace();
@@ -134,16 +134,17 @@ public class StudentService {
 			for (Object o : kSession.getObjects()) {
 	            if (o instanceof Tarea_estudiante) {
 	            	Tarea_estudiante tar_estEncontrada = (Tarea_estudiante) o;
-	            	if(tar_estEncontrada.getId_estudiante() == idEst && tar_estEncontrada.getId_tarea() == idTarea){
+	            	if(tar_estEncontrada.getIdEstudiante() == idEst && tar_estEncontrada.getIdTarea() == idTarea){
 	            		tar_estEncontrada.setCalificacion(tar_estud.getCalificacion());
 	            		tar_estEncontrada.setCompleted(tar_estud.isCompleted());
 	            		tar_estModif = tar_estEncontrada;
-	            		kSession.insert(tar_estModif);
+	            		//kSession.insert(tar_estModif);
+	            		org.kie.api.runtime.rule.FactHandle bartHandle = kSession.insert(tar_estEncontrada);
+	            		kSession.update(bartHandle, tar_estEncontrada);
 	            		kSession.fireAllRules();
 	            	}
 	            }
 	        }
-			kSession.fireAllRules();
 			return tar_estModif;
 		}catch (Exception e) {
             e.printStackTrace();
@@ -405,7 +406,7 @@ public class StudentService {
 		for (Object o : kSession.getObjects()) {
             if (o instanceof Tarea) {
             	Tarea tarea = (Tarea) o;
-            	if(tarea.getId_tarea() == idTarea){
+            	if(tarea.getId() == idTarea){
             		kSession.fireAllRules();
             		return tarea;
             	}
@@ -421,7 +422,7 @@ public class StudentService {
 		for (Object o : kSession.getObjects()) {
             if (o instanceof Tema) {
             	Tema tema = (Tema) o;
-            	if(tema.getId_tema() == idTema){
+            	if(tema.getId() == idTema){
             		kSession.fireAllRules();
             		return tema;
             	}
@@ -438,7 +439,7 @@ public class StudentService {
 		for (Object o : kSession.getObjects()) {
             if (o instanceof Estudiante_materia) {
             	Estudiante_materia est_mat = (Estudiante_materia) o;
-            	if(est_mat.getId_estudiante() == idEst){
+            	if(est_mat.getIdEstudiante() == idEst){
             		lista_estud_mat.add(est_mat);
             	}
             }
@@ -454,7 +455,7 @@ public class StudentService {
 		for (Object o : kSession.getObjects()) {
             if (o instanceof Tarea_estudiante) {
             	Tarea_estudiante tar_est = (Tarea_estudiante) o;
-            	if(tar_est.getId_estudiante() == idEst){
+            	if(tar_est.getIdEstudiante() == idEst){
             		list_tar_est.add(tar_est);
             	}
             }
@@ -470,7 +471,7 @@ public class StudentService {
 		for (Object o : kSession.getObjects()) {
             if (o instanceof Tema_estudiante) {
             	Tema_estudiante tem_est = (Tema_estudiante) o;
-            	if(tem_est.getId_estudiante() == idEst){
+            	if(tem_est.getIdEstudiante() == idEst){
             		list_tem_est.add(tem_est);
             	}
             }

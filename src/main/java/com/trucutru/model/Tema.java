@@ -11,58 +11,37 @@ import com.trucutru.model.*;
 public class Tema {
 	
 	private static final AtomicInteger count = new AtomicInteger(0); 
-	private final int id_tema;
-	private int id_materia;
+	private final int id;
+	private int idMateria;
 	private String nombre;
 	private int nivel;
-//	private List<Tarea> ejercicios;
-//	private Double promedioEjer;
-	
-	//double promedio;
 	
 	public Tema(){
-		id_tema = count.incrementAndGet();
-		id_materia = 0;
+		id = count.incrementAndGet();
+		idMateria = 0;
 	}
 	
-	public Tema(int id_materia, String nombre, int nivel) {
-		id_tema = count.incrementAndGet();
-		this.id_materia = id_materia;
+	public Tema(int idMateria, String nombre, int nivel) {
+		id = count.incrementAndGet();
+		this.idMateria = idMateria;
 		this.nombre = nombre;
 		this.nivel = nivel;
 	}
 
-//	public Double getPromedioTareas(List<Tarea> ejercicios){
-//		for(int i = 0; i < ejercicios.size(); i++){
-//			Tarea t = ejercicios.get(i);
-//			promedioEjer += t.getCalif();
-//		}
-//		promedioEjer = (promedioEjer / ejercicios.size());
-//		return promedioEjer;	
-//	}
-
-//	public Double getPromedioEjer() {
-//		return promedioEjer;
-//	}
-//
-//	public void setPromedioEjer(Double promedioEjer) {
-//		this.promedioEjer = promedioEjer;
-//	}
-
 	public String getNombre() {
 		return nombre;
 	}
-
-	public int getId_tema() {
-		return id_tema;
+	
+	public int getId() {
+		return id;
 	}
 
-	public int getId_materia() {
-		return id_materia;
+	public int getIdMateria() {
+		return idMateria;
 	}
 
-	public void setId_materia(int id_materia) {
-		this.id_materia = id_materia;
+	public void setIdMateria(int idMateria) {
+		this.idMateria = idMateria;
 	}
 
 	public void setNombre(String nombre) {
@@ -79,16 +58,8 @@ public class Tema {
 
 	@Override
 	public String toString() {
-		return "Tema [id_tema=" + id_tema + ", id_materia=" + id_materia + ", nombre=" + nombre + ", nivel=" + nivel
+		return "Tema [id=" + id + ", idMateria=" + idMateria + ", nombre=" + nombre + ", nivel=" + nivel
 				+ "]";
 	}
-
-//	public List<Tarea> getEjercicios() {
-//		return ejercicios;
-//	}
-//
-//	public void setEjercicios(List<Tarea> ejercicios) {
-//		this.ejercicios = ejercicios;
-//	}
 	
 }

@@ -3,45 +3,48 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Tarea_estudiante {
-	private int id_tarea;
-	private int id_tema;
-	private int id_estudiante;
+	private int idTarea;
+	private int idTema;
+	private int idEstudiante;
 	private double calificacion;
 	private boolean completed;
 	
 	public Tarea_estudiante() {
 	}
-	public Tarea_estudiante(int id_tarea, int id_tema, int id_estudiante, double calificacion, boolean completed) {
+	
+	public Tarea_estudiante(int idTarea, int idTema, int idEstudiante, double calificacion, boolean completed) {
 		super();
-		this.id_tarea = id_tarea;
-		this.id_tema = id_tema;
-		this.id_estudiante = id_estudiante;
+		this.idTarea = idTarea;
+		this.idTema = idTema;
+		this.idEstudiante = idEstudiante;
 		this.calificacion = calificacion;
 		this.completed = completed;
 	}
-	public int getId_tarea() {
-		return id_tarea;
+	
+	public int getIdTarea() {
+		return idTarea;
 	}
-	public void setId_tarea(int id_tarea) {
-		this.id_tarea = id_tarea;
+
+	public void setIdTarea(int idTarea) {
+		this.idTarea = idTarea;
 	}
-	public int getId_tema() {
-		return id_tema;
+
+	public int getIdTema() {
+		return idTema;
 	}
-	public void setId_tema(int id_tema) {
-		this.id_tema = id_tema;
+
+	public void setIdTema(int idTema) {
+		this.idTema = idTema;
 	}
-	public int getId_estudiante() {
-		return id_estudiante;
+
+	public int getIdEstudiante() {
+		return idEstudiante;
 	}
-	public void setId_estudiante(int id_estudiante) {
-		this.id_estudiante = id_estudiante;
+
+	public void setIdEstudiante(int idEstudiante) {
+		this.idEstudiante = idEstudiante;
 	}
-	@Override
-	public String toString() {
-		return "Tarea_estudiante [id_tarea=" + id_tarea + ", id_tema=" + id_tema + ", id_estudiante=" + id_estudiante
-				+ ", calificacion=" + calificacion + ", completed=" + completed + "]";
-	}
+
 	public double getCalificacion() {
 		return calificacion;
 	}
@@ -54,5 +57,10 @@ public class Tarea_estudiante {
 	public void setCompleted(boolean completed) {
 		this.completed = completed;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Tarea_estudiante [idTarea=" + idTarea + ", idTema=" + idTema + ", idEstudiante=" + idEstudiante
+				+ ", calificacion=" + calificacion + ", completed=" + completed + "]";
+	}
 }
