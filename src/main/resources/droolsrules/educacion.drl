@@ -190,7 +190,7 @@ rule "Contar tareas NO hechas"
 		$tarea : Tarea();
 		$tar_estud : Tarea_estudiante($tarea.getId_tarea() == id_tarea, $tema.getId_tema() == id_tema, $estud.getId() == id_estudiante);
 		$c : Counter( name == $mat.getNombre().concat("TareasNoHechas") );
-		eval( $tar_estud.getCalificacion() == 0.0 );
+		eval( $tar_estud.getCalificacion() == 0.0 && $tar_estud.isCompleted() == false );
 	then
 		$c.setValue( $c.getValue() + 1 );
 		System.out.println("Tareas no hechas: " + $c.getValue() + " por: " + $estud.getNombre() + " en: " + $mat.getNombre() );

@@ -38,6 +38,7 @@ public class StudentService {
 	            	}
 	            }
 	        }
+			kSession.fireAllRules();
 			return estudModif;
 		}catch (Exception e) {
             e.printStackTrace();
@@ -63,6 +64,7 @@ public class StudentService {
 	            	}
 	            }
 	        }
+			kSession.fireAllRules();
 			return materiaModif;
 		}catch (Exception e) {
             e.printStackTrace();
@@ -88,6 +90,7 @@ public class StudentService {
 	            	}
 	            }
 	        }
+			kSession.fireAllRules();
 			return tareaModif;
 		}catch (Exception e) {
             e.printStackTrace();
@@ -113,6 +116,7 @@ public class StudentService {
 	            	}
 	            }
 	        }
+			kSession.fireAllRules();
 			return temaModif;
 		}catch (Exception e) {
             e.printStackTrace();
@@ -139,6 +143,7 @@ public class StudentService {
 	            	}
 	            }
 	        }
+			kSession.fireAllRules();
 			return tar_estModif;
 		}catch (Exception e) {
             e.printStackTrace();
@@ -155,8 +160,8 @@ public class StudentService {
             //Insert rule parameters.
             kSession.insert(estud);
             //fire rules
-            int fired = kSession.fireAllRules();
-            System.out.println(">> Fired: " + fired);
+//            int fired = kSession.fireAllRules();
+//            System.out.println(">> Fired: " + fired);
             //Close session. Don't close session as this is a service.
             //kSession.dispose();
             return estud;
@@ -173,8 +178,8 @@ public class StudentService {
             //Insert rule parameters.
             kSession.insert(materia);
             //fire rules
-            int fired = kSession.fireAllRules();
-            System.out.println(">> Fired: " + fired);
+//            int fired = kSession.fireAllRules();
+//            System.out.println(">> Fired: " + fired);
             //Close session. Don't close session as this is a service.
             //kSession.dispose();
             return materia;
@@ -191,8 +196,8 @@ public class StudentService {
 			//Insert rule parameters.
 			kSession.insert(tema);
 			//fire rules
-			int fired = kSession.fireAllRules();
-			System.out.println(">> Fired: " + fired);
+//			int fired = kSession.fireAllRules();
+//			System.out.println(">> Fired: " + fired);
 			//Close session. Don't close session as this is a service.
 			//kSession.dispose();
 			return tema;
@@ -209,8 +214,8 @@ public class StudentService {
 			//Insert rule parameters.
 			kSession.insert(tarea);
 			//fire rules
-			int fired = kSession.fireAllRules();
-			System.out.println(">> Fired: " + fired);
+//			int fired = kSession.fireAllRules();
+//			System.out.println(">> Fired: " + fired);
 			//Close session. Don't close session as this is a service.
 			//kSession.dispose();
 			return tarea;
@@ -227,8 +232,8 @@ public class StudentService {
 			//Insert rule parameters.
 			kSession.insert(est_mat);
 			//fire rules
-			int fired = kSession.fireAllRules();
-			System.out.println(">> Fired: " + fired);
+//			int fired = kSession.fireAllRules();
+//			System.out.println(">> Fired: " + fired);
 			//Close session. Don't close session as this is a service.
 			//kSession.dispose();
 			return est_mat;
@@ -245,8 +250,8 @@ public class StudentService {
 			//Insert rule parameters.
 			kSession.insert(tar_est);
 			//fire rules
-			int fired = kSession.fireAllRules();
-			System.out.println(">> Fired: " + fired);
+//			int fired = kSession.fireAllRules();
+//			System.out.println(">> Fired: " + fired);
 			//Close session. Don't close session as this is a service.
 			//kSession.dispose();
 			return tar_est;
@@ -263,8 +268,8 @@ public class StudentService {
 			//Insert rule parameters.
 			kSession.insert(tem_est);
 			//fire rules
-			int fired = kSession.fireAllRules();
-			System.out.println(">> Fired: " + fired);
+//			int fired = kSession.fireAllRules();
+//			System.out.println(">> Fired: " + fired);
 			//Close session. Don't close session as this is a service.
 			//kSession.dispose();
 			return tem_est;
@@ -278,85 +283,85 @@ public class StudentService {
 	
 	public List<Estudiante> getEstudiantes() {
 		KieSession kSession = droolsInitializer.getKsession();
-		kSession.fireAllRules();
         List<Estudiante> estudiantes = new ArrayList<Estudiante>();
         for (Object o : kSession.getObjects()) {
             if (o instanceof Estudiante) {
             	estudiantes.add((Estudiante) o);
             }
         }
+        kSession.fireAllRules();
         return estudiantes;
 	}
 	
 	public List<Materia> getMaterias() {
 		KieSession kSession = droolsInitializer.getKsession();
-		kSession.fireAllRules();
         List<Materia> materias = new ArrayList<Materia>();
         for (Object o : kSession.getObjects()) {
             if (o instanceof Materia) {
             	materias.add((Materia) o);
             }
         }
+        kSession.fireAllRules();
         return materias;
 	}
 	
 	public List<Tema> getTemas() {
 		KieSession kSession = droolsInitializer.getKsession();
-		kSession.fireAllRules();
         List<Tema> temas = new ArrayList<Tema>();
         for (Object o : kSession.getObjects()) {
             if (o instanceof Tema) {
             	temas.add((Tema) o);
             }
         }
+        kSession.fireAllRules();
         return temas;
 	}
 	
 	public List<Tarea> getTareas() {
 		KieSession kSession = droolsInitializer.getKsession();
-		kSession.fireAllRules();
         List<Tarea> tareas = new ArrayList<Tarea>();
         for (Object o : kSession.getObjects()) {
             if (o instanceof Tarea) {
             	tareas.add((Tarea) o);
             }
         }
+        kSession.fireAllRules();
         return tareas;
 	}
 	
 	public List<Estudiante_materia> getEstudiantesMaterias() {
 		KieSession kSession = droolsInitializer.getKsession();
-		kSession.fireAllRules();
         List<Estudiante_materia> est_tareas = new ArrayList<Estudiante_materia>();
         for (Object o : kSession.getObjects()) {
             if (o instanceof Estudiante_materia) {
             	est_tareas.add((Estudiante_materia) o);
             }
         }
+        kSession.fireAllRules();
         return est_tareas;
 	}
 	
 	public List<Tarea_estudiante> getEstudiantesTareas() {
 		KieSession kSession = droolsInitializer.getKsession();
-		kSession.fireAllRules();
         List<Tarea_estudiante> tar_ests = new ArrayList<Tarea_estudiante>();
         for (Object o : kSession.getObjects()) {
             if (o instanceof Tarea_estudiante) {
             	tar_ests.add((Tarea_estudiante) o);
             }
         }
+        kSession.fireAllRules();
         return tar_ests;
 	}
 	
 	public List<Tema_estudiante> getEstudiantesTemas() {
 		KieSession kSession = droolsInitializer.getKsession();
-		kSession.fireAllRules();
         List<Tema_estudiante> temas_ests = new ArrayList<Tema_estudiante>();
         for (Object o : kSession.getObjects()) {
             if (o instanceof Tema_estudiante) {
             	temas_ests.add((Tema_estudiante) o);
             }
         }
+        kSession.fireAllRules();
         return temas_ests;
 	}
 	
@@ -364,68 +369,71 @@ public class StudentService {
 	
 	public Estudiante getEstudId(Map<String, String> inputMap){
 		KieSession kSession = droolsInitializer.getKsession();
-		kSession.fireAllRules();
 		int idEstud = Integer.parseInt(inputMap.get("id_est"));
 		for (Object o : kSession.getObjects()) {
             if (o instanceof Estudiante) {
             	Estudiante estudiante = (Estudiante) o;
             	if(estudiante.getId() == idEstud){
+            		kSession.fireAllRules();
             		return estudiante;
             	}
             }
         }
+		kSession.fireAllRules();
 		return null;
 	}
 	
 	public Materia getMateriaId(Map<String, String> inputMap){
 		KieSession kSession = droolsInitializer.getKsession();
-		kSession.fireAllRules();
 		int idMateria = Integer.parseInt(inputMap.get("id_mat"));
 		for (Object o : kSession.getObjects()) {
             if (o instanceof Materia) {
             	Materia materia = (Materia) o;
             	if(materia.getId() == idMateria){
+            		kSession.fireAllRules();
             		return materia;
             	}
             }
         }
+		kSession.fireAllRules();
 		return null;
 	}
 	
 	public Tarea getTareaId(Map<String, String> inputMap){
 		KieSession kSession = droolsInitializer.getKsession();
-		kSession.fireAllRules();
 		int idTarea = Integer.parseInt(inputMap.get("id_tar"));
 		for (Object o : kSession.getObjects()) {
             if (o instanceof Tarea) {
             	Tarea tarea = (Tarea) o;
             	if(tarea.getId_tarea() == idTarea){
+            		kSession.fireAllRules();
             		return tarea;
             	}
             }
         }
+		kSession.fireAllRules();
 		return null;
 	}
 	
 	public Tema getTemaId(Map<String, String> inputMap){
 		KieSession kSession = droolsInitializer.getKsession();
-		kSession.fireAllRules();
 		int idTema = Integer.parseInt(inputMap.get("id_tem"));
 		for (Object o : kSession.getObjects()) {
             if (o instanceof Tema) {
             	Tema tema = (Tema) o;
             	if(tema.getId_tema() == idTema){
+            		kSession.fireAllRules();
             		return tema;
             	}
             }
         }
+		kSession.fireAllRules();
 		return null;
 	}
 	
 	public List<Estudiante_materia> getEst_MatId(Map<String, String> inputMap){
 		List<Estudiante_materia> lista_estud_mat = new ArrayList<Estudiante_materia>();
 		KieSession kSession = droolsInitializer.getKsession();
-		kSession.fireAllRules();
 		int idEst = Integer.parseInt(inputMap.get("id_est"));
 		for (Object o : kSession.getObjects()) {
             if (o instanceof Estudiante_materia) {
@@ -435,13 +443,13 @@ public class StudentService {
             	}
             }
         }
+		kSession.fireAllRules();
 		return lista_estud_mat;
 	}
 	
 	public List<Tarea_estudiante> getTar_EstId(Map<String, String> inputMap){
 		List<Tarea_estudiante> list_tar_est = new ArrayList<Tarea_estudiante>();
 		KieSession kSession = droolsInitializer.getKsession();
-		kSession.fireAllRules();
 		int idEst = Integer.parseInt(inputMap.get("id_est"));
 		for (Object o : kSession.getObjects()) {
             if (o instanceof Tarea_estudiante) {
@@ -451,13 +459,13 @@ public class StudentService {
             	}
             }
         }
+		kSession.fireAllRules();
 		return list_tar_est;
 	}
 	
 	public List<Tema_estudiante> getTem_EstId(Map<String, String> inputMap){
 		List<Tema_estudiante> list_tem_est = new ArrayList<Tema_estudiante>();
 		KieSession kSession = droolsInitializer.getKsession();
-		kSession.fireAllRules();
 		int idEst = Integer.parseInt(inputMap.get("id_est"));
 		for (Object o : kSession.getObjects()) {
             if (o instanceof Tema_estudiante) {
@@ -467,6 +475,7 @@ public class StudentService {
             	}
             }
         }
+		kSession.fireAllRules();
 		return list_tem_est;
 	}
 
