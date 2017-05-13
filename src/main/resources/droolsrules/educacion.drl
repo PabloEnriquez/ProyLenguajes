@@ -9,7 +9,7 @@ declare Counter
 	value : double @key
 end
 
-rule "Insertar datos"
+/*rule "Insertar datos"
 	salience 100
 	when
 	then
@@ -104,6 +104,7 @@ rule "Insertar datos"
 		//---
 		//insert(new Counter());
 end
+*/
 
 rule "Contador por cada estudiante"
 	salience 99
@@ -210,7 +211,7 @@ rule "Calcular promedio de temas a partir de sus tareas"
 		aux = ( aux / $c.getValue() );
 		$tema_estud.setPromedioEjercicios(aux);
 		System.out.println("Tema: "+ $tema.getNombre() + " promedio: " + $tema_estud.getPromedioEjercicios() + " cont = " + $c.getValue());
-		$c.setValue(0);
+		//$c.setValue(0);
 end
 
 rule "Calcular sumatoria de promedio de materias por tema"
@@ -243,7 +244,7 @@ rule "Calcular promedio de materias por tema"
 		aux = ( aux / $c.getValue() );
 		$estud_mat.setPromedioAlumno(aux);
 		System.out.println("Materia: " + $mat.getNombre() + " promedio: " + $estud_mat.getPromedioAlumno() + " cont: " + $c.getValue());
-		$c.setValue(0);
+		//$c.setValue(0);
 end
 
 rule "Calcular sumatoria de materias para promedio global"
@@ -271,7 +272,7 @@ rule "Calcular promedio global del alumno"
 		aux = ( aux / $c.getValue() );
 		$estud.setPromedioGlobal(aux);
 		System.out.println("Estudiante: " + $estud.getNombre() + " promedio: " + $estud.getPromedioGlobal() + " cont: " + $c.getValue());
-		$c.setValue(0);
+		//$c.setValue(0);
 end
 
 rule "Determinar porcentaje completado de materia CON tareas SIN hacer"
@@ -288,8 +289,8 @@ rule "Determinar porcentaje completado de materia CON tareas SIN hacer"
 		aux = ( aux * 100 );
 		$estud_mat.setPorcentajeCompletado(aux);
 		System.out.println("Porcentaje completado: " + aux + " de: " + $mat.getNombre() + " por: " + $estud.getNombre());
-		$cH.setValue(0);
-		$cNoH.setValue(0);
+		//$cH.setValue(0);
+		//$cNoH.setValue(0);
 end
 
 rule "Determinar porcentaje completado de materia con tareas COMPLETAS"
@@ -304,8 +305,8 @@ rule "Determinar porcentaje completado de materia con tareas COMPLETAS"
 	then
 		$estud_mat.setPorcentajeCompletado(100.0);
 		System.out.println("Porcentaje completado: 100.0 de: " + $mat.getNombre() + " por: " + $estud.getNombre());
-		$cH.setValue(0);
-		$cNoH.setValue(0);
+		//$cH.setValue(0);
+		//$cNoH.setValue(0);
 end
 
 /*

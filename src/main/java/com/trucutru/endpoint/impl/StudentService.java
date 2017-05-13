@@ -36,9 +36,9 @@ public class StudentService {
 	            		estudiante.setRecomendaciones(estud.getRecomendaciones());
 	            		estudModif = estudiante;
 	            		//kSession.insert(estudModif);
-//	            		org.kie.api.runtime.rule.FactHandle estudianteHandle = kSession.insert(estudModif);
-//	            		kSession.update(estudianteHandle, estudiante);
-	                    kSession.fireAllRules();
+	            		org.kie.api.runtime.rule.FactHandle estudianteHandle = kSession.getFactHandle(estudiante);
+	            		kSession.update(estudianteHandle, estudiante);
+//	                    kSession.fireAllRules();
 	            	}
 	            }
 	        }
@@ -127,25 +127,24 @@ public class StudentService {
 	public Tarea_estudiante editarTareaEstudiante(Tarea_estudiante tar_estud, Map<String, String> inputMap){
 		try{
 			KieSession kSession = droolsInitializer.getKsession();
-			kSession.fireAllRules();
 			int idEst = Integer.parseInt(inputMap.get("id_est"));
 			int idTarea = Integer.parseInt(inputMap.get("id_tar"));
-			Tarea_estudiante tar_estModif = null;
 			for (Object o : kSession.getObjects()) {
 	            if (o instanceof Tarea_estudiante) {
-	            	Tarea_estudiante tar_estEncontrada = (Tarea_estudiante) o;
-	            	if(tar_estEncontrada.getIdEstudiante() == idEst && tar_estEncontrada.getIdTarea() == idTarea){
-	            		tar_estEncontrada.setCalificacion(tar_estud.getCalificacion());
-	            		tar_estEncontrada.setCompleted(tar_estud.isCompleted());
-	            		tar_estModif = tar_estEncontrada;
-	            		//kSession.insert(tar_estModif);
-	            		org.kie.api.runtime.rule.FactHandle bartHandle = kSession.insert(tar_estEncontrada);
-	            		kSession.update(bartHandle, tar_estEncontrada);
-	            		kSession.fireAllRules();
+	            	if(((Tarea_estudiante) o).getIdEstudiante() == idEst && ((Tarea_estudiante) o).getIdTarea() == idTarea){
+	            		((Tarea_estudiante) o).setCalificacion(tar_estud.getCalificacion());
+	            		((Tarea_estudiante) o).setCompleted(tar_estud.isCompleted());
+	            		org.kie.api.runtime.rule.FactHandle tarEstHandle = kSession.getFactHandle(o);
+	            		kSession.update(tarEstHandle, o);
+//	            		if(((Tarea_estudiante) o).isCompleted()){
+	            			kSession = kSession.getKieBase().newKieSession();
+	                		kSession.fireAllRules();
+//	            		}
+	            		return (Tarea_estudiante) o;
 	            	}
 	            }
 	        }
-			return tar_estModif;
+			return null;
 		}catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -380,7 +379,6 @@ public class StudentService {
             	}
             }
         }
-		kSession.fireAllRules();
 		return null;
 	}
 	
@@ -396,7 +394,6 @@ public class StudentService {
             	}
             }
         }
-		kSession.fireAllRules();
 		return null;
 	}
 	
@@ -412,7 +409,6 @@ public class StudentService {
             	}
             }
         }
-		kSession.fireAllRules();
 		return null;
 	}
 	
@@ -428,7 +424,6 @@ public class StudentService {
             	}
             }
         }
-		kSession.fireAllRules();
 		return null;
 	}
 	

@@ -5,9 +5,6 @@ import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.springframework.stereotype.Service;
 
-/**
- * Created by Anoop on 08-03-2017.
- */
 @Service
 public class DroolsInitializer {
 
