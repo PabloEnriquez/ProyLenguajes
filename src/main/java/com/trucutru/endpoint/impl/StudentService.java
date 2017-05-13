@@ -120,31 +120,31 @@ public class StudentService {
 			for (Object o : kSession.getObjects()) {
 				if (o instanceof Estudiante){
 					((Estudiante) o).setPromedioGlobal(0.0);
-					org.kie.api.runtime.rule.FactHandle tarEstHandle = kSession.getFactHandle(o);
-            		kSession.update(tarEstHandle, o);
+					org.kie.api.runtime.rule.FactHandle tarEstHandle = kSession.getFactHandle( (Estudiante) o);
+            		kSession.update(tarEstHandle, (Estudiante) o);
 				}
 				if (o instanceof Materia){
-					org.kie.api.runtime.rule.FactHandle tarEstHandle = kSession.getFactHandle(o);
-            		kSession.update(tarEstHandle, o);
+					org.kie.api.runtime.rule.FactHandle tarEstHandle = kSession.getFactHandle( (Materia) o);
+            		kSession.update(tarEstHandle, (Materia) o);
 				}
 				if (o instanceof Tema){
-					org.kie.api.runtime.rule.FactHandle tarEstHandle = kSession.getFactHandle(o);
-            		kSession.update(tarEstHandle, o);
+					org.kie.api.runtime.rule.FactHandle tarEstHandle = kSession.getFactHandle( (Tema) o);
+            		kSession.update(tarEstHandle, (Tema) o);
 				}
 				if (o instanceof Tarea){
-					org.kie.api.runtime.rule.FactHandle tarEstHandle = kSession.getFactHandle(o);
-            		kSession.update(tarEstHandle, o);
+					org.kie.api.runtime.rule.FactHandle tarEstHandle = kSession.getFactHandle( (Tarea) o);
+            		kSession.update(tarEstHandle, (Tarea) o);
 				}
 				if (o instanceof Estudiante_materia){
 					((Estudiante_materia) o).setPromedioAlumno(0.0);
 					((Estudiante_materia) o).setPorcentajeCompletado(0.0);
-					org.kie.api.runtime.rule.FactHandle tarEstHandle = kSession.getFactHandle(o);
-            		kSession.update(tarEstHandle, o);
+					org.kie.api.runtime.rule.FactHandle tarEstHandle = kSession.getFactHandle((Estudiante_materia) o);
+            		kSession.update(tarEstHandle, (Estudiante_materia) o);
 				}
 				if (o instanceof Tema_estudiante){
 					((Tema_estudiante) o).setPromedioEjercicios(0.0);
-					org.kie.api.runtime.rule.FactHandle tarEstHandle = kSession.getFactHandle(o);
-            		kSession.update(tarEstHandle, o);
+					org.kie.api.runtime.rule.FactHandle tarEstHandle = kSession.getFactHandle((Tema_estudiante) o);
+            		kSession.update(tarEstHandle, (Tema_estudiante) o);
 				}
 	            if (o instanceof Tarea_estudiante) {
 	            	if(((Tarea_estudiante) o).getIdEstudiante() == idEst && ((Tarea_estudiante) o).getIdTarea() == idTarea){
@@ -153,7 +153,7 @@ public class StudentService {
 	            		org.kie.api.runtime.rule.FactHandle tarEstHandle = kSession.getFactHandle((Tarea_estudiante) o);
 	            		kSession.update(tarEstHandle, (Tarea_estudiante) o);
 //	            		KieSession kSession2 = kSession.getKieBase().newKieSession();
-//	                	kSession.fireAllRules();
+//	                	kSession2.fireAllRules();
 	            		return (Tarea_estudiante) o;
 	            	}
 	            }
@@ -304,6 +304,8 @@ public class StudentService {
             	estudiantes.add((Estudiante) o);
             }
         }
+//        KieSession kSession2 = kSession.getKieBase().newKieSession();
+//    	kSession2.fireAllRules();
         kSession.fireAllRules();
         return estudiantes;
 	}

@@ -19,7 +19,7 @@ rule "Insertar datos"
 		insert(e1);
 		
 		Materia m1 = new Materia("Fisica", "Rafael Lozano", 7);
-		Materia m2 = new Materia("Matematicas", "Jose Castro", 8);
+		Materia m2 = new Materia("Matematicas", "Jose Castro", 6);
 		insert(m1);
 		insert(m2);
 		
@@ -55,7 +55,7 @@ rule "Insertar datos"
 		
 		Tarea_estudiante tar_estud1 = new Tarea_estudiante(tar1.getId(), t1.getId(), e1.getId(), 26.0, true);
 		Tarea_estudiante tar_estud2 = new Tarea_estudiante(tar2.getId(), t1.getId(), e1.getId(), 76.0, true);
-		Tarea_estudiante tar_estud3 = new Tarea_estudiante(tar3.getId(), t1.getId(), e1.getId(), 0.0, false);
+		Tarea_estudiante tar_estud3 = new Tarea_estudiante(tar3.getId(), t1.getId(), e1.getId(), 10.0, true);
 		insert(tar_estud1);
 		insert(tar_estud2);
 		insert(tar_estud3);
@@ -69,7 +69,7 @@ rule "Insertar datos"
 		
 		Tarea_estudiante tar_estud4 = new Tarea_estudiante(tar4.getId(), t2.getId(), e1.getId(), 76.0, true);
 		Tarea_estudiante tar_estud5 = new Tarea_estudiante(tar5.getId(), t2.getId(), e1.getId(), 56.0, true);
-		Tarea_estudiante tar_estud6 = new Tarea_estudiante(tar6.getId(), t2.getId(), e1.getId(), 0.0, false);
+		Tarea_estudiante tar_estud6 = new Tarea_estudiante(tar6.getId(), t2.getId(), e1.getId(), 10.0, true);
 		insert(tar_estud4);
 		insert(tar_estud5);
 		insert(tar_estud6);
@@ -81,7 +81,7 @@ rule "Insertar datos"
 		insert(tar8);
 		insert(tar9);
 		
-		Tarea_estudiante tar_estud7 = new Tarea_estudiante(tar7.getId(), t3.getId(), e1.getId(), 0.0, false);
+		Tarea_estudiante tar_estud7 = new Tarea_estudiante(tar7.getId(), t3.getId(), e1.getId(), 10.0, true);
 		Tarea_estudiante tar_estud8 = new Tarea_estudiante(tar8.getId(), t3.getId(), e1.getId(), 46.0, true);
 		Tarea_estudiante tar_estud9 = new Tarea_estudiante(tar9.getId(), t3.getId(), e1.getId(), 56.0, true);
 		insert(tar_estud7);
@@ -96,7 +96,7 @@ rule "Insertar datos"
 		insert(tar12);
 		
 		Tarea_estudiante tar_estud10 = new Tarea_estudiante(tar10.getId(), t4.getId(), e1.getId(), 36.0, true);
-		Tarea_estudiante tar_estud11 = new Tarea_estudiante(tar11.getId(), t4.getId(), e1.getId(), 0.0, false);
+		Tarea_estudiante tar_estud11 = new Tarea_estudiante(tar11.getId(), t4.getId(), e1.getId(), 10.0, true);
 		Tarea_estudiante tar_estud12 = new Tarea_estudiante(tar12.getId(), t4.getId(), e1.getId(), 46.0, true);
 		insert(tar_estud10);
 		insert(tar_estud11);
@@ -161,7 +161,7 @@ rule "Calcular sumatoria de tareas por tema"
 		$estud : Estudiante();
 		$tar_estud : Tarea_estudiante($tema.getId() == idTema, $estud.getId() == idEstudiante);
 		$tema_estud : Tema_estudiante($tema.getId() == idTema, $estud.getId() == idEstudiante);
-		$c : Counter( name == $tema.getNombre() );
+		$c : Counter( name == $tema.getNombre() && value == 0 );
 	then
 		$c.setValue( $c.getValue() + 1 );
 		double aux = $tema_estud.getPromedioEjercicios();
@@ -222,7 +222,7 @@ rule "Calcular sumatoria de promedio de materias por tema"
 		$mat : Materia();
 		$tema_estud : Tema_estudiante($tema.getId() == idTema, $estud.getId() == idEstudiante);
 		$estud_mat : Estudiante_materia($mat.getId() == idMateria, $estud.getId() == idEstudiante);
-		$c : Counter( name == $mat.getNombre() );
+		$c : Counter( name == $mat.getNombre() && value == 0 );
 		eval( $tema.getIdMateria() == $mat.getId() );
 	then
 		$c.setValue( $c.getValue() + 1 );
@@ -253,7 +253,7 @@ rule "Calcular sumatoria de materias para promedio global"
 		$estud : Estudiante();
 		$mat : Materia();
 		$estud_mat : Estudiante_materia($mat.getId() == idMateria, $estud.getId() == idEstudiante);
-		$c : Counter( name == $estud.getNombre() );
+		$c : Counter( name == $estud.getNombre() && value == 0 );
 	then
 		$c.setValue( $c.getValue() + 1 );
 		double aux = $estud.getPromedioGlobal();
@@ -288,6 +288,7 @@ rule "Determinar porcentaje completado de materia CON tareas SIN hacer"
 	then
 		double aux =  $cNoH.getValue() / $cH.getValue();
 		aux = ( aux * 100 );
+		aux = ( 100 - aux );
 		$estud_mat.setPorcentajeCompletado(aux);
 		System.out.println("Porcentaje completado: " + aux + " de: " + $mat.getNombre() + " por: " + $estud.getNombre());
 		//$cH.setValue(0);
@@ -321,50 +322,30 @@ rule "Reinicializar contadores"
 		System.out.println($c.getName() + " cont: " + $c.getValue());
 end
 
-/*
-rule "Calcular promedio global -> en cadena se obtiene el promedio de tareas por tema por materia por cada una en la lista de materias"
-    //include attributes such as "salience" here...
-    salience 100
-    when
-        $e : Estudiante($materias : materiasCursando );
-        eval($materias != null);
-    then
-    	$e.setPromedioGlobal($e.getPromedioTotal($materias));
-        System.out.println("Estudiante encontrado!!: " + $e.toString());
-end
-
-rule "Encontrar temas"
-	when
-		$e : Estudiante( $materias : materiasCursando );
-		$mat : Materia() from $materias;
-		$temas : Tema() from $mat.getTemas();
-		$t : Tema(nombre == "MRUA") from $temas;
-	then
-		System.out.println("Se encontro: " + $t.getNombre());
-end
-
 rule "Mal historial, reprobando materia media-alta, pero con tiempo"
 	when
-		$e : Estudiante( $materias : materiasCursando );
-		$mat : Materia() from $materias;
-		eval($mat.getPromedioAlumno() < 60 
-		&& ($mat.getNivelCurso() > 5 && $mat.getNivelCurso() < 8) 
-		&& $mat.getPorcentajeCompl() < 50 
-		&& $e.getPromedioGlobal() < 65 );
+		$estud : Estudiante();
+		$mat : Materia();
+		$estud_mat : Estudiante_materia($mat.getId() == idMateria, $estud.getId() == idEstudiante);
+		eval( $estud_mat.getPromedioAlumno() < 60
+		&& ($mat.getNivelCurso() > 5 && $mat.getNivelCurso() < 8)
+		&& $estud_mat.getPorcentajeCompletado() < 50
+		&& $estud.getPromedioGlobal() < 65 );
 	then
 		//System.out.println($e.getNombre() + ", tu historial es malo, tu promedio en la materia: "
 		//+ $mat.getNombre() + " es reprobatorio y el nivel de la clase es medio-alto; pero todavía tienes tiempo, busca asesoria");
-		$e.getRecomendaciones().add($e.getNombre() + ", tu promedio global es bueno, tu promedio en la materia: " 
+		$estud.getRecomendaciones().add($estud.getNombre() + ", tu promedio global es malo, tu promedio en la materia: " 
 		+ $mat.getNombre() + " es reprobatorio y el nivel de la clase es medio-alto; pero todavía tienes tiempo, practica y ponte al corriente");
 end
 
 rule "Mal historial, reprobando materia media-alta, pero sin tiempo"
 	when
-		$e : Estudiante( $materias : materiasCursando );
-		$mat : Materia() from $materias;
-		eval($mat.getPromedioAlumno() < 60 
+		$e : Estudiante();
+		$mat : Materia();
+		$estud_mat : Estudiante_materia($mat.getId() == idMateria, $e.getId() == idEstudiante);
+		eval($estud_mat.getPromedioAlumno() < 60 
 		&& ($mat.getNivelCurso() > 5 && $mat.getNivelCurso() < 8) 
-		&& $mat.getPorcentajeCompl() > 75 
+		&& $estud_mat.getPorcentajeCompletado() > 75 
 		&& $e.getPromedioGlobal() < 65 );
 	then
 		$e.getRecomendaciones().add($e.getNombre() + ", tu promedio global es malo, tu promedio en la materia: " 
@@ -374,11 +355,12 @@ end
 
 rule "Mal historial, aprobando materia media-alta, con tiempo"
 	when
-		$e : Estudiante( $materias : materiasCursando );
-		$mat : Materia() from $materias;
-		eval($mat.getPromedioAlumno() >= 70 
+		$e : Estudiante();
+		$mat : Materia();
+		$estud_mat : Estudiante_materia($mat.getId() == idMateria, $e.getId() == idEstudiante);
+		eval($estud_mat.getPromedioAlumno() >= 70 
 		&& ($mat.getNivelCurso() > 5 && $mat.getNivelCurso() < 8) 
-		&& $mat.getPorcentajeCompl() < 50 
+		&& $estud_mat.getPorcentajeCompletado() < 50 
 		&& $e.getPromedioGlobal() < 65 );
 	then
 		$e.getRecomendaciones().add($e.getNombre() + ", tu promedio global ha sido malo, pero tu promedio en la materia: " 
@@ -387,11 +369,12 @@ end
 
 rule "Mal historial, aprobando materia media-alta, sin tiempo"
 	when
-		$e : Estudiante( $materias : materiasCursando );
-		$mat : Materia() from $materias;
-		eval($mat.getPromedioAlumno() >= 70 
+		$e : Estudiante();
+		$mat : Materia();
+		$estud_mat : Estudiante_materia($mat.getId() == idMateria, $e.getId() == idEstudiante);
+		eval($estud_mat.getPromedioAlumno() >= 70 
 		&& ($mat.getNivelCurso() > 5 && $mat.getNivelCurso() < 8) 
-		&& $mat.getPorcentajeCompl() > 75 
+		&& $estud_mat.getPorcentajeCompletado() > 75 
 		&& $e.getPromedioGlobal() < 65 );
 	then
 		$e.getRecomendaciones().add($e.getNombre() + ", tu promedio global ha sido malo, pero tu promedio en la materia: " 
@@ -401,26 +384,26 @@ end
 rule "Buen historial, reprobando materia media-alta, pero con tiempo"
 
 	when
-		$e : Estudiante( $materias : materiasCursando, $recomendaciones : recomendaciones );
-		$mat : Materia() from $materias;
-		eval($mat.getPromedioAlumno() < 60 
+		$e : Estudiante();
+		$mat : Materia();
+		$estud_mat : Estudiante_materia($mat.getId() == idMateria, $e.getId() == idEstudiante);
+		eval($estud_mat.getPromedioAlumno() < 60 
 		&& ($mat.getNivelCurso() > 5 && $mat.getNivelCurso() < 8) 
-		&& $mat.getPorcentajeCompl() < 50 
+		&& $estud_mat.getPorcentajeCompletado() < 50 
 		&& $e.getPromedioGlobal() > 75 );
 	then
-		//System.out.println($e.getNombre() + ", tu historial es bueno, tu promedio en la materia: " 
-		//+ $mat.getNombre() + " es reprobatorio y el nivel de la clase es medio-alto; pero todavía tienes tiempo, practica y ponte al corriente");
 		$e.getRecomendaciones().add($e.getNombre() + ", tu promedio global es bueno, tu promedio en la materia: " 
 		+ $mat.getNombre() + " es reprobatorio y el nivel de la clase es medio-alto; pero todavía tienes tiempo, practica y ponte al corriente");
 end
 
 rule "Buen historial, reprobando materia media-alta, pero sin tiempo"
 	when
-		$e : Estudiante( $materias : materiasCursando );
-		$mat : Materia() from $materias;
-		eval($mat.getPromedioAlumno() < 60 
+		$e : Estudiante();
+		$mat : Materia();
+		$estud_mat : Estudiante_materia($mat.getId() == idMateria, $e.getId() == idEstudiante);
+		eval($estud_mat.getPromedioAlumno() < 60 
 		&& ($mat.getNivelCurso() > 5 && $mat.getNivelCurso() < 8) 
-		&& $mat.getPorcentajeCompl() > 75 
+		&& $estud_mat.getPorcentajeCompletado() > 75 
 		&& $e.getPromedioGlobal() > 75 );
 	then
 		$e.getRecomendaciones().add($e.getNombre() + ", tu promedio global es malo, tu promedio en la materia: " 
@@ -430,9 +413,10 @@ end
 
 rule "Buen historial, aprobando materia media-alta"
 	when
-		$e : Estudiante( $materias : materiasCursando );
-		$mat : Materia() from $materias;
-		eval($mat.getPromedioAlumno() >= 70 
+		$e : Estudiante();
+		$mat : Materia();
+		$estud_mat : Estudiante_materia($mat.getId() == idMateria, $e.getId() == idEstudiante);
+		eval($estud_mat.getPromedioAlumno() >= 70 
 		&& ($mat.getNivelCurso() > 5 && $mat.getNivelCurso() < 8)  
 		&& $e.getPromedioGlobal() > 75 );
 	then
@@ -440,6 +424,7 @@ rule "Buen historial, aprobando materia media-alta"
 		+ $mat.getNombre() + " son muy buenos. Sigue así para mantener un excelente promedio");
 end
 
+/*
 rule "Inscripcion futura nivel alto"
 
 	when
