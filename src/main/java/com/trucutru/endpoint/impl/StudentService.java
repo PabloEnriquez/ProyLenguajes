@@ -130,16 +130,38 @@ public class StudentService {
 			int idEst = Integer.parseInt(inputMap.get("id_est"));
 			int idTarea = Integer.parseInt(inputMap.get("id_tar"));
 			for (Object o : kSession.getObjects()) {
+				if (o instanceof Estudiante){
+					org.kie.api.runtime.rule.FactHandle tarEstHandle = kSession.getFactHandle(o);
+            		kSession.update(tarEstHandle, o);
+				}
+				if (o instanceof Materia){
+					org.kie.api.runtime.rule.FactHandle tarEstHandle = kSession.getFactHandle(o);
+            		kSession.update(tarEstHandle, o);
+				}
+				if (o instanceof Tema){
+					org.kie.api.runtime.rule.FactHandle tarEstHandle = kSession.getFactHandle(o);
+            		kSession.update(tarEstHandle, o);
+				}
+				if (o instanceof Tarea){
+					org.kie.api.runtime.rule.FactHandle tarEstHandle = kSession.getFactHandle(o);
+            		kSession.update(tarEstHandle, o);
+				}
+				if (o instanceof Estudiante_materia){
+					org.kie.api.runtime.rule.FactHandle tarEstHandle = kSession.getFactHandle(o);
+            		kSession.update(tarEstHandle, o);
+				}
+				if (o instanceof Tema_estudiante){
+					org.kie.api.runtime.rule.FactHandle tarEstHandle = kSession.getFactHandle(o);
+            		kSession.update(tarEstHandle, o);
+				}
 	            if (o instanceof Tarea_estudiante) {
 	            	if(((Tarea_estudiante) o).getIdEstudiante() == idEst && ((Tarea_estudiante) o).getIdTarea() == idTarea){
 	            		((Tarea_estudiante) o).setCalificacion(tar_estud.getCalificacion());
 	            		((Tarea_estudiante) o).setCompleted(tar_estud.isCompleted());
 	            		org.kie.api.runtime.rule.FactHandle tarEstHandle = kSession.getFactHandle(o);
 	            		kSession.update(tarEstHandle, o);
-//	            		if(((Tarea_estudiante) o).isCompleted()){
-	            			kSession = kSession.getKieBase().newKieSession();
-	                		kSession.fireAllRules();
-//	            		}
+	            		KieSession kSession2 = kSession.getKieBase().newKieSession();
+	                	kSession2.fireAllRules();
 	            		return (Tarea_estudiante) o;
 	            	}
 	            }

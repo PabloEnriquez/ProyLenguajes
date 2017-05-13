@@ -156,6 +156,7 @@ end
 
 rule "Calcular sumatoria de tareas por tema"
 	salience 98
+	no-loop true
 	when
 		$tema : Tema();
 		$estud : Estudiante();
@@ -165,7 +166,7 @@ rule "Calcular sumatoria de tareas por tema"
 	then
 		$c.setValue( $c.getValue() + 1 );
 		double aux = $tema_estud.getPromedioEjercicios();
-		aux = aux + $tar_estud.getCalificacion();	
+		aux = aux + $tar_estud.getCalificacion();
 		$tema_estud.setPromedioEjercicios(aux);
 		System.out.println("Tema: "+ $tema.getNombre() + " suma: " + $tema_estud.getPromedioEjercicios() + " cont = " + $c.getValue());
 end
