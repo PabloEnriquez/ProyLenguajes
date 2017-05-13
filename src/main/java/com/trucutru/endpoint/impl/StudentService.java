@@ -160,8 +160,8 @@ public class StudentService {
 	            		((Tarea_estudiante) o).setCompleted(tar_estud.isCompleted());
 	            		org.kie.api.runtime.rule.FactHandle tarEstHandle = kSession.getFactHandle(o);
 	            		kSession.update(tarEstHandle, o);
-	            		KieSession kSession2 = kSession.getKieBase().newKieSession();
-	                	kSession2.fireAllRules();
+//	            		KieSession kSession2 = kSession.getKieBase().newKieSession();
+//	                	kSession2.fireAllRules();
 	            		return (Tarea_estudiante) o;
 	            	}
 	            }
