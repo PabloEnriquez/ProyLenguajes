@@ -18,7 +18,6 @@ public class Tema {
 	
 	public Tema(){
 		id = count.incrementAndGet();
-		idMateria = 0;
 	}
 	
 	public Tema(int idMateria, String nombre, int nivel) {

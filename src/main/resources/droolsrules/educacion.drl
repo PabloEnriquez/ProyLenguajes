@@ -37,10 +37,10 @@ rule "Insertar datos"
 		insert(t3);
 		insert(t4);
 		
-		Tema_estudiante tema_estud1 = new Tema_estudiante(t1.getId(), e1.getId(), 0.0);
-		Tema_estudiante tema_estud2 = new Tema_estudiante(t2.getId(), e1.getId(), 0.0);
-		Tema_estudiante tema_estud3 = new Tema_estudiante(t3.getId(), e1.getId(), 0.0);
-		Tema_estudiante tema_estud4 = new Tema_estudiante(t4.getId(), e1.getId(), 0.0);
+		Tema_estudiante tema_estud1 = new Tema_estudiante(t1.getId(), e1.getId(), m1.getId(), 0.0);
+		Tema_estudiante tema_estud2 = new Tema_estudiante(t2.getId(), e1.getId(), m1.getId(), 0.0);
+		Tema_estudiante tema_estud3 = new Tema_estudiante(t3.getId(), e1.getId(), m2.getId(), 0.0);
+		Tema_estudiante tema_estud4 = new Tema_estudiante(t4.getId(), e1.getId(), m2.getId(), 0.0);
 		insert(tema_estud1);
 		insert(tema_estud2);
 		insert(tema_estud3);
@@ -105,7 +105,7 @@ rule "Insertar datos"
 		//insert(new Counter());
 end
 
-//---------------------Calculo promedio ------------------------
+//------------------------------------------- Calculo promedio ------------------------
 
 rule "Calcular promedio de temas por medio de tareas"
 	salience 98
@@ -125,13 +125,12 @@ end
 rule "Calcular promedio de materias por medio de temas"
 	salience 96
 	when
-		$estud : Estudiante();
 		$mat : Materia();
-		$tema : Tema( idMateria == $mat.getId() );
+		$estud : Estudiante();
 		$estud_mat : Estudiante_materia($mat.getId() == idMateria, $estud.getId() == idEstudiante);
-		$sumatoria : Double() from accumulate ( $tema_estud : Tema_estudiante($tema.getId() == idTema, $estud.getId() == idEstudiante),
+		$sumatoria : Double() from accumulate ( $tema_estud : Tema_estudiante( $estud.getId() == idEstudiante, $mat.getId() == idMateria),
 											 sum( $tema_estud.getPromedioEjercicios() ) );
-		$contador : Long() from accumulate ( $tema_estud2 : Tema_estudiante($tema.getId() == idTema, $estud.getId() == idEstudiante),
+		$contador : Long() from accumulate ( $tema_estud2 : Tema_estudiante( $estud.getId() == idEstudiante, $mat.getId() == idMateria),
 											count( $tema_estud2 ) );
 	then
 		$estud_mat.setPromedioAlumno( ( $sumatoria / $contador ) );
@@ -142,10 +141,9 @@ rule "Calcular promedio global por medio de materias"
 	salience 94
 	when
 		$estud : Estudiante();
-		$mat : Materia();
-		$sumatoria : Double() from accumulate ($estud_mat : Estudiante_materia($mat.getId() == idMateria, $estud.getId() == idEstudiante),
+		$sumatoria : Double() from accumulate ($estud_mat : Estudiante_materia($estud.getId() == idEstudiante),
 											sum( $estud_mat.getPromedioAlumno() ) );
-		$contador : Long() from accumulate ($estud_mat2 : Estudiante_materia($mat.getId() == idMateria, $estud.getId() == idEstudiante),
+		$contador : Long() from accumulate ($estud_mat2 : Estudiante_materia($estud.getId() == idEstudiante),
 											count( $estud_mat2 ) );
 	then
 		$estud.setPromedioGlobal( ( $sumatoria / $contador ) );
@@ -158,13 +156,13 @@ rule "Determinar porcentaje completado de materia CON tareas SIN hacer"
 		$estud : Estudiante();
 		$mat : Materia();
 		$tema : Tema( idMateria == $mat.getId() );
-		$tarea : Tarea();
+		//$tarea : Tarea();
 		$estud_mat : Estudiante_materia($mat.getId() == idMateria, $estud.getId() == idEstudiante);
 		$contadorNoH : Long() from accumulate ( 
-			$tar_estud2 : Tarea_estudiante($tarea.getId() == idTarea, $tema.getId() == idTema, $estud.getId() == idEstudiante, completed == false),
+			$tar_estud2 : Tarea_estudiante($tema.getId() == idTema, $estud.getId() == idEstudiante, completed == false),
 												count( $tar_estud2 ) );
 		$contadorTotales : Long() from accumulate (
-			$tar_estud : Tarea_estudiante($tarea.getId() == idTarea, $tema.getId() == idTema, $estud.getId() == idEstudiante),
+			$tar_estud : Tarea_estudiante($tema.getId() == idTema, $estud.getId() == idEstudiante),
 												count( $tar_estud ) );
 		eval( $contadorNoH != 0 );
 	then
@@ -181,13 +179,13 @@ rule "Determinar porcentaje completado de materia con tareas COMPLETAS"
 		$estud : Estudiante();
 		$mat : Materia();
 		$tema : Tema( idMateria == $mat.getId() );
-		$tarea : Tarea();
+		//$tarea : Tarea();
 		$estud_mat : Estudiante_materia($mat.getId() == idMateria, $estud.getId() == idEstudiante);
 		$contadorNoH : Long() from accumulate ( 
-			$tar_estud2 : Tarea_estudiante($tarea.getId() == idTarea, $tema.getId() == idTema, $estud.getId() == idEstudiante, completed == false),
+			$tar_estud2 : Tarea_estudiante( $tema.getId() == idTema, $estud.getId() == idEstudiante, completed == false),
 												count( $tar_estud2 ) );
 		$contadorTotales : Long() from accumulate (
-			$tar_estud : Tarea_estudiante($tarea.getId() == idTarea, $tema.getId() == idTema, $estud.getId() == idEstudiante),
+			$tar_estud : Tarea_estudiante( $tema.getId() == idTema, $estud.getId() == idEstudiante),
 												count( $tar_estud ) );
 		eval( $contadorNoH == 0 );
 	then
@@ -195,7 +193,7 @@ rule "Determinar porcentaje completado de materia con tareas COMPLETAS"
 		System.out.println("Porcentaje completado: 100.0 de: " + $mat.getNombre() + " por: " + $estud.getNombre());
 end
 
-//---------------------------- Recomendaciones ------------------------------
+//------------------------------------------- Recomendaciones ------------------------------
 
 rule "Mal historial, reprobando materia media-alta, pero con tiempo"
 	when

@@ -254,7 +254,7 @@ public class StudentService {
 	            if (o instanceof Tema) {
 	            	if( idMat == ((Tema) o).getIdMateria() ){
 	            		idTema = ((Tema) o).getId();
-		            	Tema_estudiante tema_est = new Tema_estudiante(idTema, idEst, 0.0);
+		            	Tema_estudiante tema_est = new Tema_estudiante(idTema, idEst, idMat, 0.0);
 		            	insertaTemaEstud(tema_est);
 	            	}
 	            }

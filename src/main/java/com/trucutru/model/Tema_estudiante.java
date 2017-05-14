@@ -5,15 +5,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Tema_estudiante {
 	private int idTema;
 	private int idEstudiante;
+	private int idMateria;
 	private double promedioEjercicios;
 	
 	public Tema_estudiante() {
 	}
-	
-	public Tema_estudiante(int idTema, int idEstudiante, double promedioEjercicios) {
+
+	public Tema_estudiante(int idTema, int idEstudiante, int idMateria, double promedioEjercicios) {
 		super();
 		this.idTema = idTema;
 		this.idEstudiante = idEstudiante;
+		this.idMateria = idMateria;
 		this.promedioEjercicios = promedioEjercicios;
 	}
 
@@ -44,6 +46,14 @@ public class Tema_estudiante {
 	public String toString() {
 		return "Tema_estudiante [idTema=" + idTema + ", idEstudiante=" + idEstudiante + ", promedioEjercicios="
 				+ promedioEjercicios + "]";
+	}
+
+	public int getIdMateria() {
+		return idMateria;
+	}
+
+	public void setIdMateria(int idMateria) {
+		this.idMateria = idMateria;
 	}
 	
 }
