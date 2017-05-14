@@ -165,8 +165,9 @@ rule "Determinar porcentaje completado de materia CON tareas SIN hacer"
 	then
 		//int contNoH = toIntExact($contadorNoH);
 		//int contTot = toIntExact($contadorTotales);
-		double resta = ( (double)$contadorTotales - (double)$contadorNoH );
-		double aux = ( resta / (double)$contadorTotales );
+		//double d = longObject.doubleValue();
+		//double resta = ( (double)$contadorTotales - (double)$contadorNoH );
+		double aux = (($contadorTotales - $contadorNoH)/$contadorTotales).doubleValue();
 		aux = ( aux * 100 );
 		$estud_mat.setPorcentajeCompletado(aux);
 		System.out.println("Div=Porcentaje completado: " + $estud_mat.getPorcentajeCompletado() + " de: " + $mat.getNombre() + " por: " + $estud.getNombre());
