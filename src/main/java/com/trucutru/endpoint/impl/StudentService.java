@@ -261,7 +261,7 @@ public class StudentService {
 	            if (o instanceof Tarea){
 	            	if ( idTema == ((Tarea) o).getIdTema() ){
 	            		idTarea = ((Tarea) o).getId();
-	            		Tarea_estudiante tar_est = new Tarea_estudiante(idTarea, idTema, idEst, 0.0, false);
+	            		Tarea_estudiante tar_est = new Tarea_estudiante(idTarea, idTema, idEst, idMat, 0.0, false);
 	        			insertaTareaEstud(tar_est);
 	            	}
 	            }

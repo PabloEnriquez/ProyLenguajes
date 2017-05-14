@@ -6,21 +6,24 @@ public class Tarea_estudiante {
 	private int idTarea;
 	private int idTema;
 	private int idEstudiante;
+	private int idMateria;
 	private double calificacion;
 	private boolean completed;
 	
 	public Tarea_estudiante() {
 	}
-	
-	public Tarea_estudiante(int idTarea, int idTema, int idEstudiante, double calificacion, boolean completed) {
+
+	public Tarea_estudiante(int idTarea, int idTema, int idEstudiante, int idMateria, double calificacion,
+			boolean completed) {
 		super();
 		this.idTarea = idTarea;
 		this.idTema = idTema;
 		this.idEstudiante = idEstudiante;
+		this.idMateria = idMateria;
 		this.calificacion = calificacion;
 		this.completed = completed;
 	}
-	
+
 	public int getIdTarea() {
 		return idTarea;
 	}
@@ -57,10 +60,19 @@ public class Tarea_estudiante {
 	public void setCompleted(boolean completed) {
 		this.completed = completed;
 	}
+	
 
 	@Override
 	public String toString() {
 		return "Tarea_estudiante [idTarea=" + idTarea + ", idTema=" + idTema + ", idEstudiante=" + idEstudiante
-				+ ", calificacion=" + calificacion + ", completed=" + completed + "]";
+				+ ", idMateria=" + idMateria + ", calificacion=" + calificacion + ", completed=" + completed + "]";
+	}
+
+	public int getIdMateria() {
+		return idMateria;
+	}
+
+	public void setIdMateria(int idMateria) {
+		this.idMateria = idMateria;
 	}
 }

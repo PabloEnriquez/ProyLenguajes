@@ -53,9 +53,9 @@ rule "Insertar datos"
 		insert(tar2);
 		insert(tar3);
 		
-		Tarea_estudiante tar_estud1 = new Tarea_estudiante(tar1.getId(), t1.getId(), e1.getId(), 26.0, true);
-		Tarea_estudiante tar_estud2 = new Tarea_estudiante(tar2.getId(), t1.getId(), e1.getId(), 76.0, true);
-		Tarea_estudiante tar_estud3 = new Tarea_estudiante(tar3.getId(), t1.getId(), e1.getId(), 0.0, false);
+		Tarea_estudiante tar_estud1 = new Tarea_estudiante(tar1.getId(), t1.getId(), e1.getId(), m1.getId(), 26.0, true);
+		Tarea_estudiante tar_estud2 = new Tarea_estudiante(tar2.getId(), t1.getId(), e1.getId(), m1.getId(), 76.0, true);
+		Tarea_estudiante tar_estud3 = new Tarea_estudiante(tar3.getId(), t1.getId(), e1.getId(), m1.getId(), 0.0, false);
 		insert(tar_estud1);
 		insert(tar_estud2);
 		insert(tar_estud3);
@@ -67,9 +67,9 @@ rule "Insertar datos"
 		insert(tar5);
 		insert(tar6);
 		
-		Tarea_estudiante tar_estud4 = new Tarea_estudiante(tar4.getId(), t2.getId(), e1.getId(), 76.0, true);
-		Tarea_estudiante tar_estud5 = new Tarea_estudiante(tar5.getId(), t2.getId(), e1.getId(), 56.0, true);
-		Tarea_estudiante tar_estud6 = new Tarea_estudiante(tar6.getId(), t2.getId(), e1.getId(), 0.0, false);
+		Tarea_estudiante tar_estud4 = new Tarea_estudiante(tar4.getId(), t2.getId(), e1.getId(), m1.getId(), 76.0, true);
+		Tarea_estudiante tar_estud5 = new Tarea_estudiante(tar5.getId(), t2.getId(), e1.getId(), m1.getId(), 56.0, true);
+		Tarea_estudiante tar_estud6 = new Tarea_estudiante(tar6.getId(), t2.getId(), e1.getId(), m1.getId(), 0.0, false);
 		insert(tar_estud4);
 		insert(tar_estud5);
 		insert(tar_estud6);
@@ -81,9 +81,9 @@ rule "Insertar datos"
 		insert(tar8);
 		insert(tar9);
 		
-		Tarea_estudiante tar_estud7 = new Tarea_estudiante(tar7.getId(), t3.getId(), e1.getId(), 0.0, false);
-		Tarea_estudiante tar_estud8 = new Tarea_estudiante(tar8.getId(), t3.getId(), e1.getId(), 46.0, true);
-		Tarea_estudiante tar_estud9 = new Tarea_estudiante(tar9.getId(), t3.getId(), e1.getId(), 56.0, true);
+		Tarea_estudiante tar_estud7 = new Tarea_estudiante(tar7.getId(), t3.getId(), e1.getId(), m2.getId(), 0.0, false);
+		Tarea_estudiante tar_estud8 = new Tarea_estudiante(tar8.getId(), t3.getId(), e1.getId(), m2.getId(), 46.0, true);
+		Tarea_estudiante tar_estud9 = new Tarea_estudiante(tar9.getId(), t3.getId(), e1.getId(), m2.getId(), 56.0, true);
 		insert(tar_estud7);
 		insert(tar_estud8);
 		insert(tar_estud9);
@@ -95,9 +95,9 @@ rule "Insertar datos"
 		insert(tar11);
 		insert(tar12);
 		
-		Tarea_estudiante tar_estud10 = new Tarea_estudiante(tar10.getId(), t4.getId(), e1.getId(), 36.0, true);
-		Tarea_estudiante tar_estud11 = new Tarea_estudiante(tar11.getId(), t4.getId(), e1.getId(), 0.0, false);
-		Tarea_estudiante tar_estud12 = new Tarea_estudiante(tar12.getId(), t4.getId(), e1.getId(), 46.0, true);
+		Tarea_estudiante tar_estud10 = new Tarea_estudiante(tar10.getId(), t4.getId(), e1.getId(), m2.getId(), 36.0, true);
+		Tarea_estudiante tar_estud11 = new Tarea_estudiante(tar11.getId(), t4.getId(), e1.getId(), m2.getId(), 0.0, false);
+		Tarea_estudiante tar_estud12 = new Tarea_estudiante(tar12.getId(), t4.getId(), e1.getId(), m2.getId(), 46.0, true);
 		insert(tar_estud10);
 		insert(tar_estud11);
 		insert(tar_estud12);
@@ -155,21 +155,22 @@ rule "Determinar porcentaje completado de materia CON tareas SIN hacer"
 		$estud : Estudiante();
 		$mat : Materia();
 		$estud_mat : Estudiante_materia($mat.getId() == idMateria, $estud.getId() == idEstudiante);
-		$tema : Tema( idMateria == $mat.getId() );
 		$contadorNoH : Long() from accumulate ( 
-			$tar_estud2 : Tarea_estudiante($tema.getId() == idTema, $estud.getId() == idEstudiante, completed == false),
+			$tar_estud2 : Tarea_estudiante($estud.getId() == idEstudiante, $mat.getId() == idMateria, completed == false),
 												count( $tar_estud2 ) );
 		$contadorTotales : Long() from accumulate (
-			$tar_estud : Tarea_estudiante($tema.getId() == idTema, $estud.getId() == idEstudiante),
+			$tar_estud : Tarea_estudiante( $estud.getId() == idEstudiante, $mat.getId() == idMateria),
 												count( $tar_estud ) );
 		eval( $contadorNoH != 0 );
 	then
-		//double aux = $contadorNoH / $contadorTotales;
-		//aux = ( aux * 100 );
-		//aux = ( 100 - aux );
-		//$estud_mat.setPorcentajeCompletado(aux);
-		//System.out.println("Div=Porcentaje completado: " + aux + " de: " + $mat.getNombre() + " por: " + $estud.getNombre());
-		System.out.println($contadorNoH + " " + $contadorTotales);
+		//int contNoH = toIntExact($contadorNoH);
+		//int contTot = toIntExact($contadorTotales);
+		double resta = ( (double)$contadorTotales - (double)$contadorNoH );
+		double aux = ( resta / (double)$contadorTotales );
+		aux = ( aux * 100 );
+		$estud_mat.setPorcentajeCompletado(aux);
+		System.out.println("Div=Porcentaje completado: " + $estud_mat.getPorcentajeCompletado() + " de: " + $mat.getNombre() + " por: " + $estud.getNombre());
+		//System.out.println($contadorNoH + " " + $contadorTotales);
 		
 end
 
@@ -178,14 +179,12 @@ rule "Determinar porcentaje completado de materia con tareas COMPLETAS"
 	when
 		$estud : Estudiante();
 		$mat : Materia();
-		$tema : Tema( idMateria == $mat.getId() );
-		//$tarea : Tarea();
 		$estud_mat : Estudiante_materia($mat.getId() == idMateria, $estud.getId() == idEstudiante);
 		$contadorNoH : Long() from accumulate ( 
-			$tar_estud2 : Tarea_estudiante($tema.getId() == idTema, completed == false),
+			$tar_estud2 : Tarea_estudiante($estud.getId() == idEstudiante, $mat.getId() == idMateria, completed == false),
 												count( $tar_estud2 ) );
 		$contadorTotales : Long() from accumulate (
-			$tar_estud : Tarea_estudiante($tema.getId() == idTema),
+			$tar_estud : Tarea_estudiante( $estud.getId() == idEstudiante, $mat.getId() == idMateria),
 												count( $tar_estud ) );
 		eval( $contadorNoH == 0 );
 	then
