@@ -28,7 +28,7 @@ public class DroolsRestController {
     
     //-----------------------------PUT-----------------------------
     
-    @RequestMapping(value="estudiantes/editar/{id_est}", method = RequestMethod.PUT, produces = "application/json")
+    @RequestMapping(value="estudiantes/{id_est}", method = RequestMethod.PUT, produces = "application/json")
     @ResponseBody
     public Estudiante editarEstudiante(@RequestBody Estudiante estud, @PathVariable("id_est") String idEstudiante){
     	try{
@@ -43,7 +43,7 @@ public class DroolsRestController {
         }	
     }
     
-    @RequestMapping(value="materias/editar/{id_mat}", method = RequestMethod.PUT, produces = "application/json")
+    @RequestMapping(value="materias/{id_mat}", method = RequestMethod.PUT, produces = "application/json")
     @ResponseBody
     public Materia editarMateria(@RequestBody Materia materia, @PathVariable("id_mat") String idMateria){
     	try{
@@ -58,7 +58,7 @@ public class DroolsRestController {
     	}
     }
     
-    @RequestMapping(value="tareas/editar/{id_tar}", method = RequestMethod.PUT, produces = "application/json")
+    @RequestMapping(value="tareas/{id_tar}", method = RequestMethod.PUT, produces = "application/json")
     @ResponseBody
     public Tarea editarTarea(@RequestBody Tarea tarea, @PathVariable("id_tar") String idTarea){
     	try{
@@ -73,7 +73,7 @@ public class DroolsRestController {
     	}
     }
     
-    @RequestMapping(value="temas/editar/{id_tem}", method = RequestMethod.PUT, produces = "application/json")
+    @RequestMapping(value="temas/{id_tem}", method = RequestMethod.PUT, produces = "application/json")
     @ResponseBody
     public Tema editarTema(@RequestBody Tema tema, @PathVariable("id_tem") String idTema){
     	try{
@@ -88,7 +88,7 @@ public class DroolsRestController {
     	}
     }
     
-    @RequestMapping(value="tarea_estud/editar/{id_est}/{id_tar}", method = RequestMethod.PUT, produces = "application/json")
+    @RequestMapping(value="tarea_estud/{id_est}/{id_tar}", method = RequestMethod.PUT, produces = "application/json")
     @ResponseBody
     public Tarea_estudiante editarTareaEstudiante(@RequestBody Tarea_estudiante tar_est, @PathVariable("id_est") String idEstud,
     		@PathVariable("id_tar") String idTarea){
@@ -106,7 +106,7 @@ public class DroolsRestController {
 
     //------------------------------POST------------------------------
     
-    @RequestMapping(value="estudiantes/inserta", method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(value="estudiantes", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
     public Estudiante insertaEstudiante(@RequestBody Estudiante estud) {
     	try{
@@ -127,7 +127,7 @@ public class DroolsRestController {
         }
     } 
     
-    @RequestMapping(value="materias/inserta", method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(value="materias", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
     public Materia insertaMateria(@RequestBody Materia materia) {
     	try{
@@ -149,7 +149,7 @@ public class DroolsRestController {
     	
     }
     
-    @RequestMapping(value="tareas/inserta", method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(value="tareas", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
     public Tarea insertaTarea(@RequestBody Tarea tarea) {
     	try{
@@ -170,7 +170,7 @@ public class DroolsRestController {
     	}
     }
     
-    @RequestMapping(value="temas/inserta", method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(value="temas", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
     public Tema insertaTema(@RequestBody Tema tema) {
     	try{
@@ -191,7 +191,7 @@ public class DroolsRestController {
     	}
     }
     
-    @RequestMapping(value="estud_mat/inserta", method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(value="estud_mat", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
     public Estudiante_materia insertaEstud_Mat(@RequestBody Estudiante_materia est_mat) {
     	try{
@@ -203,7 +203,7 @@ public class DroolsRestController {
     	}
     }
     
-    @RequestMapping(value="tarea_estud/inserta", method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(value="tarea_estud", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
     public Tarea_estudiante insertaTarea_Estud(@RequestBody Tarea_estudiante tar_est) {
     	try{
@@ -215,7 +215,7 @@ public class DroolsRestController {
     	}
     }
     
-    @RequestMapping(value="tema_estud/inserta", method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(value="tema_estud", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
     public Tema_estudiante insertaTema_Estud(@RequestBody Tema_estudiante tema_est) {
     	try{
