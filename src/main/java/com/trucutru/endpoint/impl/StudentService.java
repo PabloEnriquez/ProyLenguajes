@@ -121,7 +121,7 @@ public class StudentService {
 				if (o instanceof Estudiante){
 					((Estudiante) o).setPromedioGlobal(0.0);
 					org.kie.api.runtime.rule.FactHandle tarEstHandle = kSession.getFactHandle( (Estudiante) o);
-            		kSession.update(tarEstHandle, (Estudiante) o);
+	            	kSession.update(tarEstHandle, (Estudiante) o);	
 				}
 				if (o instanceof Materia){
 					org.kie.api.runtime.rule.FactHandle tarEstHandle = kSession.getFactHandle( (Materia) o);
@@ -266,14 +266,6 @@ public class StudentService {
 	            	}
 	            }
 	        }
-//			Tema tema = new Tema(idMat, " ", 0);
-//			insertaTema(tema);
-//			Tema_estudiante tema_est = new Tema_estudiante(tema.getId(), idEst, 0.0);
-//			insertaTemaEstud(tema_est);
-//			Tarea tarea = new Tarea(tema.getId(), " ", 0);
-//			insertaTarea(tarea);
-//			Tarea_estudiante tar_est = new Tarea_estudiante(tarea.getId(), tema.getId(), idEst, 0.0, false);
-//			insertaTareaEstud(tar_est);
 			//fire rules
 //			int fired = kSession.fireAllRules();
 //			System.out.println(">> Fired: " + fired);
