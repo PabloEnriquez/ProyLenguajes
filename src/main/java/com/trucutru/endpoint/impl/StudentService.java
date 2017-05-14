@@ -246,6 +246,16 @@ public class StudentService {
 			KieSession kSession = droolsInitializer.getKsession();
 			//Insert rule parameters.
 			kSession.insert(est_mat);
+			int idEst = est_mat.getIdEstudiante();
+			int idMat = est_mat.getIdMateria();
+			Tema tema = new Tema(idMat, " ", 0);
+			insertaTema(tema);
+			Tema_estudiante tema_est = new Tema_estudiante(tema.getId(), idEst, 0.0);
+			insertaTemaEstud(tema_est);
+			Tarea tarea = new Tarea(tema.getId(), " ", 0);
+			insertaTarea(tarea);
+			Tarea_estudiante tar_est = new Tarea_estudiante(tarea.getId(), tema.getId(), idEst, 0.0, false);
+			insertaTareaEstud(tar_est);
 			//fire rules
 //			int fired = kSession.fireAllRules();
 //			System.out.println(">> Fired: " + fired);
