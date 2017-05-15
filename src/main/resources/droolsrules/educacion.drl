@@ -163,20 +163,14 @@ rule "Determinar porcentaje completado de materia CON tareas SIN hacer"
 												count( $tar_estud ) );
 		eval( $contadorNoH != 0 );
 	then
-		//int contNoH = toIntExact($contadorNoH);
-		//int contTot = toIntExact($contadorTotales);
-		//double d = longObject.doubleValue();
-		//double resta = ( (double)$contadorTotales - (double)$contadorNoH );
 		double aux1 = Double.parseDouble(""+$contadorTotales);
-		System.out.println("NOH: " + $contadorNoH + " TOT"+$contadorTotales);
+		//System.out.println("NOH: " + $contadorNoH + " TOT"+$contadorTotales);
 		double aux2=Double.parseDouble(""+$contadorNoH);
 		double res = (aux1-aux2)/aux1;
-		System.out.println(res);
+		//System.out.println(res);
 		res = ( res * 100 );
 		$estud_mat.setPorcentajeCompletado(res);
-		System.out.println("Div=Porcentaje completado: " + $estud_mat.getPorcentajeCompletado() + " de: " + $mat.getNombre() + " por: " + $estud.getNombre());
-		//System.out.println($contadorNoH + " " + $contadorTotales);
-		
+		System.out.println("Porcentaje completado: " + $estud_mat.getPorcentajeCompletado() + " de: " + $mat.getNombre() + " por: " + $estud.getNombre());		
 end
 
 rule "Determinar porcentaje completado de materia con tareas COMPLETAS"
@@ -194,7 +188,7 @@ rule "Determinar porcentaje completado de materia con tareas COMPLETAS"
 		eval( $contadorNoH == 0 );
 	then
 		$estud_mat.setPorcentajeCompletado(100.0);
-		System.out.println("Dir=Porcentaje completado: 100.0 de: " + $mat.getNombre() + " por: " + $estud.getNombre());
+		System.out.println("Porcentaje completado: " + $estud_mat.getPorcentajeCompletado() + " de: " + $mat.getNombre() + " por: " + $estud.getNombre());
 end
 
 //------------------------------------------- Recomendaciones ------------------------------
@@ -210,7 +204,7 @@ rule "Mal historial, reprobando materia media-alta, pero con tiempo"
 		&& $estud.getPromedioGlobal() < 65 );
 	then
 		$estud.getRecomendaciones().add($estud.getNombre() + ", tu promedio global es malo, tu promedio en la materia: " 
-		+ $mat.getNombre() + " es reprobatorio y el nivel de la clase es medio-alto;"+
+		+ $mat.getNombre() + " es reprobatorio y el nivel de la clase es medio-alto;" +
 		" pero todavía tienes tiempo, busca asesoria, practica y ponte al corriente");
 end
 
@@ -226,7 +220,7 @@ rule "Mal historial, reprobando materia media-alta, pero sin tiempo"
 	then
 		$e.getRecomendaciones().add($e.getNombre() + ", tu promedio global es malo, tu promedio en la materia: " 
 		+ $mat.getNombre() + " es reprobatorio y el nivel de la clase es medio-alto y ya está por concluir el curso. "
-		+ "Te recomendamos tomar asesorías con el profesor " + $mat.getMaestro() + "lo más pronto posible");
+		+ "Te recomendamos tomar asesorías con el profesor " + $mat.getMaestro() + " lo más pronto posible");
 end
 
 rule "Mal historial, aprobando materia media-alta, con tiempo"
