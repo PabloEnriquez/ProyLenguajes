@@ -150,6 +150,7 @@ public class StudentService {
 	            if (o instanceof Tarea_estudiante) {
 	            	if(((Tarea_estudiante) o).getIdEstudiante() == idEst && ((Tarea_estudiante) o).getIdTarea() == idTarea){
 	            		((Tarea_estudiante) o).setCalificacion(tar_estud.getCalificacion());
+	            		System.out.println("Recibi:" + tar_estud.getCalificacion());
 	            		((Tarea_estudiante) o).setCompleted(tar_estud.isCompleted());
 	            		org.kie.api.runtime.rule.FactHandle tarEstHandle = kSession.getFactHandle((Tarea_estudiante) o);
 	            		kSession.update(tarEstHandle, (Tarea_estudiante) o);

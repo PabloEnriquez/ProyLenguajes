@@ -115,10 +115,17 @@ rule "Calcular promedio de temas por medio de tareas"
 		$sumatoria : Double() from accumulate ( $tar_estud : Tarea_estudiante($tema.getId() == idTema, $estud.getId() == idEstudiante),
 												 sum( $tar_estud.getCalificacion() ) );
 		$contador : Long() from accumulate ( $tar_estud2 : Tarea_estudiante($tema.getId() == idTema, $estud.getId() == idEstudiante),
-												 count( $tar_estud2 ) );	
-		eval( $contador != 0 );									 
+												 count( $tar_estud2 ) );
+		$contadorNoH : Long() from accumulate ( $tar_estud3 : Tarea_estudiante($tema.getId() == idTema, $estud.getId() == idEstudiante, completed == false),
+												 count( $tar_estud3 ) );	
+		eval( ($contador - $contadorNoH) > 0 
+		&& $contador!=0 && !$sumatoria.isNaN() );									 
 	then
-		$tema_estud.setPromedioEjercicios( ( $sumatoria / $contador ) );
+		System.out.println($sumatoria + " tema " + $contador);
+		//double sum = Double.parseDouble(""+$sumatoria);
+		double aux = ( $contador - $contadorNoH );
+		$tema_estud.setPromedioEjercicios( ( $sumatoria / aux ) );
+		System.out.println("Aux: " + aux);
 		System.out.println("Tema: "+ $tema.getNombre() + " promedio: " + $tema_estud.getPromedioEjercicios() );
 end
 
@@ -134,6 +141,7 @@ rule "Calcular promedio de materias por medio de temas"
 											count( $tema_estud2 ) );
 		eval( $contador != 0 );
 	then
+		System.out.println($sumatoria + " materia " + $contador);
 		$estud_mat.setPromedioAlumno( ( $sumatoria / $contador ) );
 		System.out.println("Materia: " + $mat.getNombre() + " promedio: " + $estud_mat.getPromedioAlumno() );
 end
