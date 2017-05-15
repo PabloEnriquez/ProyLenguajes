@@ -410,10 +410,9 @@ public class StudentService {
 		int idEstud = Integer.parseInt(inputMap.get("id_est"));
 		for (Object o : kSession.getObjects()) {
             if (o instanceof Estudiante) {
-            	Estudiante estudiante = (Estudiante) o;
-            	if(estudiante.getId() == idEstud){
+            	if(((Estudiante) o).getId() == idEstud){
             		kSession.fireAllRules();
-            		return estudiante;
+            		return (Estudiante) o;
             	}
             }
         }
@@ -425,10 +424,9 @@ public class StudentService {
 		int idMateria = Integer.parseInt(inputMap.get("id_mat"));
 		for (Object o : kSession.getObjects()) {
             if (o instanceof Materia) {
-            	Materia materia = (Materia) o;
-            	if(materia.getId() == idMateria){
+            	if(((Materia) o).getId() == idMateria){
             		kSession.fireAllRules();
-            		return materia;
+            		return (Materia) o;
             	}
             }
         }
@@ -440,10 +438,9 @@ public class StudentService {
 		int idTarea = Integer.parseInt(inputMap.get("id_tar"));
 		for (Object o : kSession.getObjects()) {
             if (o instanceof Tarea) {
-            	Tarea tarea = (Tarea) o;
-            	if(tarea.getId() == idTarea){
+            	if(((Tarea) o).getId() == idTarea){
             		kSession.fireAllRules();
-            		return tarea;
+            		return (Tarea) o;
             	}
             }
         }
@@ -455,10 +452,9 @@ public class StudentService {
 		int idTema = Integer.parseInt(inputMap.get("id_tem"));
 		for (Object o : kSession.getObjects()) {
             if (o instanceof Tema) {
-            	Tema tema = (Tema) o;
-            	if(tema.getId() == idTema){
+            	if(((Tema) o).getId() == idTema){
             		kSession.fireAllRules();
-            		return tema;
+            		return (Tema) o;
             	}
             }
         }
@@ -471,9 +467,8 @@ public class StudentService {
 		int idEst = Integer.parseInt(inputMap.get("id_est"));
 		for (Object o : kSession.getObjects()) {
             if (o instanceof Estudiante_materia) {
-            	Estudiante_materia est_mat = (Estudiante_materia) o;
-            	if(est_mat.getIdEstudiante() == idEst){
-            		lista_estud_mat.add(est_mat);
+            	if(((Estudiante_materia) o).getIdEstudiante() == idEst){
+            		lista_estud_mat.add( (Estudiante_materia) o );
             	}
             }
         }
@@ -487,9 +482,8 @@ public class StudentService {
 		int idEst = Integer.parseInt(inputMap.get("id_est"));
 		for (Object o : kSession.getObjects()) {
             if (o instanceof Tarea_estudiante) {
-            	Tarea_estudiante tar_est = (Tarea_estudiante) o;
-            	if(tar_est.getIdEstudiante() == idEst){
-            		list_tar_est.add(tar_est);
+            	if(((Tarea_estudiante) o).getIdEstudiante() == idEst){
+            		list_tar_est.add( (Tarea_estudiante) o );
             	}
             }
         }
@@ -503,9 +497,8 @@ public class StudentService {
 		int idEst = Integer.parseInt(inputMap.get("id_est"));
 		for (Object o : kSession.getObjects()) {
             if (o instanceof Tema_estudiante) {
-            	Tema_estudiante tem_est = (Tema_estudiante) o;
-            	if(tem_est.getIdEstudiante() == idEst){
-            		list_tem_est.add(tem_est);
+            	if(((Tema_estudiante) o).getIdEstudiante() == idEst){
+            		list_tem_est.add( (Tema_estudiante) o );
             	}
             }
         }
