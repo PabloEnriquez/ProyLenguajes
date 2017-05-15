@@ -107,7 +107,7 @@ end
 //------------------------------------------- Calculo promedio ------------------------
 
 rule "Calcular promedio de temas por medio de tareas"
-	salience 98
+	salience 99
 	when
 		$tema : Tema();
 		$estud : Estudiante();
@@ -122,7 +122,7 @@ rule "Calcular promedio de temas por medio de tareas"
 end
 
 rule "Calcular promedio de materias por medio de temas"
-	salience 96
+	salience 98
 	when
 		$mat : Materia();
 		$estud : Estudiante();
@@ -137,7 +137,7 @@ rule "Calcular promedio de materias por medio de temas"
 end
 
 rule "Calcular promedio global por medio de materias"
-	salience 94
+	salience 97
 	when
 		$estud : Estudiante();
 		$sumatoria : Double() from accumulate ($estud_mat : Estudiante_materia($estud.getId() == idEstudiante),
@@ -150,7 +150,7 @@ rule "Calcular promedio global por medio de materias"
 end
 
 rule "Determinar porcentaje completado de materia CON tareas SIN hacer"
-	salience 91
+	salience 96
 	when
 		$estud : Estudiante();
 		$mat : Materia();
@@ -174,7 +174,7 @@ rule "Determinar porcentaje completado de materia CON tareas SIN hacer"
 end
 
 rule "Determinar porcentaje completado de materia con tareas COMPLETAS"
-	salience 92
+	salience 96
 	when
 		$estud : Estudiante();
 		$mat : Materia();
@@ -193,7 +193,7 @@ end
 
 //------------------------------------------- Recomendaciones ------------------------------
 
-rule "Mal historial, reprobando materia media-alta, pero con tiempo"
+rule "Mal historial, reprobando materia media-alta, pero con tiempo(<50%)"
 	when
 		$estud : Estudiante();
 		$mat : Materia();
@@ -206,6 +206,21 @@ rule "Mal historial, reprobando materia media-alta, pero con tiempo"
 		$estud.getRecomendaciones().add($estud.getNombre() + ", tu promedio global es malo, tu promedio en la materia: " 
 		+ $mat.getNombre() + " es reprobatorio y el nivel de la clase es medio-alto;" +
 		" pero todavía tienes tiempo, busca asesoria, practica y ponte al corriente");
+end
+
+rule "Mal historial, reprobando materia media-alta, pero con no mucho tiempo(>50--<75%)"
+	when
+		$estud : Estudiante();
+		$mat : Materia();
+		$estud_mat : Estudiante_materia($mat.getId() == idMateria, $estud.getId() == idEstudiante);
+		eval( $estud_mat.getPromedioAlumno() < 60
+		&& ($mat.getNivelCurso() > 5 && $mat.getNivelCurso() < 8)
+		&& ($estud_mat.getPorcentajeCompletado() > 50 && $estud_mat.getPorcentajeCompletado() < 75)
+		&& $estud.getPromedioGlobal() < 65 );
+	then
+		$estud.getRecomendaciones().add($estud.getNombre() + ", tu promedio global es malo, tu promedio en la materia: " 
+		+ $mat.getNombre() + " es reprobatorio y el nivel de la clase es medio-alto;" +
+		" aunque todavía no se te acaba el tiempo, debes buscar asesorías, estudiar más, ponerte al corriente y lo lograrás!");
 end
 
 rule "Mal historial, reprobando materia media-alta, pero sin tiempo"

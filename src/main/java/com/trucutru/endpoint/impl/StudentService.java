@@ -120,6 +120,7 @@ public class StudentService {
 			for (Object o : kSession.getObjects()) {
 				if (o instanceof Estudiante){
 					((Estudiante) o).setPromedioGlobal(0.0);
+					((Estudiante) o).getRecomendaciones().clear();
 					org.kie.api.runtime.rule.FactHandle tarEstHandle = kSession.getFactHandle( (Estudiante) o);
 	            	kSession.update(tarEstHandle, (Estudiante) o);	
 				}
