@@ -3,7 +3,7 @@ para correrlo en eclipse, deben tener un servidor, yo tengo wildfly pero segun y
 entonces importan el proyecto drools a eclipse y le ponen run on server. Debe decirles en consola q no hay pedos, osea INFO o WARN maximo; y se abrirá una pestana de explorador en eclipse para que sepan q ya está corriendo.
 Si sale ERROR pues ya ahi pasa algo. No se preocupen por la pestana de explorador que abre eclipse automáticamente si dice not found o algo asi, el chiste es probarlo con postman. si ya ahi no les responde con un objeto json hay problemas. 
 usando postman o algo similar si tienen otro, pueden hacer get y post.
-ahorita tengo otras clases/objetos q usaba de ejemplo, eso de padre y hermano es de la tarea tons no lo tomen en cuenta; ahorita solo estudiante importa (y materia y tema, tal vez maestro lo podamos incluir). (src/main/java/com.trucutru.model)
+
 
 **********************************************
 
