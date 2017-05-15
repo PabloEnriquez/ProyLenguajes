@@ -46,37 +46,37 @@ rule "Insertar datos"
 		insert(tema_estud3);
 		insert(tema_estud4);
 		//---
-		Tarea tar1 = new Tarea(t1.getId(), "Ejercicio 1", 8);
-		Tarea tar2 = new Tarea(t1.getId(), "Tarea 1", 7);
-		Tarea tar3 = new Tarea(t1.getId(), "Assignment 2", 6);
+		Tarea tar1 = new Tarea(t1.getId(), "Ejercicio 1", 9);
+		Tarea tar2 = new Tarea(t1.getId(), "Tarea 1", 9);
+		Tarea tar3 = new Tarea(t1.getId(), "Assignment 2", 9);
 		insert(tar1);
 		insert(tar2);
 		insert(tar3);
 		
-		Tarea_estudiante tar_estud1 = new Tarea_estudiante(tar1.getId(), t1.getId(), e1.getId(), m1.getId(), 26.0, true);
-		Tarea_estudiante tar_estud2 = new Tarea_estudiante(tar2.getId(), t1.getId(), e1.getId(), m1.getId(), 76.0, true);
-		Tarea_estudiante tar_estud3 = new Tarea_estudiante(tar3.getId(), t1.getId(), e1.getId(), m1.getId(), 0.0, false);
+		Tarea_estudiante tar_estud1 = new Tarea_estudiante(tar1.getId(), t1.getId(), e1.getId(), m1.getId(), 100.0, true);
+		Tarea_estudiante tar_estud2 = new Tarea_estudiante(tar2.getId(), t1.getId(), e1.getId(), m1.getId(), 100.0, true);
+		Tarea_estudiante tar_estud3 = new Tarea_estudiante(tar3.getId(), t1.getId(), e1.getId(), m1.getId(), 100.0, true);
 		insert(tar_estud1);
 		insert(tar_estud2);
 		insert(tar_estud3);
 		//---
-		Tarea tar4 = new Tarea(t2.getId(), "Proyecto 1", 8);
+		Tarea tar4 = new Tarea(t2.getId(), "Proyecto 1", 9);
 		Tarea tar5 = new Tarea(t2.getId(), "Ejercicio 5", 8);
-		Tarea tar6 = new Tarea(t2.getId(), "Tarea 3", 8);
+		Tarea tar6 = new Tarea(t2.getId(), "Tarea 3", 9);
 		insert(tar4);
 		insert(tar5);
 		insert(tar6);
 		
-		Tarea_estudiante tar_estud4 = new Tarea_estudiante(tar4.getId(), t2.getId(), e1.getId(), m1.getId(), 76.0, true);
-		Tarea_estudiante tar_estud5 = new Tarea_estudiante(tar5.getId(), t2.getId(), e1.getId(), m1.getId(), 56.0, true);
-		Tarea_estudiante tar_estud6 = new Tarea_estudiante(tar6.getId(), t2.getId(), e1.getId(), m1.getId(), 0.0, false);
+		Tarea_estudiante tar_estud4 = new Tarea_estudiante(tar4.getId(), t2.getId(), e1.getId(), m1.getId(), 100.0, true);
+		Tarea_estudiante tar_estud5 = new Tarea_estudiante(tar5.getId(), t2.getId(), e1.getId(), m1.getId(), 100.0, true);
+		Tarea_estudiante tar_estud6 = new Tarea_estudiante(tar6.getId(), t2.getId(), e1.getId(), m1.getId(), 90.0, true);
 		insert(tar_estud4);
 		insert(tar_estud5);
 		insert(tar_estud6);
 		//---
 		Tarea tar7 = new Tarea(t3.getId(), "Ejercicio 5", 8);
-		Tarea tar8 = new Tarea(t3.getId(), "Tarea 9", 7);
-		Tarea tar9 = new Tarea(t3.getId(), "Examen 2", 6);
+		Tarea tar8 = new Tarea(t3.getId(), "Tarea 9", 9);
+		Tarea tar9 = new Tarea(t3.getId(), "Examen 2", 9);
 		insert(tar7);
 		insert(tar8);
 		insert(tar9);
@@ -88,9 +88,9 @@ rule "Insertar datos"
 		insert(tar_estud8);
 		insert(tar_estud9);
 		//---
-		Tarea tar10 = new Tarea(t4.getId(), "Prueba 1", 8);
-		Tarea tar11 = new Tarea(t4.getId(), "Examen 3", 7);
-		Tarea tar12 = new Tarea(t4.getId(), "Ejercicios 2", 6);
+		Tarea tar10 = new Tarea(t4.getId(), "Prueba 1", 9);
+		Tarea tar11 = new Tarea(t4.getId(), "Examen 3", 9);
+		Tarea tar12 = new Tarea(t4.getId(), "Ejercicios 2", 8);
 		insert(tar10);
 		insert(tar11);
 		insert(tar12);
@@ -115,7 +115,8 @@ rule "Calcular promedio de temas por medio de tareas"
 		$sumatoria : Double() from accumulate ( $tar_estud : Tarea_estudiante($tema.getId() == idTema, $estud.getId() == idEstudiante),
 												 sum( $tar_estud.getCalificacion() ) );
 		$contador : Long() from accumulate ( $tar_estud2 : Tarea_estudiante($tema.getId() == idTema, $estud.getId() == idEstudiante),
-												 count( $tar_estud2 ) );										 
+												 count( $tar_estud2 ) );	
+		eval( $contador != 0 );									 
 	then
 		$tema_estud.setPromedioEjercicios( ( $sumatoria / $contador ) );
 		System.out.println("Tema: "+ $tema.getNombre() + " promedio: " + $tema_estud.getPromedioEjercicios() );
@@ -131,6 +132,7 @@ rule "Calcular promedio de materias por medio de temas"
 											 sum( $tema_estud.getPromedioEjercicios() ) );
 		$contador : Long() from accumulate ( $tema_estud2 : Tema_estudiante( $estud.getId() == idEstudiante, $mat.getId() == idMateria),
 											count( $tema_estud2 ) );
+		eval( $contador != 0 );
 	then
 		$estud_mat.setPromedioAlumno( ( $sumatoria / $contador ) );
 		System.out.println("Materia: " + $mat.getNombre() + " promedio: " + $estud_mat.getPromedioAlumno() );
@@ -144,6 +146,7 @@ rule "Calcular promedio global por medio de materias"
 											sum( $estud_mat.getPromedioAlumno() ) );
 		$contador : Long() from accumulate ($estud_mat2 : Estudiante_materia($estud.getId() == idEstudiante),
 											count( $estud_mat2 ) );
+		eval( $contador != 0 );
 	then
 		$estud.setPromedioGlobal( ( $sumatoria / $contador ) );
 		System.out.println("Estudiante: " + $estud.getNombre() + " promedio: " + $estud.getPromedioGlobal());
@@ -161,7 +164,7 @@ rule "Determinar porcentaje completado de materia CON tareas SIN hacer"
 		$contadorTotales : Long() from accumulate (
 			$tar_estud : Tarea_estudiante( $estud.getId() == idEstudiante, $mat.getId() == idMateria),
 												count( $tar_estud ) );
-		eval( $contadorNoH != 0 );
+		eval( $contadorNoH != 0 && $contadorTotales != 0 );
 	then
 		double aux1 = Double.parseDouble(""+$contadorTotales);
 		//System.out.println("NOH: " + $contadorNoH + " TOT"+$contadorTotales);
@@ -173,7 +176,7 @@ rule "Determinar porcentaje completado de materia CON tareas SIN hacer"
 		System.out.println("Porcentaje completado: " + $estud_mat.getPorcentajeCompletado() + " de: " + $mat.getNombre() + " por: " + $estud.getNombre());		
 end
 
-rule "Determinar porcentaje completado de materia con tareas COMPLETAS"
+rule "Determinar porcentaje completado de materia con tareas COMPLETAS; curso completo"
 	salience 96
 	when
 		$estud : Estudiante();
@@ -308,45 +311,132 @@ rule "Buen historial, aprobando materia media-alta"
 		+ $mat.getNombre() + " son muy buenos. Sigue así para mantener un excelente promedio");
 end
 
-/*
-rule "Inscripcion futura nivel alto"
+//----------------------------------------- Seccion 2 ----------------------------------------------
 
+rule "Tareas faltantes de cada materia cuando el curso está por terminar"
 	when
-		$e1 : EstudInscripcion( $e1.getMateriaAInscribir().getNivelCurso() > 7 
-		&& promedioGlobal > 75 );
+		$e : Estudiante();
+		$mat : Materia();
+		$estud_mat : Estudiante_materia($mat.getId() == idMateria, $e.getId() == idEstudiante);
+		$total : Long() from accumulate (
+			$tar_estud : Tarea_estudiante($e.getId() == idEstudiante, $mat.getId() == idMateria, calificacion == 0.0, completed == false),
+												count( $tar_estud ) );
+		eval(
+			$estud_mat.getPromedioAlumno() >= 70 
+			&& ($mat.getNivelCurso() > 5 && $mat.getNivelCurso() < 8) 
+			&& $estud_mat.getPorcentajeCompletado() > 90
+			&& $total > 0
+		);
 	then
-		//System.out.println($e1.getNombre() + ", la materia: " + $e1.getMateriaAInscribir().getNombre() + ", es muy alta para tu nivel");
-		$e1.getRecomendaciones().add($e1.getNombre() + ", la materia: " + $e1.getMateriaAInscribir().getNombre() + ", es muy alta para tu nivel");
+		$e.getRecomendaciones().add($e.getNombre() + ", el curso está por terminar y aún tienes pendientes: " 
+		+ $total + " tareas de la materia de " + $mat.getNombre() + ". ¡Acábalas cuanto antes para no afectar tu promedio!");
 end
 
-
-rule "Inscripcion futura nivel correcto(medio)"
-
+rule "Mal promedio, aún falta tiempo del curso y las tareas siguientes son de mayor nivel"
 	when
-		$e1 : EstudInscripcion( ($e1.getMateriaAInscribir().getNivelCurso() >= 3
-		&& $e1.getMateriaAInscribir().getNivelCurso() <= 7)
-		&& promedioGlobal > 75 );
+		$e : Estudiante();
+		$estud_mat : Estudiante_materia( $e.getId() == idEstudiante );
+		$mat : Materia( $estud_mat.getIdMateria() == id );
+		$tema : Tema( $mat.getId() == idMateria );
+		$tar : Tarea( $tema.getId() == idTema, dificultad > $mat.getNivelCurso() );
+		$tar_estud : Tarea_estudiante($tar.getId() == idTarea, $tema.getId() == idTema, $e.getId() == idEstudiante);
+		eval(
+			$estud_mat.getPromedioAlumno() < 70 
+			&& $estud_mat.getPorcentajeCompletado() < 80
+			&& $tar_estud.getCalificacion() == 0.0
+			&& $tar_estud.isCompleted() == false
+		);
 	then
-		//System.out.println($e1.getNombre() + ", la materia: " + $e1.getMateriaAInscribir().getNombre() + ", es perfecta para tu nivel");
-		$e1.getRecomendaciones().add($e1.getNombre() + ", la materia: " + $e1.getMateriaAInscribir().getNombre() + ", es perfecta para tu nivel");
+		$e.getRecomendaciones().add($e.getNombre() + ", tu promedio en la materia " + $mat.getNombre() + " no va muy bien. "
+		+ "Te recomendamos estudiar más porque las próximas tareas te pondrán a prueba. Una es: " + $tar.getNombre() 
+		+ ", con una dificultad de: " + $tar.getDificultad() );
 end
 
-rule "Inscripcion futura nivel correcto"
-
+rule "Buen promedio, aún falta tiempo del curso y las tareas siguientes son de mayor nivel"
 	when
-		$e1 : EstudInscripcion( $e1.getMateriaAInscribir().getNivelCurso() > 7 
-		&& promedioGlobal > 75 );
+		$e : Estudiante();
+		$estud_mat : Estudiante_materia( $e.getId() == idEstudiante );
+		$mat : Materia( $estud_mat.getIdMateria() == id );
+		$tema : Tema( $mat.getId() == idMateria );
+		$tar : Tarea( $tema.getId() == idTema, dificultad > $mat.getNivelCurso() );
+		$tar_estud : Tarea_estudiante($tar.getId() == idTarea, $tema.getId() == idTema, $e.getId() == idEstudiante);
+		eval(
+			($estud_mat.getPromedioAlumno() >= 70 && $estud_mat.getPromedioAlumno() < 85)
+			&& $estud_mat.getPorcentajeCompletado() < 90
+			&& $tar_estud.getCalificacion() == 0.0
+			&& $tar_estud.isCompleted() == false
+		);
 	then
-		//System.out.println($e1.getNombre() + ", la materia: " + $e1.getMateriaAInscribir().getNombre() + ", es perfecta para tu nivel");
-		$e1.getRecomendaciones().add($e1.getNombre() + ", la materia: " + $e1.getMateriaAInscribir().getNombre() + ", es perfecta para tu nivel");
+		$e.getRecomendaciones().add($e.getNombre() + ", tu promedio en la materia " + $mat.getNombre() + " va bien. "
+		+ "Te recomendamos seguir así porque las próximas tareas te pondrán a prueba. Una es: " + $tar.getNombre() 
+		+ ", con una dificultad de: " + $tar.getDificultad() );
 end
 
-rule "Inscripcion futura nivel bajo"
+rule "Excelente promedio, aún falta tiempo del curso y las tareas siguientes son de mayor nivel"
 	when
-		$e1 : EstudInscripcion( materiaAInscribir.getNivelCurso() < 3
-		&& promedioGlobal > 75 );
+		$e : Estudiante();
+		$estud_mat : Estudiante_materia( $e.getId() == idEstudiante );
+		$mat : Materia( $estud_mat.getIdMateria() == id );
+		$tema : Tema( $mat.getId() == idMateria );
+		$tar : Tarea( $tema.getId() == idTema, dificultad > $mat.getNivelCurso() );
+		$tar_estud : Tarea_estudiante($tar.getId() == idTarea, $tema.getId() == idTema, $e.getId() == idEstudiante);
+		
+		eval(
+			$estud_mat.getPromedioAlumno() >= 80 
+			&& $estud_mat.getPorcentajeCompletado() < 90
+			&& $tar_estud.getCalificacion() == 0.0
+			&& $tar_estud.isCompleted() == false
+		);
 	then
-		//System.out.println($e1.getNombre() + ", la materia: " + $e1.getMateriaAInscribir().getNombre() + ", es muy baja para tu nivel");
-		$e1.getRecomendaciones().add($e1.getNombre() + ", la materia: " + $e1.getMateriaAInscribir().getNombre() + ", es muy baja para tu nivel");
+		$e.getRecomendaciones().add($e.getNombre() + ", tu promedio en la materia " + $mat.getNombre() + " es excelente. "
+		+ "Las próximas tareas de tu curso te resultarán sencillas. Una es: " + $tar.getNombre() 
+		+ ", con una dificultad de: " + $tar.getDificultad() );
 end
-*/
+
+//------------------------------- Seccion 3 ---------------------------------------------
+
+rule "Felicitación por obtener calificación perfecta en las tareas"
+	when
+		$estud : Estudiante();
+		$mat : Materia();
+		$estud_mat : Estudiante_materia($mat.getId() == idMateria, $estud.getId() == idEstudiante);
+		$suma : Double() from accumulate ( $tar_estud : Tarea_estudiante( $estud.getId() == idEstudiante, $mat.getId() == idMateria, completed == true),
+												 sum( $tar_estud.getCalificacion() ) );
+		$contador : Long() from accumulate ( $tar_estud2 : Tarea_estudiante( $estud.getId() == idEstudiante, $mat.getId() == idMateria, completed == true),
+												 count( $tar_estud2 ) );
+		
+		eval(($suma / $contador) == 100);										 
+	then
+		$estud.getRecomendaciones().add("Felicidades, " + $estud.getNombre() + ". Obtuviste 100 en todas tus tareas de la materia: "
+		+ $mat.getNombre() + ".");
+end
+
+rule "Felicitación por obtener calificación alta en las tareas"
+	when
+		$e : Estudiante();
+		$mat : Materia();
+		$estud_mat : Estudiante_materia( $mat.getId() == idMateria, $e.getId() == idEstudiante );
+		$suma : Double() from accumulate ( $tar_estud : Tarea_estudiante( $e.getId() == idEstudiante, $mat.getId() == idMateria, completed == true),
+												 sum( $tar_estud.getCalificacion() ) );
+		$contador : Long() from accumulate ( $tar_estud2 : Tarea_estudiante( $e.getId() == idEstudiante, $mat.getId() == idMateria, completed == true),
+												 count( $tar_estud2 ) );
+		eval( ($suma / $contador) >= 90 && ($suma / $contador) < 100 );										 
+	then
+		$e.getRecomendaciones().add("Felicidades, " + $e.getNombre() + ". Obtuviste por encima de 90 en todas tus tareas de la materia de "
+		+ $mat.getNombre() + ".");
+end
+
+rule "Mensaje de calificación baja en las tareas"
+	when
+		$e : Estudiante();
+		$mat : Materia();
+		$estud_mat : Estudiante_materia( $mat.getId() == idMateria, $e.getId() == idEstudiante );
+		$suma : Double() from accumulate ( $tar_estud : Tarea_estudiante( $e.getId() == idEstudiante, $mat.getId() == idMateria, completed == true),
+												 sum( $tar_estud.getCalificacion() ) );
+		$contador : Long() from accumulate ( $tar_estud2 : Tarea_estudiante( $e.getId() == idEstudiante, $mat.getId() == idMateria, completed == true),
+												 count( $tar_estud2 ) );
+		eval( ($suma / $contador) < 70 );										 
+	then
+		$e.getRecomendaciones().add($e.getNombre() + ", tu promedio en las tareas de la materia: "
+		+ $mat.getNombre() + " fue baja (< 70). Te recomendamos estudiar los puntos en los que te fue mal.");
+end
